@@ -18,13 +18,13 @@ public class Dia {
     private String mes;
     private String ano;
     private List<Calendar> entradas;
-    private float horasExtrasDebito;
+    private int minutosExtrasDebito;
     private boolean diaValido;
 
     public Dia(String data, String mes) {
         this.dia = data;
         this.mes = mes;
-        this.horasExtrasDebito = 0;
+        this.minutosExtrasDebito = 0;
         this.diaValido = true;
         this.ano = "2013";
         this.entradas = new ArrayList<Calendar>();
@@ -33,7 +33,7 @@ public class Dia {
     public Dia() {
         this.dia = "";
         this.mes = "";
-        this.horasExtrasDebito = 0;
+        this.minutosExtrasDebito = 0;
         this.diaValido = true;
         this.ano = "2013";
         this.entradas = new ArrayList<Calendar>();
@@ -62,10 +62,10 @@ public class Dia {
     }
 
     public void verificarHoras() {
-        this.horasExtrasDebito = -360;
+        this.minutosExtrasDebito = -360;
         this.verificarValidade();
         for (int i = 0; this.diaValido && i < this.entradas.size() - 1; i = i + 2) {
-            this.horasExtrasDebito += this.diferencaHora(
+            this.minutosExtrasDebito += this.diferencaHora(
                     this.entradas.get(i),
                     this.entradas.get(i + 1));
         }
@@ -86,10 +86,17 @@ public class Dia {
     }
 
     /**
+     * @return the minutosExtrasDebito
+     */
+    public int mostrarMinutosExtrasOuDebitoEmMinutos(){
+        return (int) this.minutosExtrasDebito;
+    }
+    
+    /**
      * @return the diaValido
      */
     public boolean isDiaValido() {
-        return diaValido;
+        return this.diaValido;
     }
 
     /**
@@ -103,7 +110,7 @@ public class Dia {
      * @return the Dia
      */
     public String getDia() {
-        return dia;
+        return this.dia;
     }
 
     /**
@@ -117,7 +124,7 @@ public class Dia {
      * @return the mes
      */
     public String getMes() {
-        return mes;
+        return this.mes;
     }
 
     /**
@@ -131,14 +138,14 @@ public class Dia {
      * @return the ano
      */
     public String getAno() {
-        return ano;
+        return this.ano;
     }
 
     /**
      * @return the entradas
      */
     public List<Calendar> getEntradas() {
-        return entradas;
+        return this.entradas;
     }
 
     /**
@@ -147,8 +154,27 @@ public class Dia {
     private void setEntradas(List<Calendar> entradas) {
         this.entradas = entradas;
     }
-
-    public int mostrarHorasExtrasOuDebitoEmMinutos(){
-        return (int) this.horasExtrasDebito;
+    
+    /**
+     * @param minutosExtrasDebito to minutosExtrasDebito set
+     */
+    private void setMinutosExtrasDebito(int minutosExtrasDebito) {
+        this.minutosExtrasDebito = minutosExtrasDebito;
     }
+    
+    /**
+     * @return the minutosExtrasDebito
+     */
+    private int getMinutosExtrasDebito() {
+        return this.minutosExtrasDebito;
+    }
+
+    /**
+     * @param ano the ano to set
+     */
+    private void setAno(String ano) {
+        this.ano = ano;
+    }
+
+    
 }
