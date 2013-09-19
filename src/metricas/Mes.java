@@ -4,9 +4,12 @@
  */
 package metricas;
 
+import exception.ExceptionDiaInvalido;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import util.TipoMes;
 
 /**
@@ -33,8 +36,12 @@ public class Mes {
         float horas = 0;
         if (this.dias != null) {
             for (Dia dia : dias) {
-                horas +=
-                        dia.verificarHoras();
+                try {
+                    horas +=
+                            dia.verificarHoras();
+                } catch (ExceptionDiaInvalido ex) {
+                   System.out.println(ex.getMessage());
+                }
             }
         }
         return horas;

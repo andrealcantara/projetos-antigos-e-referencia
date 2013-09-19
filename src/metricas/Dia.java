@@ -44,11 +44,10 @@ public class Dia {
     }
 
     private int diferencaHora(Calendar oneDay, Calendar twoDay) {
-        int retorno = 0;
+        int retorno;
         int diffHoras = (int) (oneDay.getTime().getTime()
                 - twoDay.getTime().getTime()) / 1000;
-//        float diferencaHoras = oneDay.get(Calendar.MINUTE) - twoDay.get(Calendar.MINUTE);
-        retorno = diffHoras / 60;
+        retorno = (int)(diffHoras / 60);
         return retorno;
     }
 
@@ -66,7 +65,7 @@ public class Dia {
      */
     public int verificarMinutos() throws ExceptionDiaInvalido {
         this.verificarValidade();
-        if(this.diaValido){
+        if(!this.diaValido){
             throw new ExceptionDiaInvalido("Dia Invalido\n"+this);
         }
         int minutosExtrasDebito = 0;
