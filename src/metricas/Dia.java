@@ -4,6 +4,7 @@
  */
 package metricas;
 
+import exception.ExceptionDiaInvalido;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -31,7 +32,7 @@ public class Dia {
 
     public Dia() {
         Calendar cal = Calendar.getInstance();
-        this.dia = ""+cal.get(Calendar.DAY_OF_MONTH);
+        this.dia = "" + cal.get(Calendar.DAY_OF_MONTH);
         this.mes = TipoMes.values()[cal.get(Calendar.MONTH)];
         this.diaValido = true;
         this.ano = "2013";
@@ -44,9 +45,8 @@ public class Dia {
 
     private int diferencaHora(Calendar oneDay, Calendar twoDay) {
         int retorno = 0;
-        int diffHoras = (int) 
-                (oneDay.getTime().getTime() - 
-                 twoDay.getTime().getTime()) / 1000;
+        int diffHoras = (int) (oneDay.getTime().getTime()
+                - twoDay.getTime().getTime()) / 1000;
 //        float diferencaHoras = oneDay.get(Calendar.MINUTE) - twoDay.get(Calendar.MINUTE);
         retorno = diffHoras / 60;
         return retorno;
@@ -54,31 +54,37 @@ public class Dia {
 
     private Calendar makeDay() throws NumberFormatException {
         Calendar day = Calendar.getInstance();
-        day.set(Integer.parseInt(this.ano),this.mes.ordinal(),
+        day.set(Integer.parseInt(this.ano), this.mes.ordinal(),
                 Integer.parseInt(this.dia));
         return day;
     }
+
     /**
      * Retorna a quantidade de horas trabalhadas em minutos
+     *
      * @return int referente a tempo
      */
-    public int verificarMinutos() {
-        int minutosExtrasDebito = 0;
+    public int verificarMinutos() throws ExceptionDiaInvalido {
         this.verificarValidade();
-        for (int i = 0; this.diaValido && i < this.entradas.size() - 1; i = i + 2) {
+        if(this.diaValido){
+            throw new ExceptionDiaInvalido("Dia Invalido\n"+this);
+        }
+        int minutosExtrasDebito = 0;
+        for (int i = 0;i < this.entradas.size() - 1; i = i + 2) {
             minutosExtrasDebito += this.diferencaHora(
                     this.entradas.get(i),
                     this.entradas.get(i + 1));
         }
         return minutosExtrasDebito;
     }
-    
+
     /**
      * Retorna a quantidade de horas trabalhadas em horas.
+     *
      * @return float referente a tempo
      */
-    public float verificarHoras(){
-        return (float)(this.verificarMinutos()/60);
+    public float verificarHoras() throws ExceptionDiaInvalido {
+        return (float) (this.verificarMinutos() / 60);
     }
 
     /**
@@ -94,7 +100,7 @@ public class Dia {
         this.entradas.add(day);
         this.verificarValidade();
     }
-    
+
     /**
      * @return the diaValido
      */
@@ -165,5 +171,44 @@ public class Dia {
         this.ano = ano;
     }
 
-    
+    @Override
+    public String toString() { 
+        String str = "";
+        try {
+            str = "Dia:" + this.dia + " Mes:" + this.mes.name()
+                    + "\n HorasExtras:" + this.verificarHoras();
+        } catch (ExceptionDiaInvalido ex) {}
+        return str;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 89 * hash + (this.dia != null ? this.dia.hashCode() : 0);
+        hash = 89 * hash + (this.mes != null ? this.mes.hashCode() : 0);
+        hash = 89 * hash + (this.ano != null ? this.ano.hashCode() : 0);
+        hash = 89 * hash + (this.diaValido ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Dia other = (Dia) obj;
+        if ((this.dia == null) ? (other.dia != null) : !this.dia.equals(other.dia)) {
+            return false;
+        }
+        if (this.mes != other.mes) {
+            return false;
+        }
+        if ((this.ano == null) ? (other.ano != null) : !this.ano.equals(other.ano)) {
+            return false;
+        }
+        return true;
+    }
 }

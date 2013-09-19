@@ -14,28 +14,41 @@ import util.TipoMes;
  * @author andre
  */
 public class Mes {
-    private float horasDebitoCredito;
+    private final int horaDeTrabalho = 6*22;
     private List<Dia> dias;
     private TipoMes mes;
-    
-    public Mes(TipoMes mes){
-        this.horasDebitoCredito = -1*6*22;
+
+    public Mes(TipoMes mes) {
         this.dias = new ArrayList<Dia>();
         this.mes = mes;
     }
-    
-    public Mes(){
-        this.horasDebitoCredito = -1*6*22;
+
+    public Mes() {
         this.dias = new ArrayList<Dia>();
         int numMes = (int) Calendar.getInstance().get(Calendar.MONTH);
         this.mes = TipoMes.values()[numMes];
     }
-    
-    
-    public void calcularHorasDoMes(){
-        for(Dia dia : dias){
-            this.horasDebitoCredito += 
-                    dia.verificarHoras();
+
+    public float calcularHorasDoMes() {
+        float horas = 0;
+        if (this.dias != null) {
+            for (Dia dia : dias) {
+                horas +=
+                        dia.verificarHoras();
+            }
         }
+        return horas;
+    }
+    
+    @Override
+    public String toString(){
+        StringBuffer strb = new StringBuffer();
+        for(Dia dia : this.dias){
+            strb.append(dia.toString());
+            strb.append("\n");
+        }
+        strb.append("\n\n");
+        strb.append("Mes de "+this.mes.name()+"\n"+"Horas trabalhadas:"+this.calcularHorasDoMes());
+        return strb.toString();
     }
 }
