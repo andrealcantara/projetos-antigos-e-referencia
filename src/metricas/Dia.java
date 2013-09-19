@@ -7,6 +7,7 @@ package metricas;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import util.TipoMes;
 
 /**
  *
@@ -15,25 +16,23 @@ import java.util.List;
 public class Dia {
 
     private String dia;
-    private String mes;
+    private TipoMes mes;
     private String ano;
     private List<Calendar> entradas;
-    private int minutosExtrasDebito;
     private boolean diaValido;
 
-    public Dia(String data, String mes) {
+    public Dia(String data, TipoMes mes) {
         this.dia = data;
         this.mes = mes;
-        this.minutosExtrasDebito = 0;
         this.diaValido = true;
         this.ano = "2013";
         this.entradas = new ArrayList<Calendar>();
     }
 
     public Dia() {
-        this.dia = "";
-        this.mes = "";
-        this.minutosExtrasDebito = 0;
+        Calendar cal = Calendar.getInstance();
+        this.dia = ""+cal.get(Calendar.DAY_OF_MONTH);
+        this.mes = TipoMes.values()[cal.get(Calendar.MONTH)];
         this.diaValido = true;
         this.ano = "2013";
         this.entradas = new ArrayList<Calendar>();
@@ -55,20 +54,31 @@ public class Dia {
 
     private Calendar makeDay() throws NumberFormatException {
         Calendar day = Calendar.getInstance();
-        day.set(Integer.parseInt(this.ano),
-                Integer.parseInt(this.mes)-1,
+        day.set(Integer.parseInt(this.ano),this.mes.ordinal(),
                 Integer.parseInt(this.dia));
         return day;
     }
-
-    public void verificarHoras() {
-        this.minutosExtrasDebito = -360;
+    /**
+     * Retorna a quantidade de horas trabalhadas em minutos
+     * @return int referente a tempo
+     */
+    public int verificarMinutos() {
+        int minutosExtrasDebito = 0;
         this.verificarValidade();
         for (int i = 0; this.diaValido && i < this.entradas.size() - 1; i = i + 2) {
-            this.minutosExtrasDebito += this.diferencaHora(
+            minutosExtrasDebito += this.diferencaHora(
                     this.entradas.get(i),
                     this.entradas.get(i + 1));
         }
+        return minutosExtrasDebito;
+    }
+    
+    /**
+     * Retorna a quantidade de horas trabalhadas em horas.
+     * @return float referente a tempo
+     */
+    public float verificarHoras(){
+        return (float)(this.verificarMinutos()/60);
     }
 
     /**
@@ -83,13 +93,6 @@ public class Dia {
         day.set(Calendar.MINUTE, min);
         this.entradas.add(day);
         this.verificarValidade();
-    }
-
-    /**
-     * @return the minutosExtrasDebito
-     */
-    public int mostrarMinutosExtrasOuDebitoEmMinutos(){
-        return (int) this.minutosExtrasDebito;
     }
     
     /**
@@ -123,14 +126,14 @@ public class Dia {
     /**
      * @return the mes
      */
-    public String getMes() {
+    public TipoMes getMes() {
         return this.mes;
     }
 
     /**
      * @param mes the mes to set
      */
-    public void setMes(String mes) {
+    public void setMes(TipoMes mes) {
         this.mes = mes;
     }
 
@@ -153,20 +156,6 @@ public class Dia {
      */
     private void setEntradas(List<Calendar> entradas) {
         this.entradas = entradas;
-    }
-    
-    /**
-     * @param minutosExtrasDebito to minutosExtrasDebito set
-     */
-    private void setMinutosExtrasDebito(int minutosExtrasDebito) {
-        this.minutosExtrasDebito = minutosExtrasDebito;
-    }
-    
-    /**
-     * @return the minutosExtrasDebito
-     */
-    private int getMinutosExtrasDebito() {
-        return this.minutosExtrasDebito;
     }
 
     /**

@@ -35,7 +35,7 @@ public class Mes {
     public void calcularHorasDoMes(){
         for(Dia dia : dias){
             this.horasDebitoCredito += 
-                    dia.mostrarMinutosExtrasOuDebitoEmMinutos()/60;
+                    dia.verificarHoras();
         }
     }
 }
