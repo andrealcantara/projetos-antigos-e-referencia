@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+  <user id="1.0 ">
+    <name>Yvonne</name>
+    <login>yvonne-arainz</login>
+    <password>123456</password>
+    <followers>3</followers>
+    <following>2</following>
+  </user>
+  <user id="2.0 ">
+    <name>Javier</name>
+    <login>javier-tesillo</login>
+    <password>123456</password>
+    <followers>4</followers>
+    <following>3</following>
+  </user>
+  <user id="3.0 ">
+    <name>Jonna</name>
+    <login>jonna-fenderson</login>
+    <password>123456</password>
+    <followers>1</followers>
+    <following>3</following>
+  </user>
+  <user id="4.0 ">
+    <name>Beertje</name>
+    <login>beertje-kee</login>
+    <password>123456</password>
+    <followers>2</followers>
+    <following>3</following>
+  </user>
+  <user id="5.0 ">
+    <name>Serafim</name>
+    <login>serafim-asturiano</login>
+    <password>123456</password>
+    <followers>0</followers>
+    <following>1</following>
+  </user>
+  <user id="6.0 ">
+    <name>Marcus Editado</name>
+    <login>fraudlucas</login>
+    <password>123456</password>
+    <followers>3</followers>
+    <following>3</following>
+  </user>
+  <user id="7.0 ">
+    <name>ASJ AJS</name>
+    <login>asjajs</login>
+    <password>123456</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="8.0 ">
+    <name>sdfsdfdsf</name>
+    <login>fdsfsfs</login>
+    <password>sdsfsdf</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="9.0 ">
+    <name>testando signup</name>
+    <login>aisdoaisdaisoadsoidajsiodjapsd</login>
+    <password>saoidasid</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="11.0 ">
+    <name>babiiii</name>
+    <login>babiiii</login>
+    <password>123456</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="14.0 ">
+    <name>Paulo</name>
+    <login>paulomgj</login>
+    <password>123456</password>
+    <followers>2</followers>
+    <following>0</following>
+  </user>
+  <user id="15.0 ">
+    <name>Anderson Moreira</name>
+    <login>anderson</login>
+    <password>123</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="16.0 ">
+    <name>Hugo </name>
+    <login>hugo</login>
+    <password>123456</password>
+    <followers>0</followers>
+    <following>0</following>
+  </user>
+  <user id="17.0 ">
+    <name>Daniel Bion</name>
+    <login>bion</login>
+    <password>123456</password>
+    <followers>1</followers>
+    <following>1</following>
+  </user>
+</users>

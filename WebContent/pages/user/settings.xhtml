@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:t="http://myfaces.apache.org/tomahawk"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="shortcut icon"
+		href="#{facesContext.externalContext.requestContextPath}/imgs/favicon.png" />
+	<title>TweetMe</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/styles/bootstrap.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/styles/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/styles/documentation.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/styles/sunburst.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{facesContext.externalContext.requestContextPath}/styles/style.css" />
+
+
+</h:head>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><h:outputText
+						value="#{msg.tweetme}" /></a>
+			</div>
+			<div class="collapse navbar-collapse">
+				<h:form>
+					<ul class="nav navbar-nav">
+						<li><h:commandLink value="#{msg.home}"
+								action="#{profileBean.goToHome}" /></li>
+						<li><h:commandLink value="#{msg.profile}"
+								action="#{profileBean.goToProfile}">
+								<f:param name="login" value="#{user.getLogin()}" />
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msg.following}"
+								action="#{profileBean.goToFollowing}">
+								<f:param name="login" value="#{user.getLogin()}" />
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msg.followers}"
+								action="#{profileBean.goToFollowers}">
+								<f:param name="login" value="#{user.getLogin()}" />
+							</h:commandLink></li>
+						<li><h:commandLink value="#{msg.search}"
+								action="#{profileBean.goToSearch}" /></li>
+						<li><h:commandLink value="#{msg.settings}"
+								action="#{profileBean.goToSettings}" /></li>
+					</ul>
+				</h:form>
+
+				<ul class="nav navbar-nav navbar-right">
+					<h:form>
+						<li><h:commandLink styleClass="logout" value="#{msg.logout}"
+								action="#{loginBean.logout}" /></li>
+					</h:form>
+				</ul>
+			</div>
+			<!--/.nav-collapse -->
+		</div>
+	</div>
+
+	<div id="profile"
+		class="jumbotron pos-adv-2 width-profile height-profile">
+		<h:graphicImage styleClass="img-circle img-profile"
+			value="#{pageContext.request.contextPath}#{user.getPhoto()}"></h:graphicImage>
+
+		<h:form>
+			<h4>
+				<h:commandLink styleClass="call-el" value="#{user.getName()}"
+					action="#{profileBean.goToProfile}">
+					<f:param name="login" value="#{user.getLogin()}" />
+				</h:commandLink>
+			</h4>
+			<h5>
+				<h:commandLink styleClass="call-el"
+					value="#{msg.at_sign}#{user.getLogin()}"
+					action="#{profileBean.goToProfile}">
+					<f:param name="login" value="#{user.getLogin()}" />
+				</h:commandLink>
+			</h5>
+
+			<div class="form-group">
+				<h6>
+					<h:commandLink styleClass="call-el"
+						value="#{user.getFollowers().size()} "
+						action="#{profileBean.goToFollowers}">
+						<f:param name="login" value="#{user.getLogin()}" />
+					</h:commandLink>
+					<h:outputText value="#{msg.followers}" />
+					<h:commandLink styleClass="call-el"
+						value=" #{user.getFollowing().size()} "
+						action="#{profileBean.goToFollowing}">
+						<f:param name="login" value="#{user.getLogin()}" />
+					</h:commandLink>
+					<h:outputText value="#{msg.following}" />
+				</h6>
+			</div>
+		</h:form>
+	</div>
+
+	<div id="settings_description" class="jumbotron pos-home-1 width-home">
+		<h:form>
+			<div class="form-group">
+				<h4>
+					<h:outputText value="#{msg.settings}" />
+				</h4>
+			</div>
+
+		</h:form>
+
+	</div>
+
+	<div id="settings-field" class="jumbotron pos-home-2 width-home">
+		<h:form styleClass="form-horizontal"  enctype="multipart/form-data"> 
+			<div class="form-group">
+				<h5>
+					<h:outputLabel value="#{msg.full_name}" />
+				</h5>
+				<h:inputText styleClass="form-control" id="inputName"
+					value="#{userBean.name}" required="true"
+					requiredMessage="Campo vazio! Favor preencher!" />
+				<h:message styleClass="msg-font msg-position-1 msg-width"
+					for="inputName" />
+			</div>
+			<div class="form-group">
+				<h5>
+					<h:outputLabel value="#{msg.description}" />
+				</h5>
+				<h:inputText styleClass="form-control" id="description"
+					value="#{userBean.description}" required="true"
+					requiredMessage="Campo vazio! Favor preencher!" />
+				<h:message styleClass="msg-font msg-position-1 msg-width"
+					for="description" />
+			</div>
+<!-- 			<div class="form-group margin-t-b-0"> -->
+<!-- 				<h5> -->
+<!-- 					<h:outputLabel value="#{msg.email_adress}" /> -->
+<!-- 				</h5> -->
+<!-- 				<h:inputText styleClass="form-control" id="inputEmail" -->
+<!-- 					value="#{userBean.email }" required="true" -->
+<!-- 					requiredMessage="E-mail obrigatório" /> -->
+<!-- 				<h:message styleClass="msg-font msg-position-2 msg-width" -->
+<!-- 					for="inputEmail" /> -->
+<!-- 			</div> -->
+<!-- 			<div class="form-group margin-t-b-0"> -->
+<!-- 				<h5> -->
+<!-- 					<h:outputLabel value="#{msg.username_choose}" /> -->
+<!-- 				</h5> -->
+<!-- 				<h:inputText styleClass="form-control" id="inputUsername" -->
+<!-- 					value="#{userBean.login }" required="true" -->
+<!-- 					requiredMessage="Campo Obrigatório" /> -->
+<!-- 				<h:message styleClass="msg-font msg-position-4 msg-width" -->
+<!-- 					for="inputUsername" /> -->
+<!-- 			</div> -->
+			
+			<div class="form-group margin-t-b-0">
+				<h5>
+					<h:outputLabel value="Choose your Photo:" />
+				</h5>
+				<t:inputFileUpload id="fileUpload" value="#{userBean.arquivo}"/>
+				<h:message styleClass="msg-font msg-position-4 msg-width"
+					for="inputPhoto" />
+			</div>
+			<div class="form-group margin-t-b-0">
+				<h:commandButton styleClass="btn btn-default"
+					action="#{userBean.change}" value="#{msg.save}" />
+			</div>
+		</h:form>
+	</div>
+
+	<div id="footer">
+		<div class="container">
+			<p class="muted credit">
+				Web III Project - TweetMe courtesy <a
+					href="https://github.com/fraudlucas">Marcus Lucas</a> and <a
+					href="https://github.com/barbaracgoncalves">Barbara Gonçalves</a>.
+			</p>
+		</div>
+	</div>
+
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/scripts/bootstrap.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/scripts/jquery-1.10.2.js"></script>
+	<script
+		src="#{facesContext.externalContext.requestContextPath}/scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+.logout {
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	padding-top: 15px;
+	padding-bottom: 15px;
+	color: #999999;
+	position: relative;
+	display: block;
+}
+
+.logout:hover {
+	color: #ffffff;
+}
+
+#footer {
+	position: relative;
+	top: 250px;
+	height: 75px;
+	width: 100%;
+	background-color: #222222;
+	margin-top: 20px;
+}
+
+#footer>.container>p {
+	color: #FFF;
+}
+
+.display-off {
+	display: none;
+}
+
+.align-right {
+	position: relative;
+	float: right;
+}
+
+.margin-t-b-0 {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+.margin-t-0 {
+	margin-top: 0px;
+}
+
+.content {
+	position: absolute;
+}
+
+.pos-adv-2 {
+	position: fixed;
+	top: 150px;
+	left: 150px;
+}
+
+.pos-adv-3 {
+	position: fixed;
+	top: 460px;
+	left: 150px;
+}
+
+.pos-adv {
+	position: relative;
+	top: 150px;
+	left: 150px;
+}
+
+.width-adv {
+	width: 600px;
+}
+
+.height-adv {
+	height: 400px;
+}
+
+.pos-signup {
+	position: absolute;
+	top: 150px;
+	left: 760px;
+}
+
+.height-signup {
+	height: 400px;
+}
+
+.width-signup {
+	width: 350px;
+}
+
+.height-signup2 {
+	width: 800px;
+}
+
+.width-profile {
+	width: 210px;
+}
+
+.height-profile {
+	height: 300px;
+}
+
+.img-profile {
+	height: 150px;
+	width: 150px;
+}
+
+.img-profile-2 {
+	height: 110px;
+	width: 110px;
+	margin-left: 4px;
+	margin-top: 10px;
+}
+
+.txt-align-profile {
+	text-align: center;
+}
+
+.pos-home-1 {
+	position: relative;
+	top: 150px;
+	left: 400px;
+}
+
+.pos-home-2 {
+	position: relative;
+	top: 150px;
+	left: 400px;
+}
+
+.width-home {
+	width: 700px;
+}
+
+.height-home {
+	height: 1300px;
+}
+
+.height-home-2 {
+	height: 200px;
+}
+
+.pos-home-el {
+	position: relative;
+	display: block;
+}
+
+.width-home-el {
+	width: 640px;
+}
+
+.height-home-el {
+	height: 150px;
+}
+
+.jumbotron-home {
+	padding: 5px;
+	margin-bottom: 5px;
+	font-size: 14px;
+	font-weight: 200;
+	line-height: 2.1428571435;
+	color: inherit;
+	background-color: #fff;
+}
+
+.text-font {
+	font-size: 12pt !important;
+}
+
+.border-el {
+	border: thin dashed black;
+}
+
+.picture-el {
+	position: absolute;
+}
+
+.picture-tam-el {
+	height: 140px;
+	width: 120px;
+}
+
+.text-el {
+	position: relative;
+	float: right;
+}
+
+.text-tam-el {
+	height: 110px;
+	width: 510px;
+}
+
+.cmd-el {
+	position: relative;
+	float: right;;
+	vertical-align: bottom;
+}
+
+.cmd-tam-el {
+	height: 30px;
+	width: 510px;
+}
+
+.call-el {
+	text-align: center;
+	color: black;
+	font-style: normal;
+	font-weight: bold;
+}
+
+.call-el:FOCUS {
+	text-align: center;
+	color: blue;
+	font-style: italic;
+}
+
+.text-body-el {
+	padding: 15px;
+	font-size: 14px;
+	font-style: italic;
+}
+
+.text-body-el-2 {
+	font-size: 14px;
+}
+
+.text-body-el-3 {
+	padding: 15px;
+	font-size: 14px;
+}
+
+.msg-position-1 {
+	position: absolute;
+	left: 620px;
+	top: 150px;
+}
+
+.msg-position-2 {
+	position: absolute;
+	left: 620px;
+	top: 240px;
+}
+
+.msg-position-3 {
+	position: absolute;
+	left: 620px;
+	top: 320px;
+}
+
+.msg-position-4 {
+	position: absolute;
+	left: 620px;
+	top: 395px;
+}
+
+.msg-font {
+	font-size: 14px;
+	color: red;
+}
+
+.msg-width {
+	width: 300px;
+}
+
+.height-search {
+	height: 160px;
+}
