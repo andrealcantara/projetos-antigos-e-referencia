@@ -15,17 +15,6 @@ public aspect AspectoPegarPalavras {
 		return msg;
 	}
 	
-
-	
-//	public pointcut alteraPalavras(): call(String ResultSet.getString(String));
-//	
-//	String around() : alteraPalavras(){
-//		String msg = "";	
-//		
-//		
-//		return msg;
-//	}
-	
 	
 	//filtro de Palavroes
 	void around(String texto) : call(void Post.setText(..)) 
