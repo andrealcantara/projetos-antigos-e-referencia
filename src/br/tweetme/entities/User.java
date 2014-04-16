@@ -31,19 +31,19 @@ public class User implements Serializable {
 
 	@Id
 	@Column(name = "id")
-	protected double id;
+	protected /*@ spec_public non_null @*/ double id;
 
 	@Column(name = "login", nullable = false)
-	protected String login;
+	protected /*@ spec_public non_null @*/ String login;
 
 	@Column(name = "pass", nullable = false)
-	protected String password;
+	protected /*@ spec_public non_null @*/ String password;
 
 	@Column(name = "name", nullable = true)
 	protected String name;
 
 	@Column(name = "description", nullable = true)
-	protected String description;
+	protected /*@ spec_public non_null @*/String description;
 
 	@Column(name = "email", nullable = false)
 	protected String email;
