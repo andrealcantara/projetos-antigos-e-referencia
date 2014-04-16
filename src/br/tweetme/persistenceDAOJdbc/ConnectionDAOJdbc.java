@@ -20,7 +20,7 @@ public class ConnectionDAOJdbc {
 	public static Connection getConnection(boolean autoCommit) throws SQLException {
 		String url = "jdbc:mysql://127.0.0.1:3306/tweetme";
 		String user = "root";
-		String password = "";
+		String password = "root";
 		
 		Connection connection = DriverManager.getConnection(url, user, password);
 		connection.setAutoCommit(autoCommit);
