@@ -1,0 +1,16 @@
+/bin
+build
+.gralde
+
+#Eclipse
+.project
+.classpath
+.settings
+
+
+
+#Test editor
+*.swp
+*.remote
+*.local
+*.~lock
