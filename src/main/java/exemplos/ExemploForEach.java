@@ -4,8 +4,6 @@ import java.util.List;
 
 import control.Controller;
 import model.Usuario;
-import model.Mensagem;
-import model.Mensagem.MensagemEnum;
 
 public class ExemploForEach {
 	private static List<Usuario> usuarios = Controller.todosUsuarios();
