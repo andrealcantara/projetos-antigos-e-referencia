@@ -1,11 +1,12 @@
 /bin
 build
+.gradle
 
 #Eclipse
 .project
 .classpath
 .settings
-
+.metadata
 
 
 #Test editor
