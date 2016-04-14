@@ -1,10 +1,10 @@
-package model;
+package br.ufpe.exemploprojeto.model;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import mensagem.Mensagem;
-import mensagem.Mensagem.MensagemEnum;
+import br.ufpe.exemploprojeto.mensagem.Mensagem;
+import br.ufpe.exemploprojeto.mensagem.Mensagem.MensagemEnum;
 
 public enum Role {
 	ADMIN(1),

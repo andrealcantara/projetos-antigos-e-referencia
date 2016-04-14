@@ -1,4 +1,4 @@
-package model;
+package br.ufpe.exemploprojeto.model;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -6,23 +6,45 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 
-public class Usuario {
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import br.ufpe.exemploprojeto.model.util.Builder;
+
+@Entity
+@Table(name = "usuario")
+@SequenceGenerator(name = "seq_usuario", sequenceName = "usuario_id_seq", allocationSize = 1)
+public class Usuario implements Builder {
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
+	
 	private String nome;
+	
 	private String cpf;
+	
+	@Temporal(TemporalType.DATE)
 	private Date dtNascimento;
+	
+	@ElementCollection(targetClass=Role.class)
+	@Enumerated(EnumType.STRING)
+	@CollectionTable(name="role_usuario")
+	@Column(name="role")
 	private List<Role> permissoes;
 	
 	public Usuario(){}
-	
-	public Usuario(long id, String nome, String cpf, Date dtNascimento, List<Role> permissoes) {
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.dtNascimento = dtNascimento;
-		this.permissoes = permissoes;
-	}
-	
+
 	public String toString(){
 		return "Id: " + id + ", Nome:" + nome + ", Idade: " + getIdade() + 
 				" Permissoes: " + permissoes + ".";

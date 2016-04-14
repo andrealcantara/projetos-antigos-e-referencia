@@ -1,4 +1,4 @@
-package mensagem;
+package br.ufpe.exemploprojeto.mensagem;
 
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
