@@ -1,8 +1,12 @@
 package model;
 
+import java.util.Arrays;
 import java.util.function.Predicate;
 
-public enum Role implements HelperEnum{
+import mensagem.Mensagem;
+import mensagem.Mensagem.MensagemEnum;
+
+public enum Role {
 	ADMIN(1),
 	COLLABORATOR(2),
 	MODERATE(3),
@@ -19,12 +23,16 @@ public enum Role implements HelperEnum{
 	}
 	
 	public static Role valueOf(int nivel) {
+		String mensagemError = 
+				Mensagem.get(MensagemEnum.Mensagem_Error_Enum_Param, 
+							 Role.class.getName(),String.valueOf(nivel));
+
 		Predicate<Role> filtro = f-> f.getNivel() == nivel;
-		Role r = HelperEnum.of(filtro, Role.class, nivel);
-//		Role r = Arrays.stream(Role.values())
-//				.filter(f -> f.getNivel() == nivel)
-//				.findFirst()
-//				.orElseThrow(()-> new RuntimeException());
+	
+		Role r = Arrays.stream(Role.values())
+				.filter(filtro)
+				.findFirst()
+				.orElseThrow(()-> new IllegalArgumentException(mensagemError));
 		return r;
 	}
 	

@@ -31,7 +31,8 @@ public class Usuario {
 	public int getIdade(){
 		int retorno = -1;
 		if(dtNascimento != null){
-			Period p = Period.between(dtNascimento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+			Period p = Period.between(dtNascimento.toInstant()
+					.atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
 			retorno = p.normalized().getYears();
 		}	
 		return retorno;
