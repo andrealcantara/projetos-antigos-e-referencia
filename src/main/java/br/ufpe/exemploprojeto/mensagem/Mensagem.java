@@ -15,7 +15,7 @@ public class Mensagem {
 	}
 	
 	private static class MensagemHolder{
-		private static final ResourceBundle HOLDER = ResourceBundle.getBundle("mensagem.mensagem");
+		private static final ResourceBundle HOLDER = ResourceBundle.getBundle("mensagem");
 	}
 	
 	public enum MensagemEnum{

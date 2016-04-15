@@ -20,12 +20,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import br.ufpe.exemploprojeto.model.util.Builder;
-
 @Entity
 @Table(name = "usuario")
 @SequenceGenerator(name = "seq_usuario", sequenceName = "usuario_id_seq", allocationSize = 1)
-public class Usuario implements Builder {
+public class Usuario {
 	@Id
 	@GeneratedValue(strategy=GenerationType.SEQUENCE)
 	private long id;
@@ -44,6 +42,15 @@ public class Usuario implements Builder {
 	private List<Role> permissoes;
 	
 	public Usuario(){}
+	
+	public static Usuario of(String nome, String cpf, Date dtNascimento, List<Role> permissoes) {
+		Usuario u = new Usuario();
+		u.nome = nome;
+		u.cpf = cpf;
+		u.dtNascimento = dtNascimento;
+		u.permissoes = permissoes;
+		return u;
+	}
 
 	public String toString(){
 		return "Id: " + id + ", Nome:" + nome + ", Idade: " + getIdade() + 

@@ -1,14 +1,8 @@
 package br.ufpe.exemploprojeto.controlador;
 
-import javax.enterprise.context.ApplicationScoped;
-
 import br.ufpe.exemploprojeto.model.Usuario;
 
-@ApplicationScoped
-public class ControladorUsuario {
+public class ControladorUsuario extends Controlador<Usuario> {
+	private static final long serialVersionUID = 2274139660861473718L;
 
-	public static void main(String[] args) {
-		
-	}
-	
 }
