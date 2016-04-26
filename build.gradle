@@ -54,6 +54,7 @@ dependencies {
 	
 	// JUNIT
     	testCompile 'junit:junit:4.12'
+	compile 'org.jglue.cdi-unit:cdi-unit-tests-gradle:3.0.1'
 }
 
 // Configurações do eclipse
