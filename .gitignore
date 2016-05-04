@@ -6,7 +6,7 @@ build
 .project
 .classpath
 .settings
-
+.metadata
 
 
 #Test editor
