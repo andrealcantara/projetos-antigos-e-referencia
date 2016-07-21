@@ -10,10 +10,11 @@ import com.google.common.base.Preconditions;
 public class RegexManipulation {
 	
 	public static List<String> searchAll(String regex, String source){
-		List<String> retorno = new ArrayList<>();
-		Preconditions.checkArgument(source.matches(regex));
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher = pattern.matcher(source);
+		List<String> retorno = new ArrayList<>();
+		Preconditions.checkArgument(matcher.find());
+		matcher = pattern.matcher(source);
 		while(matcher.find()){
 			retorno.add(matcher.group().trim());
 		}

@@ -5,27 +5,42 @@ public class Configuracao {
 	public static final String tolken = "@";
 	public static final String defaultTags = String.format("%s%s", groupTAG,tolken);
 	
-	private long id;
+	private long idTag;
+	private long idBBCode;
 	
 	private Configuracao(){
-		this.id = 0;
+		this.idTag = 0;
+		this.idBBCode = 0;
 	}
 	
 	public static Configuracao getInstnace(){
 		return ConfiguracaoHolder.INSTANCE;
 	}
 	
-	public long getId(){
-		return id;
+	public long getIdTag(){
+		return idTag;
 	}
 	
-	public long nextId(){
-		return ++id;
+	public long nextIdTag(){
+		return ++idTag;
 	}
 	
-	public void zerarId(){
-		this.id = 0;
+	public void zerarIdTag(){
+		this.idTag = 0;
 	}
+	
+	public long getIdBBCode(){
+		return idBBCode;
+	}
+	
+	public long nextIdBBCode(){
+		return ++idBBCode;
+	}
+	
+	public void zerarIdBBCode(){
+		this.idBBCode = 0;
+	}
+	
 	
 	private static class ConfiguracaoHolder{
 		private static Configuracao INSTANCE = new Configuracao();

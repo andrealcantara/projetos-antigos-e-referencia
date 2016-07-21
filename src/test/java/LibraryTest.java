@@ -17,20 +17,33 @@ import java.util.List;
  */
 public class LibraryTest {
 	public final static String CORRECT_TAG_WITH_ALL_PROPERTIES="{{"+Configuracao.defaultTags+" name=\"image_banner\" type=\"image\" size=40 needed=false}}";
+	public final static String loren = "Mussum Ipsum, cacilds vidis litro abertis. Pra lá , depois divoltis porris," +
+			CORRECT_TAG_WITH_ALL_PROPERTIES +
+			" paradis. Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. " +
+			"Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Suco de cevadiss, é um leite " +
+			"divinis, qui tem lupuliz, matis, aguis e fermentis.";
 	
-    @Test
-    public void testSomeLibraryMethod() {
-        Library classUnderTest = new Library();
-        assertTrue("someLibraryMethod should return 'true'", classUnderTest.someLibraryMethod());
-    }
+	public final static String bbCodes = "[table][tr][td2col][table][tr][td3rodape][/td3rodape][/tr][tr][tdrodape][/tdrodape][tdvtop][table][tr][tdvtop][table][tr][td2col]"
+			+ "[img=http://i933.photobucket.com/albums/ad173/aimihikari/hacko-banner-v1_zpsz6wqjkd2.png][/td2col][/tr][tr][td2rodape][b][size=5]Overlord[/size][/b] [i]"
+			+ "[size=3]+ OVAs[/size][/i][/td2rodape][/tr][tr][td2col][/td2col][/tr][tr][tdrodape]Capa[/tdrodape][tdrodape]Sinopse[/tdrodape][/tr][tr][tdvtop] "
+			+ "[poster]http://ultraimg.com/images/2016/07/21/poster.jpg[/poster] [/tdvtop][tdvtop][table][tr][tdvtop][justify]Yggdrasil é um popular jogo online que acaba sendo encerrado sem alardes certo dia. "
+			+ "No entanto, Momonga decide não sair do jogo. Então ele é transformado num esqueleto como \"o mago mais poderoso\". O mundo continua a mudar, com NPCs começando a sentir emoção. Como não tem família, "
+			+ "amigos ou lugar na sociedade real, o jovem Momonga precisa lutar para dominar o novo mundo que o jogo se tornou.[/justify][/tdvtop][/tr][tr][td2rodape]ScreenShots"
+			+ "[/td2rodape][/tr][tr][tdvtop] [center][ashot]http://ultraimg.com/images/2016/07/21/screen1.jpg[/ashot] [ashot]http://ultraimg.com/images/2016/07/21/screen2.jpg[/ashot] "
+			+ "[ashot]http://ultraimg.com/images/2016/07/21/screen3.jpg[/ashot] [ashot]http://ultraimg.com/images/2016/07/21/screen4.jpg[/ashot] "
+			+ "[ashot]http://ultraimg.com/images/2016/07/21/screen5.jpg[/ashot] [ashot]http://ultraimg.com/images/2016/07/21/screen6.jpg[/ashot] [ashot]http://ultraimg.com/images/2016/07/21/screen7.jpg[/ashot] "
+			+ "[ashot]http://ultraimg.com/images/2016/07/21/screen8.jpg[/ashot] Clique na imagem para ver em tamanho real[/center] [/tdvtop][/tr][/table][/tdvtop][/tr] [tr][td2col][table][tr][tdrodape]Dados da Anime[/tdrodape]"
+			+ "[tdrodape]Dados Técnicos[/tdrodape][tdrodape]Informações Gerais[/tdrodape][/tr][tr][tdvtop][b]Nome Original do Anime:[/b] オーバーロード [b]Tempo de Duração:[/b] ~25Min [b]My Anime List:[/b] "
+			+ "[url=http://myanimelist.net/anime/29803/Overlord]http://myanimelist.net/anime/29803/Overlord[/url] [b]Gênero:[/b] Ação, Aventura, Fantasia, Game, Magia, Sobrenatural[/tdvtop][tdvtop][b]Qualidade do Vídeo:"
+			+ "[/b] BDRip [b]Vídeo Codec:[/b] 10Bits [b]Áudio Codec:[/b] AAC [b]Idioma do Áudio:[/b] Japonês [b]Legenda:[/b] Embutida [b]Formato do Vídeo:[/b] WideScreen [b]Resolução:[/b] 1920 x 1080[/tdvtop][tdvtop]"
+			+ "[b]Tamanho do Arquivo:[/b] ~200Mb [b]Tipo de Compartilhamento:[/b]  http [b]Fansubber:[/b] AnimeNoSekai[/tdvtop][/tr][/table][/td2col][/tr][tr][td2rodape]Vídeo/Trailer[/td2rodape][/tr][tr][td2col] "
+			+ "[center][media]https://www.youtube.com/watch?v=RuNAPPcjDr4[/media][/center] [/td2col][/tr][tr][td2rodape]Download[/td2rodape][/tr][tr][td2col] "
+			+ "[code=auto:0]https://mega.nz/#F!cJcmhQ4B https://userscloud.com/go/embed/1epihhml47ld/[/code] [/td2col][/tr][tr][td2rodape][b]Senha[/b][/td2rodape][/tr][tr]"
+			+ "[td2col]!JFyrTowgSYcF-gzN1Xwy-g[/td2col][/tr][/table][/tdvtop][/tr][/table][/tdvtop][tdrodape][/tdrodape][/tr][tr][td3rodape][/td3rodape][/tr][/table][/td2col][/tr][/table]";
+	
     
     @Test
     public void test_verify_only_default_tag(){
-    	final String loren = "Mussum Ipsum, cacilds vidis litro abertis. Pra lá , depois divoltis porris," +
-    			CORRECT_TAG_WITH_ALL_PROPERTIES +
-    			" paradis. Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. " +
-    			"Não sou faixa preta cumpadi, sou preto inteiris, inteiris. Suco de cevadiss, é um leite " +
-    			"divinis, qui tem lupuliz, matis, aguis e fermentis.";
     	ControlTags control = new ControlTags();
     	List<Tag> tags = control.findTags(loren);
     	assertThat(tags.size(), CoreMatchers.is(1));

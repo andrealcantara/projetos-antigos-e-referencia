@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.google.common.base.Preconditions;
+
 import model.Tag;
 
 public class ControlTags {
@@ -16,10 +18,11 @@ public class ControlTags {
 		List<Tag> retorno = new ArrayList<>();
 		Pattern pattern = Pattern.compile(REGEX_IDENTIFY_TAG);
 		Matcher matcher = pattern.matcher(line);
+		Preconditions.checkArgument(matcher.find());
+		matcher = pattern.matcher(line);
 		while(matcher.find()){
 			retorno.add(Tag.of(matcher.group()));
 		}
-
 		return retorno;
 	}
 }

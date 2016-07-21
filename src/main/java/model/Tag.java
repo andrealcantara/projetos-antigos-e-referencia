@@ -10,7 +10,7 @@ import util.RegexManipulation;
 
 public class Tag {
 	private static final String REGEX_PATTERN = "^(\\{){2}("+Configuracao.defaultTags+"){1}.*(\\}){2}$";
-	private static final String REGEX_PROPERTIES = "(\\s){1}(name|type|size|needed)(\\=){1}((\"[a-zA-Z0-9_-]+\")|(\\d+)|(true|false)){1}";
+	private static final String REGEX_PROPERTIES = "(name||type||size||needed)(=){1}(\"[a-zA-Z_-]+\"|\\d+|true|false){1}";
 	private int id;
 	private List<TagProperties> properties;
 
