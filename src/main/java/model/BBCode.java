@@ -2,8 +2,6 @@ package model;
 
 import java.io.Serializable;
 
-import org.junit.experimental.theories.Theories;
-
 import com.google.common.base.Preconditions;
 
 public class BBCode implements Serializable{
