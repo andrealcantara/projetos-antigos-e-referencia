@@ -18,6 +18,7 @@ public class TagProperties {
 		return properTag;
 	}
 
+	//TODO: refatorar.
 	public static TagProperties of(String pattern) {
 		Preconditions.checkArgument(pattern.matches(".*=.*"));
 		String[] part = pattern.split("=");
