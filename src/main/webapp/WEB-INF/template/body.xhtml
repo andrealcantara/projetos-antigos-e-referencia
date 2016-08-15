@@ -11,7 +11,7 @@
 		<meta content="text/html; charset=ISO-8859-1"
 			http-equiv="Content-Type" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Projeto#{empty nomeTela == false? ' - ':''}#{nomeTela}</title>
+		<title>Gerador Okaeri - Cpturbo #{empty nomeUser == false? 'User - ':''}#{nomeUser}</title>
 	</f:facet>
 	<f:facet name="middle">
 
@@ -28,7 +28,7 @@
 				<ui:include src="footer.xhtml" />
 			</p:layoutUnit>
 			
-			<p:layoutUnit id="cont" position="center" size="#{empty nomeTela == false? '130':'0'}" header="#{nomeTela}">
+			<p:layoutUnit id="cont" position="center" size="#{empty nomeUser == false? '130':'0'}" header="#{nomeUser}">
 				<ui:insert name="content" src="content.xhtml" />
 			</p:layoutUnit>
 		</p:layout>
