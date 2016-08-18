@@ -1,4 +1,4 @@
-package MAL;
+package br.com.geradorOkaeri.MAL;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,22 +10,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.enterprise.context.ApplicationScoped;
+
 import org.apache.commons.codec.binary.Base64;
 
 import com.thoughtworks.xstream.XStream;
 
-import MAL.modal.AnimeMAL;
+import br.com.geradorOkaeri.MAL.modal.AnimeMAL;
+import br.com.geradorOkaeri.annotation.LocalProperties;
  
+@ApplicationScoped
 public class MALConnector {
     private final String baseUrl;
     private final String username;
     private final String password;
-    
-    public static void main(String[] args) {
-		MALConnector rest = new MALConnector("AndreAlcantara", "890410");
-		List<AnimeMAL> lista = rest.getAnimesMAL(1,"fullmetal alchemist");
-		lista.forEach(s -> System.out.println(s.getTitulo() + "- Tipo " + s.getTipo() + " dates - " + s.getDate_inicio() + " - " + s.getDate_fim()));
-	}
  
     public MALConnector(String username, String password) {
         this.baseUrl = "http://myanimelist.net/api";
@@ -33,7 +31,7 @@ public class MALConnector {
         this.password = password;
     }
     
-    public MALConnector(Properties prop) {
+    public MALConnector(@LocalProperties("MALUser") Properties prop) {
         this.baseUrl = "http://myanimelist.net/api";
         this.username = prop.getProperty("username");
         this.password = prop.getProperty("password");

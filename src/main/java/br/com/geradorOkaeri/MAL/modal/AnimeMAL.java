@@ -1,4 +1,4 @@
-package MAL.modal;
+package br.com.geradorOkaeri.MAL.modal;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -7,8 +7,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-import MAL.converter.AnimeMALStatusConverterXML;
-import MAL.converter.LocalDateConverterXML;
+import br.com.geradorOkaeri.MAL.converter.AnimeMALStatusConverterXML;
+import br.com.geradorOkaeri.MAL.converter.LocalDateConverterXML;
 
 @XStreamAlias("entry")
 public class AnimeMAL implements Serializable{

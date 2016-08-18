@@ -1,22 +1,22 @@
-package MAL.converter;
+package br.com.geradorOkaeri.MAL.converter;
 
 import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 
-import MAL.modal.AnimeMALStatus;
+import br.com.geradorOkaeri.MAL.modal.AnimeMALType;
 
-public class AnimeMALStatusConverterXML extends AbstractSingleValueConverter {
+public class AnimeMALTypeConverterXML extends AbstractSingleValueConverter {
 
 	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean canConvert(Class type) {
-		return type.equals(AnimeMALStatus.class);
+		return type.equals(AnimeMALType.class);
 	}
 
 	@Override
 	public Object fromString(String str) {
-		AnimeMALStatus retorno;
+		AnimeMALType retorno;
 		try{
-			retorno = AnimeMALStatus.valueOfName(str);
+			retorno = AnimeMALType.valueOfName(str);
 		}catch(RuntimeException e){
 			retorno = null;
 		}

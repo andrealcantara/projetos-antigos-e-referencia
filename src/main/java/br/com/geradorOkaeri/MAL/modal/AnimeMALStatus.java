@@ -1,4 +1,4 @@
-package MAL.modal;
+package br.com.geradorOkaeri.MAL.modal;
 
 import java.util.stream.Stream;
 

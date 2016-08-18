@@ -1,11 +1,11 @@
-package MAL.modal;
+package br.com.geradorOkaeri.MAL.modal;
 
 import java.util.stream.Stream;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-import MAL.converter.AnimeMALTypeConverterXML;
+import br.com.geradorOkaeri.MAL.converter.AnimeMALTypeConverterXML;
 
 @XStreamAlias("type")
 @XStreamConverter(AnimeMALTypeConverterXML.class)

@@ -1,4 +1,4 @@
-package MAL.converter;
+package br.com.geradorOkaeri.MAL.converter;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
