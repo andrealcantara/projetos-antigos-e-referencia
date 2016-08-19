@@ -8,7 +8,7 @@ import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
 import br.com.geradorOkaeri.MAL.converter.AnimeMALStatusConverterXML;
-import br.com.geradorOkaeri.MAL.converter.LocalDateConverterXML;
+import br.com.geradorOkaeri.Util.converters.LocalDateConverterXML;
 
 @XStreamAlias("entry")
 public class AnimeMAL implements Serializable{
@@ -30,7 +30,6 @@ public class AnimeMAL implements Serializable{
 
 	@XStreamAlias("episodes")
 	private Integer episodios;
-	
 
 	@XStreamAlias("score")
 	private Double nota;

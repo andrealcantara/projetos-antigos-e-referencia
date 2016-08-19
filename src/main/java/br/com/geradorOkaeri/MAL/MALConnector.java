@@ -1,9 +1,6 @@
 package br.com.geradorOkaeri.MAL;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
@@ -17,11 +14,13 @@ import org.apache.commons.codec.binary.Base64;
 import com.thoughtworks.xstream.XStream;
 
 import br.com.geradorOkaeri.MAL.modal.AnimeMAL;
+import br.com.geradorOkaeri.Util.RESTAcess;
 import br.com.geradorOkaeri.annotation.LocalProperties;
  
 @ApplicationScoped
-public class MALConnector {
-    private final String baseUrl;
+public class MALConnector implements Serializable, RESTAcess{
+	private static final long serialVersionUID = -4860690404329496751L;
+	private final String baseUrl;
     private final String username;
     private final String password;
  
@@ -57,36 +56,19 @@ public class MALConnector {
     public StringBuilder getRESTResponse(Integer tipoPesquisa, String animeQuery){
     	String path = tipoPesquisa.intValue() == 1? "anime":"manga";
     	StringBuilder sb = new StringBuilder();
+    	sb.append(baseUrl);
     	sb.append("/");
     	sb.append(path);
     	sb.append("/search.xml?q=");
     	try {
 			sb.append(URLEncoder.encode(animeQuery,"UTF-8"));
 		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
 		}
-    	return getDataFromServer(sb.toString());
+    	return getDataFromServer(sb.toString(), this::setUsernamePassword, null);
     }
- 
-    public StringBuilder getDataFromServer(String path) {
-        StringBuilder sb = new StringBuilder();
-        try {
-            URL url = new URL(baseUrl + path);
-            URLConnection urlConnection = setUsernamePassword(url);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                sb.append(line+"\n");
-            }
-            reader.close();
- 
-            return sb;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
- 
-    private URLConnection setUsernamePassword(URL url) throws IOException {
-        URLConnection urlConnection = url.openConnection();
+
+    private URLConnection setUsernamePassword(URLConnection urlConnection) {
         String authString = username + ":" + password;
         String authStringEnc = new String(Base64.encodeBase64(authString.getBytes()));
         urlConnection.setRequestProperty("Authorization", "Basic " + authStringEnc);

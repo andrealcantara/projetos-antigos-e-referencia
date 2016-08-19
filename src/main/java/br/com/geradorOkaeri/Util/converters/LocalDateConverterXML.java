@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.MAL.converter;
+package br.com.geradorOkaeri.Util.converters;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,13 +15,15 @@ public class LocalDateConverterXML implements Converter{
 
 	private final DateTimeFormatter formatter;
 	
+	private static final String dataInvalida = "1970-01-01";
+	
 	
 	public LocalDateConverterXML() {
-		this(new Locale("pt","BR"));
+		this("yyyy-MM-dd",new Locale("pt","BR"));
 	}
 	
-	public LocalDateConverterXML(Locale locale){
-		formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", locale);
+	public LocalDateConverterXML(String pattern_date, Locale locale){
+		formatter = DateTimeFormatter.ofPattern(pattern_date, locale);
 	}
 	
 	@Override
@@ -35,7 +37,9 @@ public class LocalDateConverterXML implements Converter{
 		LocalDate local = (LocalDate) source;
 		String strLocal = null;
 		try{
-			strLocal = formatter.format(local);
+			if(!local.equals(dataInvalida)){
+				strLocal = formatter.format(local);
+			}
 		}catch(DateTimeParseException e){
 			strLocal = "0000-00-00";
 		}
@@ -46,8 +50,12 @@ public class LocalDateConverterXML implements Converter{
 	@Override
 	public Object unmarshal(HierarchicalStreamReader reader, UnmarshallingContext context) {
 		LocalDate local = null;
+		String strDate = null;
 		try{
-			local = LocalDate.from(formatter.parse(reader.getValue()));
+			strDate = reader.getValue();
+			if(!strDate.equals(dataInvalida)){
+				local = LocalDate.from(formatter.parse(reader.getValue()));
+			}
 		}catch(DateTimeParseException e){
 			local = null;
 		}
