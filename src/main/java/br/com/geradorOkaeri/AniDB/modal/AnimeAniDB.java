@@ -52,7 +52,8 @@ public class AnimeAniDB implements Serializable{
 	@XStreamAlias("picture")
 	private String urlImg;
 	
-	
+	@XStreamAlias("characters")
+	@XStreamConverter(CollectionConverter.class)
 	private List<Personagem> personagens;
 	
 	private List<Episodio> episodios;
