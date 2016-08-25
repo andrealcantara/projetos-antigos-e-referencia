@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.Util;
+package br.com.geradorOkaeri.Animes.Util;
 
 import java.io.BufferedReader;
 import java.io.IOException;

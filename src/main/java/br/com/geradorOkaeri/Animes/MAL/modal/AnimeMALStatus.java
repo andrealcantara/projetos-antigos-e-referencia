@@ -1,7 +1,14 @@
-package br.com.geradorOkaeri.MAL.modal;
+package br.com.geradorOkaeri.Animes.MAL.modal;
 
 import java.util.stream.Stream;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
+
+import br.com.geradorOkaeri.Animes.MAL.converter.AnimeMALStatusConverterXML;
+
+@XStreamAlias("status")
+@XStreamConverter(AnimeMALStatusConverterXML.class)
 public enum AnimeMALStatus {
 	
 	FINALIZADO(2,"Finished Airing", "Finalizado exibicao"), 

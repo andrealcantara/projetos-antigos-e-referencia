@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.AniDB.modal;
+package br.com.geradorOkaeri.Animes.AniDB.modal;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -8,8 +8,8 @@ import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 import com.thoughtworks.xstream.converters.collections.CollectionConverter;
 
-import br.com.geradorOkaeri.AniDB.converter.AnimeAniDBTypeConverterXML;
-import br.com.geradorOkaeri.Util.converters.LocalDateConverterXML;
+import br.com.geradorOkaeri.Animes.AniDB.converter.AnimeAniDBTypeConverterXML;
+import br.com.geradorOkaeri.Animes.Util.converters.LocalDateConverterXML;
 
 @XStreamAlias("anime")
 public class AnimeAniDB implements Serializable{

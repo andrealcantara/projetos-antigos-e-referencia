@@ -1,8 +1,8 @@
-package br.com.geradorOkaeri.AniDB.converter;
+package br.com.geradorOkaeri.Animes.AniDB.converter;
 
 import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 
-import br.com.geradorOkaeri.AniDB.modal.AnimeAniDBType;
+import br.com.geradorOkaeri.Animes.AniDB.modal.AnimeAniDBType;
 
 public class AnimeAniDBTypeConverterXML extends AbstractSingleValueConverter {
 

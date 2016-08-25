@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.MAL;
+package br.com.geradorOkaeri.Animes.MAL;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLConnection;
@@ -13,8 +13,8 @@ import org.apache.commons.codec.binary.Base64;
 
 import com.thoughtworks.xstream.XStream;
 
-import br.com.geradorOkaeri.MAL.modal.AnimeMAL;
-import br.com.geradorOkaeri.Util.RESTAcess;
+import br.com.geradorOkaeri.Animes.MAL.modal.AnimeMAL;
+import br.com.geradorOkaeri.Animes.Util.RESTAcess;
 import br.com.geradorOkaeri.annotation.LocalProperties;
  
 @ApplicationScoped

@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.AniDB.modal;
+package br.com.geradorOkaeri.Animes.AniDB.modal;
 
 import java.util.stream.Stream;
 

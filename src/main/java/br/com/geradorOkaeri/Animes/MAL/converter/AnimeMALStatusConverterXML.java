@@ -1,8 +1,8 @@
-package br.com.geradorOkaeri.MAL.converter;
+package br.com.geradorOkaeri.Animes.MAL.converter;
 
 import com.thoughtworks.xstream.converters.basic.AbstractSingleValueConverter;
 
-import br.com.geradorOkaeri.MAL.modal.AnimeMALStatus;
+import br.com.geradorOkaeri.Animes.MAL.modal.AnimeMALStatus;
 
 public class AnimeMALStatusConverterXML extends AbstractSingleValueConverter {
 

@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.AniDB.modal;
+package br.com.geradorOkaeri.Animes.AniDB.modal;
 
 import java.io.Serializable;
 
@@ -75,6 +75,4 @@ public class Staff implements Serializable {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	
-	
 }
