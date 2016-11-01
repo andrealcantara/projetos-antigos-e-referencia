@@ -34,8 +34,8 @@
  	<!-- End Weld -->
 
  	<!-- PrimeFaces Font Icons -->
-<!-- 	<context-param> -->
-<!-- 		<param-name>primefaces.FONT_AWESOME</param-name> -->
-<!-- 		<param-value>true</param-value> -->
-<!-- 	</context-param> -->
+	<context-param>
+		<param-name>primefaces.FONT_AWESOME</param-name>
+		<param-value>true</param-value>
+	</context-param>
 </web-app>
