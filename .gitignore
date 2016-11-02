@@ -5,6 +5,7 @@ build
 .project
 .gradle
 
+
 # Eclipse configuration
 .classpath
 .project
@@ -19,3 +20,6 @@ build
 *.directory
 *.~lock*
 *.old
+
+# Exclusao Pessoal
+/FilesIgnored
