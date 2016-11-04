@@ -18,6 +18,9 @@ repositories {
     jcenter()
 }
 
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 // In this section you declare the dependencies for your production and test code
 dependencies {
     // The production code uses the SLF4J logging API at compile time
@@ -62,4 +65,49 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'junit:junit:4.12'
+}
+
+eclipse{
+  project {
+    natures 'org.springsource.ide.eclipse.gradle.core.nature'
+  }
+  classpath {
+    // containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+    // containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    downloadSources = true
+    downloadJavadoc = true
+    // Configuração que permite que o código fonte das bibliotecas sejam visualizados
+    file {
+	  withXml { xml ->
+	      def node = xml.asNode()
+	      node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+	      node.remove( node.find { it.@path == 'src/test/java' } )
+	      node.remove( node.find { it.@path == 'src/test/resources' } )
+	      node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/java',      output: 'binTest'])
+	      node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/resources', output: 'binTest'])
+	      node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+	  }
+	}
+  }
+  wtp {
+  	component {
+  		resource sourcePath: '/src/test/java', deployPath: 'WEB-INF/classes/target-test'
+  		resource sourcePath: '/src/test/resources', deployPath: 'WEB-INF/classes/target-test'
+  	}
+	facet {
+		//facet name: 'jst.web', version: '3.1'
+		facet name: 'jst.jsf', version: '2.2'
+		file.withXml { provider ->
+    		provider.asNode().installed.find { it.@facet == 'jst.web' }.@version = '3.1'
+    	}
+	}
+  }
+
+}
+
+// Adiciona informações pertinentes a configuração do eclipse
+eclipseJdt << {
+  File f = file('.settings/org.eclipse.core.resources.prefs')
+  f.write('eclipse.preferences.version=1\n')
+  f.append('encoding/<project>=utf-8')
 }
