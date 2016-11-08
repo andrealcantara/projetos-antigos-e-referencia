@@ -1,5 +1,4 @@
 ### Projeto de IFQuestões para o projeto de WEB 3 
-### aprendidos durante o projeto do Sisu
 ----
 Sistema para CRUD de Questões, Matérias e Professores de matérias.
 A ideia do projeto é criar um sistema que ajude um ou mais professores adicionar uma séries de questões de sua matéria para gerar uma prova ou lista de exercícios de forma fácil persistente e configurável.
