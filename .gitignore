@@ -7,6 +7,7 @@ build
 
 
 # Eclipse configuration
+.metadata
 .classpath
 .project
 .settings

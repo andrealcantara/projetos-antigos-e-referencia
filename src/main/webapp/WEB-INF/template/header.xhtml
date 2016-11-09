@@ -7,28 +7,24 @@
 	xmlns:p="http://primefaces.org/ui">
 <ui:component>
 	<h:panelGroup layout="block" id="headerInner">
-		<h:panelGroup layout="block" id="logo">
-			<h:graphicImage library="img" name="larger/logo.png" height="30%"
-				width="30%" />
-		</h:panelGroup>
-		<h:panelGroup layout="block" id="menu">
-			<h:form>
-				<p:toolbar style="">
-					<f:facet name="left">
-						<p:commandButton type="button" value="Home"
-							icon="fa fa-fw fa-home" />
-						<p:commandButton type="button" value="Questões"
-							icon="fa fa-fw fa-search" />
-						<span class="ui-separator"> <span
-							class="ui-icon ui-icon-grip-dotted-vertical" />
-						</span>
-					</f:facet>
-					<f:facet name="right">
-						<p:commandButton type="button" value="Logoff"
-							icon="fa fa-fw fa-power-off" />
-					</f:facet>
-				</p:toolbar>
-			</h:form>
+		<h:panelGroup layout="block" id="header" styleClass="ui-g">
+			<h:panelGroup layout="block" id="logo" styleClass="ui-g-4">
+				<h:graphicImage library="img" name="larger/logo.png" width="360" />
+			</h:panelGroup>
+			<h:panelGroup layout="block" id="menu" styleClass="ui-g-8">
+				<h:panelGroup layout="block" styleClass="pull_right">
+					<h:form id="header_form">
+						<h:panelGroup layout="block" styleClass="header_menu">
+							<p:commandButton type="button" value="Home"
+								icon="fa fa-fw fa-home" />
+							<p:commandButton type="button" value="Questões"
+								icon="fa fa-fw fa-search" />
+							<p:commandButton type="button" value="Logoff"
+								icon="fa fa-fw fa-power-off" />
+						</h:panelGroup>
+					</h:form>
+				</h:panelGroup>
+			</h:panelGroup>
 		</h:panelGroup>
 	</h:panelGroup>
 </ui:component>

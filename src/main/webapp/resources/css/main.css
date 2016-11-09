@@ -1,0 +1,11 @@
+
+
+.pull_right {
+	float:right !important;
+}
+
+.header_button {
+	text-align: right;
+	vertical-align: middle;
+	display: block;
+}
