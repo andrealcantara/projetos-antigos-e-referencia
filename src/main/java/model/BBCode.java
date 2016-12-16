@@ -1,17 +1,19 @@
 package model;
 
-import java.io.Serializable;
-
 import com.google.common.base.Preconditions;
 
+import model.util.GeneratorIdBBCode;
+import model.util.IGenerator;
+import model.util.IModel;
 import util.RegexManipulation;
 
-public class BBCode implements Serializable{
+public class BBCode implements IModel<Long>{
 	private static final long serialVersionUID = -6913474109726201370L;
 	
 	private static final String bbcodeIsClose = "^(\\[\\/).*";
+	private static IGenerator<BBCode> genId = GeneratorIdBBCode.getInstance();
 	
-	private long id;
+	private Long id;
 	
 	private String tag;
 	private String innerValue; 
@@ -21,7 +23,7 @@ public class BBCode implements Serializable{
 	public static BBCode of(String source) {
 		Preconditions.checkArgument(!source.isEmpty());
 		boolean close = source.matches(bbcodeIsClose);
-		String tag = RegexManipulation.search("[a-zA-Z]+", source);
+		String tag = RegexManipulation.search("[a-zA-Z2-6]+", source);
 		String innerValue = "";
 		if(source.contains("=")) {
 			innerValue = source.split("=")[1].replace("]", "");
@@ -34,52 +36,35 @@ public class BBCode implements Serializable{
 		retorno.tag = tag;
 		retorno.close = close;
 		retorno.innerValue = innerValue;
+		genId.generateId(retorno);
 		return retorno;
 	}
 	
-	
 	@Override
 	public int hashCode() {
-		final int prime = 37;
+		final int prime = 31;
 		int result = 1;
-		result = prime * result + (close ? 1231 : 1237);
-		result = prime * result + ((innerValue == null) ? 0 : innerValue.hashCode());
-		result = prime * result + ((tag == null) ? 0 : tag.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
+		if (this == obj)
 			return true;
-		}
-		if (obj == null) {
+		if (obj == null)
 			return false;
-		}
-		if (getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass())
 			return false;
-		}
 		BBCode other = (BBCode) obj;
-		if (close != other.close) {
-			return false;
-		}
-		if (innerValue == null) {
-			if (other.innerValue != null) {
+		if (id == null) {
+			if (other.id != null)
 				return false;
-			}
-		} else if (!innerValue.equals(other.innerValue)) {
+		} else if (!id.equals(other.id))
 			return false;
-		}
-		if (tag == null) {
-			if (other.tag != null) {
-				return false;	
-			}
-		} else if (!tag.equals(other.tag)) {
-			return false;
-		}
 		return true;
 	}
-	
+
 	public String getTag() {
 		return tag;
 	}
@@ -104,14 +89,13 @@ public class BBCode implements Serializable{
 		this.innerValue = innerValue;
 	}
 	
-	public long getId() {
+	@Override
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	@Override
+	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-
 }

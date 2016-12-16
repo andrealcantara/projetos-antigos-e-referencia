@@ -30,6 +30,7 @@ public class RegexManipulation {
 	private static Matcher prepareVerifyRegex(String regex, String source) {
 		Matcher matcher = Pattern.compile(regex).matcher(source);
 		Preconditions.checkArgument(matcher.find());
+		matcher = Pattern.compile(regex).matcher(source);
 		return matcher;
 	}
 
