@@ -8,9 +8,16 @@
 <ui:component>
 	<h:form>
 		<p:toolbar style="">
-			<f:facet name="center">
-				<h:outputText value="Okaeri Gerador" />
-				<h:outputText value="Bem vindo" />
+			<f:facet name="left">
+				<p:commandButton type="button" value="#{msg.home}" icon="fa fa-fw fa-home" />
+				<span class="ui-separator">
+				<span class="ui-icon ui-icon-grip-dotted-vertical" />
+				</span>
+				<p:menuButton value="#{msg.loadAnimes}">
+					<p:menuitem value="#{msg.buscaAnimeMAL}" icon="fa fa-fw fa-arrow-circle-o-right" />
+					<p:menuitem value="#{msg.buscaAnimeAniDB}" disabled="true"  icon="fa fa-fw fa-arrow-circle-o-right" />
+					<p:menuitem value="#{msg.buscaAnimeIMDB}" disabled="true" icon="fa fa-fw fa-arrow-circle-o-right" />
+				</p:menuButton>
 			</f:facet>
 		</p:toolbar>
 	</h:form>
