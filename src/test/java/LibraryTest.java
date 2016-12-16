@@ -89,18 +89,7 @@ public class LibraryTest {
     	ControlTags control = new ControlTags();
     	List<Tag> tags = control.findTags(loren);
     	assertThat(tags.size(), CoreMatchers.is(1));
-//    	System.out.println(bbCodes);
     }
-    
-    
-    @Test
-    public void test_verify_detect_wrong_bbcode(){
-    	ControlBBCode control = new ControlBBCode();
-    	assertTrue(!control.validationBBCode(bbCodeOpenWrong));
-    	assertTrue(!control.validationBBCode(bbCodeCloseWrong));
-    }
-    
-    
     
     @Test
     public void test_vefiry_only_default_bbcodes(){
@@ -108,13 +97,25 @@ public class LibraryTest {
     	assertTrue(control.validationBBCode(bbCodes));
     }
     
-    @Test
+    @Test(expected=RuntimeException.class)
+    public void test_verify_detect_wrong_open_bbcode(){
+    	ControlBBCode control = new ControlBBCode();
+    	assertTrue(!control.validationBBCode(bbCodeOpenWrong));
+    }
+    
+    @Test(expected=RuntimeException.class)
+    public void test_verify_detect_wrong_close_bbcode(){
+    	ControlBBCode control = new ControlBBCode();
+    	assertTrue(!control.validationBBCode(bbCodeCloseWrong));
+    }
+
+    @Test(expected=RuntimeException.class)
     public void test_verify_bbcode_not_closed() {
     	ControlBBCode control = new ControlBBCode();
     	assertTrue(!control.validationBBCode(bbCodesWithBBCodesNotClosed));
     }
-    
-    @Test
+
+    @Test(expected=RuntimeException.class)
     public void test_verify_bbcode_not_opened() {
     	ControlBBCode control = new ControlBBCode();
     	assertTrue(!control.validationBBCode(bbCodesWithBBCodesNotOpened));

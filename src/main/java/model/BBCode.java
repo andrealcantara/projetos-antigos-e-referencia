@@ -7,30 +7,31 @@ import model.util.IGenerator;
 import model.util.IModel;
 import util.RegexManipulation;
 
-public class BBCode implements IModel<Long>{
+public class BBCode implements IModel<Long> {
 	private static final long serialVersionUID = -6913474109726201370L;
-	
+
 	private static final String bbcodeIsClose = "^(\\[\\/).*";
+	private static final String bbcodeBodyContent = "[a-zA-Z2-6]+";
 	private static IGenerator<BBCode> genId = GeneratorIdBBCode.getInstance();
-	
+
 	private Long id;
-	
+
 	private String tag;
-	private String innerValue; 
+	private String innerValue;
 
 	private boolean close;
 
 	public static BBCode of(String source) {
 		Preconditions.checkArgument(!source.isEmpty());
-		boolean close = source.matches(bbcodeIsClose);
-		String tag = RegexManipulation.search("[a-zA-Z2-6]+", source);
+		boolean close = source.matches(BBCode.bbcodeIsClose);
+		String tag = RegexManipulation.search(BBCode.bbcodeBodyContent, source);
 		String innerValue = "";
-		if(source.contains("=")) {
+		if (source.contains("=")) {
 			innerValue = source.split("=")[1].replace("]", "");
 		}
 		return BBCode.of(tag, close, innerValue);
 	}
-	
+
 	public static BBCode of(String tag, boolean close, String innerValue) {
 		BBCode retorno = new BBCode();
 		retorno.tag = tag;
@@ -39,7 +40,22 @@ public class BBCode implements IModel<Long>{
 		genId.generateId(retorno);
 		return retorno;
 	}
-	
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		if (close) {
+			sb.append("/");
+		}
+		sb.append(this.tag);
+		if (!innerValue.isEmpty()) {
+			sb.append("=" + innerValue);
+		}
+		sb.append("]");
+		return sb.toString();
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,27 +84,27 @@ public class BBCode implements IModel<Long>{
 	public String getTag() {
 		return tag;
 	}
-	
+
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
-	
+
 	public boolean isClose() {
 		return close;
 	}
-	
+
 	public void setClose(boolean close) {
 		this.close = close;
 	}
-	
+
 	public String getInnerValue() {
 		return innerValue;
 	}
-	
+
 	public void setInnerValue(String innerValue) {
 		this.innerValue = innerValue;
 	}
-	
+
 	@Override
 	public Long getId() {
 		return id;
