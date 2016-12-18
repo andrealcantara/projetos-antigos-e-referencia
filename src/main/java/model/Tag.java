@@ -16,7 +16,7 @@ public class Tag implements IModel<Long>{
 	private static final long serialVersionUID = 4837117269637110338L;
 	private static IGenerator<Tag> genId = GeneratorIdTag.getInstance();
 	private static final String REGEX_PATTERN = "^(\\{){2}("+Configuracao.defaultTags+"){1}.*(\\}){2}$";
-	private static final String REGEX_PROPERTIES = "(name|type|size|needed)(=){1}(\"[a-zA-Z_-]+\"|\\d+|true|false){1}";
+	private static final String REGEX_PROPERTIES = "(name|type|size|needed|value)(=){1}(\"[a-zA-Z_-]+\"|\\d+|true|false){1}";
 	private Long id;
 	private List<TagProperties> properties;
 

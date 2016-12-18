@@ -1,3 +1,4 @@
+package br.com.gerador.test;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
@@ -18,13 +19,8 @@ import util.Configuracao;
  *
  * @author andre, @date 16/06/16 18:38
  */
-public class LibraryTest {
-	public final static String CORRECT_TAG_WITH_ALL_PROPERTIES="{{"+Configuracao.defaultTags+" name=\"image_banner\" type=\"image\" size=40 needed=false}}";
-	public final static String loren = "Mussum Ipsum, cacilds vidis litro abertis. Pra lÃ¡ , depois divoltis porris," +
-			CORRECT_TAG_WITH_ALL_PROPERTIES +
-			" paradis. Praesent vel viverra nisi. Mauris aliquet nunc non turpis scelerisque, eget. " +
-			"NÃ£o sou faixa preta cumpadi, sou preto inteiris, inteiris. Suco de cevadiss, Ã© um leite " +
-			"divinis, qui tem lupuliz, matis, aguis e fermentis.";
+public class BBCodeTest {
+
 	public final static String bbCodeOpenWrong = "[table] [tr"+" other problems"+" [/ajkhas";
 	public final static String bbCodeCloseWrong = "[tr"+" other problems"+" [/ajkhas [/table]";
 	
@@ -82,14 +78,6 @@ public class LibraryTest {
 			+ "[center][media]https://www.youtube.com/watch?v=RuNAPPcjDr4[/media][/center] [/td2col][/tr][tr][td2rodape]Download[/td2rodape][/tr][tr][td2col] "
 			+ "[code=auto:0]https://mega.nz/#F!cJcmhQ4B https://userscloud.com/go/embed/1epihhml47ld/[/code] [/td2col][/tr][tr][td2rodape][b]Senha[/b][/td2rodape][/tr][tr]"
 			+ "[td2col]!JFyrTowgSYcF-gzN1Xwy-g[/td2col][/tr][/table][/tdvtop][/tr][/table][/tdvtop][tdrodape][/tdrodape][/tr][tr][td3rodape][/td3rodape][/tr][/table][/td2col][/tr][/table]";
-	
-	
-    @Test
-    public void test_verify_only_default_tag(){
-    	ControlTags control = new ControlTags();
-    	List<Tag> tags = control.findTags(loren);
-    	assertThat(tags.size(), CoreMatchers.is(1));
-    }
     
     @Test
     public void test_vefiry_only_default_bbcodes(){
