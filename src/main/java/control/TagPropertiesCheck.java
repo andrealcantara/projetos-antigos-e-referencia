@@ -1,6 +1,9 @@
-package model;
+package control;
 
 import java.util.function.Function;
+
+import model.TagProperties;
+import model.TagPropertiesType;
 
 public class TagPropertiesCheck{
 	

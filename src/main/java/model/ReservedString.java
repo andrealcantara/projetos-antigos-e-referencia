@@ -9,7 +9,8 @@ public enum ReservedString {
 	NAME("name"), 
 	NEEDED("needed"), 
 	TYPE("type"),
-	SIZE("size");
+	SIZE("size"),
+	VALUE("value");
 	
 	private String name;
 	

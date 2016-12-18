@@ -1,7 +1,5 @@
 package model;
 
-import com.google.common.base.Preconditions;
-
 public class TagProperties {
 	private String name;
 	private Object value;
@@ -17,50 +15,6 @@ public class TagProperties {
 		properTag.value = value;
 		properTag.type = type;
 		return properTag;
-	}
-
-	// TODO: refatorar.
-	// procurar um padrao de projeto que resolva isso
-	// chainOfResponsability pode ser uma opção.
-//	public static TagProperties of(String pattern) {
-//		Preconditions.checkArgument(pattern.matches(".*=.*"));
-//		String[] part = pattern.split("=");
-//		String tagName = part[0];
-//		TagPropertiesType propertiesType = null;
-//		Object value = part[1];
-//		switch (tagName) {
-//		case "name":
-//			propertiesType = TagPropertiesType.String;
-//			value = ((String) value).replaceAll("\"", "");
-//			break;
-//		case "type":
-//			propertiesType = TagPropertiesType.String;
-//			value = ((String) value).replaceAll("\"", "");
-//			break;
-//		case "value":
-//			propertiesType = TagPropertiesType.String;
-//			value = ((String) value).replaceAll("\"", "");
-//			break;
-//		case "size":
-//			propertiesType = TagPropertiesType.Number;
-//			value = new Integer(value.toString());
-//			break;
-//		case "needed":
-//			propertiesType = TagPropertiesType.Boolean;
-//			value = new Boolean(value.toString());
-//			break;
-//		default:
-//			throw new IllegalArgumentException("Property [" + tagName + "] not supported yet");
-//		}
-//		return TagProperties.of(tagName, value, propertiesType);
-//	}
-	
-	public static TagProperties of(String pattern) {
-		Preconditions.checkArgument(pattern.matches(".*=.*"));
-		String[] part = pattern.split("=");
-		String tagName = part[0];
-		String value = part[1];
-		return TagPropertiesCheck.getInstance().check(tagName, value);
 	}
 
 	public String getName() {

@@ -11,9 +11,11 @@ import model.BBCode;
 import util.RegexManipulation;
 
 public class ControlBBCode {
-	public static final String regexBBCode = "\\[(\\/)?[a-zA-Z0-9=\\:\\/%\\.\\-\\_]+\\]";
-	public static final String[] autoClosableBBCodes = {"img","hr","member"};
-	public List<String> erroMessage;
+	private static final String regexBBCode = "\\[(\\/)?[a-zA-Z0-9=\\:\\/%\\.\\-\\_]+\\]";
+	private static final String bbcodeIsClose = "^(\\[\\/).*";
+	private static final String bbcodeBodyContent = "[a-zA-Z2-6]+";
+	private static final String[] autoClosableBBCodes = {"img","hr","member"};
+	private List<String> erroMessage;
 	
 	public ControlBBCode(){
 		this.erroMessage = new ArrayList<>();
@@ -23,7 +25,7 @@ public class ControlBBCode {
 		Preconditions.checkArgument(!source.isEmpty());
 		this.erroMessage.clear();
 		Stack<BBCode> bbCodes = new Stack<>();
-		boolean retorno = RegexManipulation.searchAll(regexBBCode, source).stream().map(BBCode::of).allMatch(bb -> {
+		boolean retorno = RegexManipulation.searchAll(regexBBCode, source).stream().map(this::processStringBBCode).allMatch(bb -> {
 			boolean localRetorno = true;
 			if(bb.isClose()) {
 				if(bbCodes.isEmpty()){
@@ -55,5 +57,17 @@ public class ControlBBCode {
 	
 	private static boolean isAutoClosableBBCodes(String nameTag){
 		return Stream.of(autoClosableBBCodes).anyMatch(e -> e.equals(nameTag.toLowerCase()));
+	}
+	
+	
+	public BBCode processStringBBCode(String source) {
+		Preconditions.checkArgument(!source.isEmpty());
+		boolean close = source.matches(ControlBBCode.bbcodeIsClose);
+		String tag = RegexManipulation.search(ControlBBCode.bbcodeBodyContent, source);
+		String innerValue = "";
+		if (source.contains("=")) {
+			innerValue = source.split("=")[1].replace("]", "");
+		}
+		return BBCode.of(tag, close, innerValue);
 	}
 }
