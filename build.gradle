@@ -20,97 +20,105 @@ war {
 repositories {
 	jcenter();
 }
-
 // Seção de declaração das dependências do código de produção e teste
 dependencies {
+	// The production code uses the SLF4J logging API at compile time
+	compile 'org.slf4j:slf4j-api:1.7.21'
+	
+	compile 'com.google.guava:guava:20.0'
+	
+	// Primefaces
+	compile 'org.primefaces:primefaces:6.0'
+	
+	// Postgresql
+	// compile 'org.postgresql:postgresql:9.4-1204-jdbc42'
+	
+	// JSF
+	compile 'com.sun.faces:jsf-api:2.2.13'
+	compile 'com.sun.faces:jsf-impl:2.2.13'
+	
+	// Spring Security
+	// compile 'org.springframework.security:spring-security-web:4.1.0.RELEASE'
+	// compile 'org.springframework.security:spring-security-config:4.1.0.RELEASE'
+	
+	// Código de produção usa log SLF4J em tempo de compilação
+	compile 'jstl:jstl:1.2'
+	
+	// JPA
+	// compile 'org.hibernate:hibernate-core:5.0.2.Final'
+	// compile 'org.hibernate:hibernate-entitymanager:5.0.2.Final'
+	// compile 'org.eclipse.persistence:eclipselink:2.6.4'
+	// compile 'org.apache.derby:derby:10.13.1.1'
+	
+	
+	//CDI (Weld)
+	compile 'org.jboss.weld.servlet:weld-servlet-core:2.4.1.Final'
+	compile 'org.jboss.weld:weld-core:2.4.1.Final'
+	
+	//XStream
+	// compile 'com.thoughtworks.xstream:xstream:1.4.9'
+	// Tomcat Lib
+	compile 'org.apache.tomcat:tomcat-servlet-api:8.0.38'
 
-  compile 'org.slf4j:slf4j-api:1.7.12'
-  compile 'org.slf4j:slf4j-simple:1.7.12'  
-
-  compile 'com.google.guava:guava:18.0'
+	//XStream
+	compile 'com.thoughtworks.xstream:xstream:1.4.9'
+	
+	// Declare the dependency for your favourite test framework you want to use in your tests.
+	// TestNG is also supported by the Gradle Test task. Just change the
+	// testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
+	// 'test.useTestNG()' to your build script.
   
-
-  // Primefaces
-  compile 'org.primefaces:primefaces:5.3'
-
-  // Postgresql
-  // compile 'org.postgresql:postgresql:9.4-1204-jdbc42'
-
-  // JSF
-  compile 'com.sun.faces:jsf-api:2.2.12'
-  compile 'com.sun.faces:jsf-impl:2.2.12'
-  
-  // Spring Security
-  // compile 'org.springframework.security:spring-security-web:4.1.0.RELEASE'
-  // compile 'org.springframework.security:spring-security-config:4.1.0.RELEASE'
-
-  // Código de produção usa log SLF4J em tempo de compilação
-  compile 'jstl:jstl:1.2'
-
-  // JPA
-  // compile 'org.hibernate:hibernate-core:5.0.2.Final'
-  // compile 'org.hibernate:hibernate-entitymanager:5.0.2.Final'
-  
-  //CDI (Weld)
-  compile 'org.jboss.weld.servlet:weld-servlet-core:2.3.1.Final'
-  compile 'org.jboss.weld:weld-core:2.3.1.Final'
-  
-  //XStream
-  compile 'com.thoughtworks.xstream:xstream:1.4.9'
-  
-  // Tomcat Lib
-  compile 'org.apache.tomcat:tomcat-servlet-api:8.0.28'  
-
-  // Junit
-  testCompile 'junit:junit:4.12'
-  testCompile 'org.jglue.cdi-unit:cdi-unit:3.1.3'
-  testCompile 'org.mybatis:mybatis:3.4.0'
-  
-  
-  
+	// Junit
+	testCompile 'junit:junit:4.12'
+	testCompile 'org.jglue.cdi-unit:cdi-unit:3.1.3'
+	// testCompile 'org.mybatis:mybatis:3.4.0'
 }
 
-// Configurações do eclipse
 eclipse{
-  project {
-    natures 'org.springsource.ide.eclipse.gradle.core.nature'
-  }
-  classpath {
-    // containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-    // containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
-    downloadSources = true
-  }
-  wtp {
-  	component {
-  		resource sourcePath: '/src/test/java', deployPath: 'WEB-INF/classes/target-test'
-  		resource sourcePath: '/src/test/resources', deployPath: 'WEB-INF/classes/target-test'
-  	}
-  }
-
+	project {
+		natures 'org.springsource.ide.eclipse.gradle.core.nature'
+	}
+	classpath {
+		// containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		// containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+		downloadSources = true
+		downloadJavadoc = true
+		
+		// Configuração que permite que o código fonte das bibliotecas sejam visualizados
+		file {
+			withXml { xml ->
+				def node = xml.asNode()
+				node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+				node.remove( node.find { it.@path == 'src/test/java' } )
+				node.remove( node.find { it.@path == 'src/test/resources' } )
+				node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/java', output: 'binTest'])
+				node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/resources', output: 'binTest'])
+				node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+			}
+		}
+	}
+	wtp {
+		component {
+			resource sourcePath: '/src/test/java', deployPath: 'WEB-INF/classes/target-test'
+			resource sourcePath: '/src/test/resources', deployPath: 'WEB-INF/classes/target-test'
+		}
+		facet {
+			//facet name: 'jst.web', version: '3.1'
+			facet name: 'jst.jsf', version: '2.2'
+			file.withXml { provider ->
+				provider.asNode().installed.find { it.@facet == 'jst.web' }.@version = '3.1'
+			}
+		}
+	}
 }
 
 // Adiciona informações pertinentes a configuração do eclipse
 eclipseJdt << {
-  File f = file('.settings/org.eclipse.core.resources.prefs')
-  f.write('eclipse.preferences.version=1\n')
-  f.append('encoding/<project>=utf-8')
+	File f = file('.settings/org.eclipse.core.resources.prefs')
+	f.write('eclipse.preferences.version=1\n')
+	f.append('encoding/<project>=utf-8')
 }
 
-// Configuração que permite que o código fonte das bibliotecas sejam visualizados
-// <classpathentry kind="src" output="binTest" path="src/test/java"/>
-// <classpathentry kind="src" output="binTest" path="src/test/resources"/>
-
-eclipse.classpath.file {
-  withXml { xml ->
-      def node = xml.asNode()
-      node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
-      node.remove( node.find { it.@path == 'src/test/java' } )
-      node.remove( node.find { it.@path == 'src/test/resources' } )
-      node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/java',      output: 'binTest'])
-      node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/resources', output: 'binTest'])
-      node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
-  }
-}
 
 task wrapper(type: Wrapper) {
   gradleVersion = '3.1'

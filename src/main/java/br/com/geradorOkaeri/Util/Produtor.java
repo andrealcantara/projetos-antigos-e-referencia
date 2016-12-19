@@ -15,10 +15,19 @@ public class Produtor implements Serializable{
 	@Produces
 	@LocalProperties("MALUser")
 	@ApplicationScoped
-	public Properties generateProperties() throws IOException{
+	public Properties generateMALProperties() throws IOException{
 		Properties prop = new Properties();
     	prop.load(Produtor.class.getResourceAsStream("properties.MAL.properties"));
     	return prop;
+	}
+	
+	@Produces
+	@LocalProperties("AniDBUser")
+	@ApplicationScoped
+	public Properties generateAniDBProperties() throws IOException {
+		Properties prop = new Properties();
+		prop.load(Produtor.class.getResourceAsStream("properties.AniDBNet.properties"));
+		return prop;
 	}
 	
 }
