@@ -5,6 +5,9 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
     
+    <lifecycle>
+    	<phase-listener>br.com.geradorOkaeri.cloudinary.FieldDisableListener</phase-listener>
+    </lifecycle>
     <application>
 		<locale-config>
 			<default-locale>pt_BR</default-locale>

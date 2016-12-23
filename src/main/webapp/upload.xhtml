@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="WEB-INF/template/body.xhtml">
 	<ui:define name="content">
-		<script type="text/javascript"
-			src="https://rawgit.com/enyo/dropzone/master/dist/dropzone.js" />
-		<h:outputScript>
-			Dropzone.options.uploadForm = { paramName: "uploadForm:fileh" };
-		</h:outputScript>
-		<h:form id="uploadForm" enctype="multipart/form-data"
-			styleClass="dropzone">
-			<div class="fallback">
-				<h:inputFile id="fileh" value="#{uploadLocal.fileh}"
-					pt:multiple="multiple" />
-				<br />
-				<h:commandButton id="submit" value="submit" />
-			</div>
+		<h:form id="uploadForm">
+			<h:outputText id="teste" value="#{uploadLocal.treta}" />
+			<p:fileUpload fileUploadListener="#{uploadLocal.uploader}" mode="advanced" dragDropSupport="true"
+                  multiple="true" update="teste" sizeLimit="100000" />
 		</h:form>
 	</ui:define>
 </ui:composition>

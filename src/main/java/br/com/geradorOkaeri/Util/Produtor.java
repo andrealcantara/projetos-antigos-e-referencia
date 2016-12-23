@@ -5,7 +5,9 @@ import java.io.Serializable;
 import java.util.Properties;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.CDI;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -20,7 +22,7 @@ public class Produtor implements Serializable {
 	@ApplicationScoped
 	public Properties generateMALProperties() throws IOException {
 		Properties prop = new Properties();
-		prop.load(Produtor.class.getResourceAsStream("properties.MAL.properties"));
+		prop.load(Produtor.class.getClassLoader().getResourceAsStream("configs/MAL.properties"));
 		return prop;
 	}
 
@@ -29,7 +31,7 @@ public class Produtor implements Serializable {
 	@ApplicationScoped
 	public Properties generateAniDBProperties() throws IOException {
 		Properties prop = new Properties();
-		prop.load(Produtor.class.getResourceAsStream("properties.AniDBNet.properties"));
+		prop.load(Produtor.class.getClassLoader().getResourceAsStream("configs/AniDBNet.properties"));
 		return prop;
 	}
 
@@ -37,11 +39,17 @@ public class Produtor implements Serializable {
 	@ApplicationScoped
 	public Cloudinary generateCloudinaryProperties() throws IOException {
 		Properties prop = new Properties();
-		prop.load(Produtor.class.getResourceAsStream("properties.cloudinary.properties"));
+		prop.load(Produtor.class.getClassLoader().getResourceAsStream("configs/cloudinary.properties"));
 		Cloudinary cloud = new Cloudinary(ObjectUtils.asMap(
 				"cloud_name", prop.getProperty("cloud_name"), 
 				"api_key", prop.getProperty("cloud_key"),
 				"api_secret", prop.getProperty("cloud_secret")));
 		return cloud;
+	}
+	
+
+	public static <T> T staticClassCDI(Class<T> clazz){
+		 Instance<T> instance = CDI.current().select(clazz);
+		    return instance.get();
 	}
 }
