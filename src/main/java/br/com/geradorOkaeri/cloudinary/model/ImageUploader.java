@@ -1,20 +1,10 @@
 package br.com.geradorOkaeri.cloudinary.model;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.faces.context.FacesContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.Part;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.StoredFile;
 import com.cloudinary.Transformation;
-
-import br.com.geradorOkaeri.Util.Produtor;
 
 public class ImageUploader extends StoredFile implements Serializable {
 	private static final long serialVersionUID = -2039884079555879531L;
@@ -27,7 +17,7 @@ public class ImageUploader extends StoredFile implements Serializable {
 	
 	public ImageUploader(){}
 	
-	private static ImageUploader ofImage(Image image){
+	public static ImageUploader ofImage(Image image){
 		ImageUploader iu = new ImageUploader();
 		iu.image = image;
 		return iu;
@@ -86,16 +76,5 @@ public class ImageUploader extends StoredFile implements Serializable {
 
 	public void setImage(Image image) {
 		this.image = image;
-	}
-	
-	public static List<ImageUploader> getAllParts(Part part) {
-		List<ImageUploader> retorno = null;
-		try{
-			HttpServletRequest request = (HttpServletRequest) Produtor.staticClassCDI(FacesContext.class).getExternalContext().getRequest();
-		    retorno = request.getParts().stream().filter(p -> part.getName().equals(p.getName())).map(Image::of).map(ImageUploader::ofImage).collect(Collectors.toList());
-		}catch(IOException | ServletException e) {
-			throw new IllegalArgumentException(e.getMessage());
-		}
-		return retorno;
 	}
 }

@@ -7,6 +7,8 @@ import java.io.Serializable;
 
 import javax.servlet.http.Part;
 
+import org.primefaces.model.UploadedFile;
+
 public class Image implements Serializable {
 	private static final long serialVersionUID = 7936393587890466147L;
 
@@ -15,7 +17,7 @@ public class Image implements Serializable {
 	private long size;
 	private byte[] input;
 
-	public static Image of(Part parte) {
+	public static Image ofPart(Part parte) {
 		Image image = null;
 		try {
 			image = new Image();
@@ -23,6 +25,20 @@ public class Image implements Serializable {
 			image.contentType = parte.getContentType();
 			image.size = parte.getSize();
 			image.input = image.loadImage(parte.getInputStream());
+		} catch (IOException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return image;
+	}
+	
+	public static Image ofUploadedFile(UploadedFile parte) {
+		Image image = null;
+		try {
+			image = new Image();
+			image.name = parte.getFileName();
+			image.contentType = parte.getContentType();
+			image.size = parte.getSize();
+			image.input = image.loadImage(parte.getInputstream());
 		} catch (IOException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}

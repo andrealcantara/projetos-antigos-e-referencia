@@ -8,9 +8,8 @@
 <ui:composition template="WEB-INF/template/body.xhtml">
 	<ui:define name="content">
 		<h:form id="uploadForm">
-			<h:outputText id="teste" value="#{uploadLocal.treta}" />
 			<p:fileUpload fileUploadListener="#{uploadLocal.uploader}" mode="advanced" dragDropSupport="true"
-                  multiple="true" update="teste" sizeLimit="100000" />
+                  multiple="true" update="teste" sizeLimit="100000" sequential="true"/>
 		</h:form>
 	</ui:define>
 </ui:composition>

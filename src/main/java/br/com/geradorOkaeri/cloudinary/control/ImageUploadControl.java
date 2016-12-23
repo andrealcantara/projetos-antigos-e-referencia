@@ -15,31 +15,28 @@ import br.com.geradorOkaeri.cloudinary.model.ImageUploader;
 
 public class ImageUploadControl implements Serializable {
 	private static final long serialVersionUID = -7042798667363520989L;
-
-	private StringBuffer sb = new StringBuffer();
-
+	
 	@Inject
 	private Cloudinary cloudImg;
 	
-	public void save(List<ImageUploader> imageUpload) throws Exception {
+	public void saves(List<ImageUploader> imageUpload) throws Exception {
 		imageUpload.stream().forEach(this::processImage);
-		System.out.println(sb.toString());
+	}
+	
+	public void save(ImageUploader imageUpload) throws Exception {
+		this.processImage(imageUpload);
 	}
 
 	private void processImage(ImageUploader imageUploader) {
 		try {
 			Image image = imageUploader.getImage();
-			testeImage(image);
 			Map<?,?> uploadResult = null;
 			if (image.getInput() != null && image.getInput().length > 0) {
 				uploadResult = cloudImg.uploader().upload(image.getInput(),
 						ObjectUtils.asMap("async", "true", "resource_type", "auto", "tags", "imagemAleatoria, teste2"));
-				sb.append(uploadResult+"\n");
 				loadImageUploader(imageUploader, uploadResult);
 			}
 			image.setName(imageUploader.getTitle());
-			sb.append(image+"\n");
-			sb.append(imageUploader+"\n");
 		} catch (IOException e) {
 			throw new RuntimeException(e.getMessage());
 		}
@@ -59,11 +56,11 @@ public class ImageUploadControl implements Serializable {
 		imageUploader.setCloud(cloudImg);
 	}
 
-	private void testeImage(Image image) {
-		String fileName = image.getName();
-		String contentType = image.getContentType();
-		long size = image.getSize();
-		sb.append(fileName + " cntType:" + contentType + " size:" + size + ", obj:" + image.getInput()+"\n");
-	}
+//	private void testeImage(Image image) {
+//		String fileName = image.getName();
+//		String contentType = image.getContentType();
+//		long size = image.getSize();
+//		System.out.println(fileName + " cntType:" + contentType + " size:" + size + ", obj:" + image.getInput()+"\n");
+//	}
 
 }
