@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="styleClass" default="ui-g-nopad" />
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="label" required="true" />
+	<composite:attribute name="inputSize" default="35" />
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="tooltips" required="true" />
+	<composite:attribute name="tooltipsPosition" default="right"
+		shortDescription="Position of tooltips. Ex: top, bottom, right, left. Default value is 'right'" />
+</composite:interface>
+<composite:implementation>
+	<h:panelGroup layout="block" id="#{cc.attrs.id}Geral"
+		styleClass="#{cc.attrs.styleClass} ui-g-nopad">
+		<h:panelGroup id="#{cc.attrs.id}LayoutLabel"
+			styleClass="ui-g-3">
+			<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.id}Txt"
+				id="#{cc.attrs.id}Label" indicateRequired="false" />
+			<p:outputLabel value="#{cc.attrs.required ? ' *' : ''}"
+				for="#{cc.attrs.id}Txt" indicateRequired="false"
+				id="#{cc.attrs.id}LabelRequired" styleClass="redNeed" />:
+		</h:panelGroup>
+		<h:panelGroup layout="block" id="#{cc.attrs.id}LayoutValue"
+			styleClass="ui-g-9">
+			<p:inputText id="#{cc.attrs.id}Txt" value="#{cc.attrs.value}"
+				required="#{cc.attrs.required}" size="#{cc.attrs.inputSize}" />
+			<p:tooltip id="#{cc.attrs.id}Tooltip" for="#{cc.attrs.id}Txt"
+				value="#{cc.attrs.tooltips}" position="#{cc.attrs.tooltipsPosition}" />
+		</h:panelGroup>
+	</h:panelGroup>
+</composite:implementation>
+
+</html>

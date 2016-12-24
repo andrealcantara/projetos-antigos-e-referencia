@@ -49,7 +49,4 @@ public class AnimesBean implements Serializable {
 	public void setItens(List<SelectItem> itens) {
 		this.itens = itens;
 	}
-	
-	
-	
 }
