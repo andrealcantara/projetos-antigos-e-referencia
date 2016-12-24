@@ -5,12 +5,14 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-<ui:composition template="WEB-INF/template/body.xhtml">
+<ui:composition template="/WEB-INF/template/body.xhtml">
 	<ui:define name="content">
-		<h:form id="uploadForm">
-			<p:fileUpload fileUploadListener="#{uploadLocal.uploader}" mode="advanced" dragDropSupport="true"
-                  multiple="true" sizeLimit="100000" sequential="true"/>
-		</h:form>
+		<h:panelGroup layout="block" styleClass="ui-g">
+				<p:panelGrid columns="4">
+					<p:outputLabel value="${labels['titulo']}" />	
+				</p:panelGrid>
+			</h:panelGroup>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>
