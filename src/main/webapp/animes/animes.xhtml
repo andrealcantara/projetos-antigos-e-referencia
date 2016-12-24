@@ -52,18 +52,29 @@
 					styleClass="ui-g-6" value="#{animesBean.post.imagemCapa}"
 					tooltips="#{tooltips['imagemCapa']}" required="true" />
 
-
-				<h:panelGroup layout="block" id="tGeral" styleClass="ui-g-12">
-					<h:panelGroup id="tLayoutLabel" styleClass="ui-g-1 ui-g-nopad">
-						<p:outputLabel value="Sinopse" for="tTxt" id="tLabel"
-							indicateRequired="false" />
-						<p:outputLabel value=" *" rendered="false" for="tTxt"
-							indicateRequired="false" id="tLabelRequired" styleClass="redNeed" />:
+				<local:inputTextLabel id="sinopsePTBR"
+					label="#{labels['sinopsePTBR']}" styleClass="ui-g-12"
+					value="#{animesBean.post.sinopsePTBR}"
+					tooltips="#{tooltips['sinopsePTBR']}" required="true" />
+				<h:panelGroup id="screenshotNumber" layout="block"
+					styleClass="ui-g-12 ui-g-nopad">
+					<h:panelGroup layout="block" styleClass="ui-g-11 ui-g-nopad" />
+					<h:panelGroup layout="block" styleClass="ui-g-1 ui-g-nopad">
+						<p:spinner id="numeroScreenshot"
+							value="#{animesBean.countScrenShot}">
+							<p:ajax update="screenshotBox" process="@this" />
+						</p:spinner>
 					</h:panelGroup>
-					<h:panelGroup layout="block" id="tLayoutValue" styleClass="ui-g-11 ui-g-nopad">
-						<p:inputTextarea id="tTxt" value="" />
-						<p:tooltip id="tTooltip" for="tTxt" value="lala" position="top" />
-					</h:panelGroup>
+				</h:panelGroup>
+				<h:panelGroup id="screenshotBox" layout="block">
+					<ui:repeat varStatus="sts" var="screenShot"
+						value="#{animesBean.post.screenshot}">
+						<!-- continuar corrigindo aqui -->
+						<local:inputLabel id="screenshot#{sts.index}"
+					label="#{labels['screenshot']}" styleClass="ui-g-12"
+					value="#{animesBean.post.sinopsePTBR}"
+					tooltips="#{tooltips['sinopsePTBR']}" required="true"/>
+					</ui:repeat>
 				</h:panelGroup>
 
 			</h:panelGroup>
