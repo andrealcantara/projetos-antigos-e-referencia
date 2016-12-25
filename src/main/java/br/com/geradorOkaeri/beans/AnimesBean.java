@@ -1,6 +1,7 @@
 package br.com.geradorOkaeri.beans;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -16,22 +17,34 @@ public class AnimesBean implements Serializable {
 	private static final long serialVersionUID = -475922267196560694L;
 	
 	private Post post;
-	private int countScrenShot;
+	private int countScreenShot;
 	private List<SelectItem> itens;
 	
 	@PostConstruct
 	public void init(){
 		post = new Post();
-		countScrenShot = 4;
-		post.setScreenshot(new String[countScrenShot]);
+		countScreenShot = 4;
+		this.ajustScreenshot(post, countScreenShot);
 	}
 	
-	public int getCountScrenShot() {
-		return countScrenShot;
+	private void ajustScreenshot(Post post, int countSS){
+		String[] atual = post.getScreenshot();
+		String[] novo = null;
+		if(atual != null && atual[0] != null && atual[0].trim().length() > 18)  {
+			novo = Arrays.copyOf(atual, countSS);
+		} else {
+			novo = new String[countSS];
+		}
+		post.setScreenshot(novo);
+	}
+	
+	public int getCountScreenShot() {
+		return countScreenShot;
 	}
 
-	public void setCountScrenShot(int countScrenShot) {
-		this.countScrenShot = countScrenShot;
+	public void setCountScreenShot(int countScreenShot) {
+		this.countScreenShot = countScreenShot;
+		this.ajustScreenshot(post, countScreenShot);
 	}
 
 	public Post getPost() {

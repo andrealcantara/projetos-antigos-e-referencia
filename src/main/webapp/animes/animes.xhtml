@@ -58,22 +58,28 @@
 					tooltips="#{tooltips['sinopsePTBR']}" required="true" />
 				<h:panelGroup id="screenshotNumber" layout="block"
 					styleClass="ui-g-12 ui-g-nopad">
-					<h:panelGroup layout="block" styleClass="ui-g-11 ui-g-nopad" />
-					<h:panelGroup layout="block" styleClass="ui-g-1 ui-g-nopad">
-						<p:spinner id="numeroScreenshot"
-							value="#{animesBean.countScrenShot}">
-							<p:ajax update="screenshotBox" process="@this" />
+					<h:panelGroup layout="block" styleClass="ui-g-8">&nbsp;</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="ui-g-2">
+						#{labels['numScreenshot']}
+					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="ui-g-1">
+						<p:spinner id="numeroScreenshot" size="2"
+							value="#{animesBean.countScreenShot}">
+							<p:ajax update="screenshotBox" process="@this,screenshotBox" />
 						</p:spinner>
 					</h:panelGroup>
+					<h:panelGroup layout="block" styleClass="ui-g-1">&nbsp;</h:panelGroup>
+					<p:tooltip for="numeroScreenshot" position="right" value="#{tooltips['numScreenshot']}"/>
 				</h:panelGroup>
 				<h:panelGroup id="screenshotBox" layout="block">
 					<ui:repeat varStatus="sts" var="screenShot"
 						value="#{animesBean.post.screenshot}">
-						<!-- continuar corrigindo aqui -->
 						<local:inputLabel id="screenshot#{sts.index}"
-					label="#{labels['screenshot']}" styleClass="ui-g-12"
-					value="#{animesBean.post.sinopsePTBR}"
-					tooltips="#{tooltips['sinopsePTBR']}" required="true"/>
+					label="#{labels['screenshot']}" styleClass="ui-g-6"
+					value="#{animesBean.post.screenshot[(sts.index)]}"
+					tooltips="#{tooltips['screenshot']} " required="#{sts.index > 1? 'false':'true'}">
+						<f:param value="#{sts.index}"   />
+					</local:inputLabel>
 					</ui:repeat>
 				</h:panelGroup>
 
