@@ -23,7 +23,7 @@ public class AnimesBean implements Serializable {
 	@PostConstruct
 	public void init(){
 		post = new Post();
-		countScreenShot = 4;
+		countScreenShot = 2;
 		this.ajustScreenshot(post, countScreenShot);
 	}
 	

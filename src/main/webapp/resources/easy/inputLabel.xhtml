@@ -9,6 +9,7 @@
 	<composite:attribute name="styleClass" default="ui-g-nopad" />
 	<composite:attribute name="id" required="true" />
 	<composite:attribute name="required" default="false" />
+	<composite:attribute name="starRequeridShow" default="false" />
 	<composite:attribute name="label" required="true" />
 	<composite:attribute name="inputSize" default="35" />
 	<composite:attribute name="value" required="true" />
@@ -18,12 +19,12 @@
 </composite:interface>
 <composite:implementation>
 	<h:panelGroup layout="block" id="#{cc.attrs.id}Geral"
-		styleClass="#{cc.attrs.styleClass} ui-g-nopad">
+		styleClass="#{cc.attrs.styleClass}">
 		<h:panelGroup id="#{cc.attrs.id}LayoutLabel"
 			styleClass="ui-g-3">
 			<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.id}Txt"
 				id="#{cc.attrs.id}Label" indicateRequired="false" />
-			<p:outputLabel value="#{cc.attrs.required ? ' *' : ''}"
+			<p:outputLabel value="#{cc.attrs.required or cc.attrs.starRequeridShow ? ' *' : ''}"
 				for="#{cc.attrs.id}Txt" indicateRequired="false"
 				id="#{cc.attrs.id}LabelRequired" styleClass="redNeed" />:
 		</h:panelGroup>

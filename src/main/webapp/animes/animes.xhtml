@@ -63,27 +63,27 @@
 						#{labels['numScreenshot']}
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="ui-g-1">
-						<p:spinner id="numeroScreenshot" size="2"
+						<p:spinner id="numeroScreenshot" size="2" min="2"
 							value="#{animesBean.countScreenShot}">
-							<p:ajax update="screenshotBox" process="@this,screenshotBox" />
+							<p:ajax update="screenshotBox" process="@this,screenshotBox" partialSubmit="true"/>
 						</p:spinner>
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="ui-g-1">&nbsp;</h:panelGroup>
 					<p:tooltip for="numeroScreenshot" position="right" value="#{tooltips['numScreenshot']}"/>
 				</h:panelGroup>
-				<h:panelGroup id="screenshotBox" layout="block">
+				<h:panelGroup id="screenshotBox" styleClass="ui-g">
 					<ui:repeat varStatus="sts" var="screenShot"
 						value="#{animesBean.post.screenshot}">
 						<local:inputLabel id="screenshot#{sts.index}"
 					label="#{labels['screenshot']}" styleClass="ui-g-6"
-					value="#{animesBean.post.screenshot[(sts.index)]}"
-					tooltips="#{tooltips['screenshot']} " required="#{sts.index > 1? 'false':'true'}">
-						<f:param value="#{sts.index}"   />
-					</local:inputLabel>
+					value="#{screenShot}" starRequeridShow="#{sts.index > 1? 'false':'true'}"
+					tooltips="#{tooltips['screenshot']}" 
+					required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
 					</ui:repeat>
 				</h:panelGroup>
 
 			</h:panelGroup>
+			<p:commandButton id="enviar" value="Enviar" update="@form"/>
 		</h:form>
 	</ui:define>
 </ui:composition>
