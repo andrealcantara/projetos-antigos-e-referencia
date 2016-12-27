@@ -1,4 +1,4 @@
-package br.com.geradorOkaeri.Util;
+package br.com.geradorOkaeri.util;
 
 import java.io.IOException;
 import java.io.Serializable;

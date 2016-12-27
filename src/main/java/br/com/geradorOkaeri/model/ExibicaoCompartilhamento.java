@@ -2,8 +2,8 @@ package br.com.geradorOkaeri.model;
 
 import java.util.Arrays;
 
-import br.com.geradorOkaeri.Util.Mensagem;
-import br.com.geradorOkaeri.Util.Mensagem.MensagemEnum;
+import br.com.geradorOkaeri.util.Mensagem;
+import br.com.geradorOkaeri.util.Mensagem.MensagemEnum;
 
 public enum ExibicaoCompartilhamento {
 	PADRAO(1,"Padrão"),
