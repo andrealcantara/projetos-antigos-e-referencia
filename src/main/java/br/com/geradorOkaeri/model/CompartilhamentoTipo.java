@@ -2,10 +2,9 @@ package br.com.geradorOkaeri.model;
 
 import java.util.Arrays;
 
-import br.com.geradorOkaeri.util.Mensagem;
-import br.com.geradorOkaeri.util.Mensagem.MensagemEnum;
+import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum CompartilhamentoTipo {
+public enum CompartilhamentoTipo implements EnumID {
 	ED2K(1,"Ed2k"),
 	HTTP(2,"Http"),
 	TORRENT(3,"Torrent"),
@@ -35,6 +34,6 @@ public enum CompartilhamentoTipo {
 	public static CompartilhamentoTipo valueOf(int id) {
 		return Arrays.asList(CompartilhamentoTipo.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						Mensagem.get(MensagemEnum.Mensagem_Error_Enum_Param, id, CompartilhamentoTipo.class.getName())));
+						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, CompartilhamentoTipo.class.getName())));
 	}
 }

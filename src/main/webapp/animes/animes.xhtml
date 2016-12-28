@@ -65,25 +65,37 @@
 					<h:panelGroup layout="block" styleClass="ui-g-1">
 						<p:spinner id="numeroScreenshot" size="2" min="2"
 							value="#{animesBean.countScreenShot}">
-							<p:ajax update="screenshotBox" process="@this,screenshotBox" partialSubmit="true"/>
+							<p:ajax update="screenshotBox" process="@this,screenshotBox"
+								partialSubmit="true" />
 						</p:spinner>
 					</h:panelGroup>
 					<h:panelGroup layout="block" styleClass="ui-g-1">&nbsp;</h:panelGroup>
-					<p:tooltip for="numeroScreenshot" position="right" value="#{tooltips['numScreenshot']}"/>
+					<p:tooltip for="numeroScreenshot" position="bottom"
+						value="#{tooltips['numScreenshot']}" />
 				</h:panelGroup>
-				<h:panelGroup id="screenshotBox" styleClass="ui-g">
+				<h:panelGroup id="screenshotBox" styleClass="ui-datagrid-data ui-g">
 					<ui:repeat varStatus="sts" var="screenShot"
 						value="#{animesBean.post.screenshot}">
 						<local:inputLabel id="screenshot#{sts.index}"
-					label="#{labels['screenshot']}" styleClass="ui-g-6"
-					value="#{screenShot}" starRequeridShow="#{sts.index > 1? 'false':'true'}"
-					tooltips="#{tooltips['screenshot']}" 
-					required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
+							label="#{messageBean.bundleLabels('screenshot2',(sts.index)+1)}"
+							styleClass="ui-g-6" value="#{screenShot}"
+							starRequeridShow="#{sts.index > 1? 'false':'true'}"
+							tooltips="#{messageBean.bundleTooltips('screenshot',(sts.index)+1)}"
+							required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
 					</ui:repeat>
 				</h:panelGroup>
+				<local:inputSelectItens id="qualidade"
+					label="#{labels['qualidade']}" styleClass="ui-g-6"
+					required="true"
+					value="#{animesBean.post.qualidade}"
+					converteSelect="QualidadeConverter"
+					tooltips="#{tooltips['qualidade']}">
+					<f:converter converterId="QualidadeConverter" for="qualidadeConverter" />
+					<f:selectItems value="#{animesBean.qualidadeItens}" />
+				</local:inputSelectItens>
 
 			</h:panelGroup>
-			<p:commandButton id="enviar" value="Enviar" update="@form"/>
+			<p:commandButton id="enviar" value="Enviar" update="@form" />
 		</h:form>
 	</ui:define>
 </ui:composition>

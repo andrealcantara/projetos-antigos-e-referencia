@@ -2,10 +2,9 @@ package br.com.geradorOkaeri.model;
 
 import java.util.Arrays;
 
-import br.com.geradorOkaeri.util.Mensagem;
-import br.com.geradorOkaeri.util.Mensagem.MensagemEnum;
+import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum Legendas {
+public enum Legendas implements EnumID {
 
 	AO_POST(1,"Anexao ao Post"),
 	EMBUTIDA(2,"Embutida"),
@@ -36,7 +35,7 @@ public enum Legendas {
 	public static Legendas valueOf(int id) {
 		return Arrays.asList(Legendas.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						Mensagem.get(MensagemEnum.Mensagem_Error_Enum_Param, id, Legendas.class.getName())));
+						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, Legendas.class.getName())));
 	}
 	
 }

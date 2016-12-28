@@ -2,38 +2,46 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:composite="http://java.sun.com/jsf/composite"
 	xmlns:p="http://primefaces.org/ui">
 
 <composite:interface>
-	<composite:attribute name="styleClass" default="ui-g-nopad" />
 	<composite:attribute name="id" required="true" />
-	<composite:attribute name="required" default="false" />
-	<composite:attribute name="starRequeridShow" default="false" />
 	<composite:attribute name="label" required="true" />
-	<composite:attribute name="inputSize" default="35" />
 	<composite:attribute name="value" required="true" />
 	<composite:attribute name="tooltips" required="true" />
+	<composite:attribute name="valueChangeListenerSelect"
+		method-signature="java.lang.String action()" />
+	<composite:attribute name="styleClass" default="ui-g-nopad" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="starRequeridShow" default="false" />
 	<composite:attribute name="tooltipsPosition" default="right"
 		shortDescription="Position of tooltips. Ex: top, bottom, right, left. Default value is 'right'" />
+	<composite:editableValueHolder name="#{cc.attrs.id}Converter" targets="#{cc.attrs.id}Select" />
+	<composite:attribute name="valueAcepted" />
 </composite:interface>
 <composite:implementation>
 	<h:panelGroup layout="block" id="#{cc.attrs.id}Geral"
 		styleClass="#{cc.attrs.styleClass}">
 		<h:panelGroup id="#{cc.attrs.id}LayoutLabel" styleClass="ui-g-3">
-			<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.id}Txt"
+			<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.id}Select"
 				id="#{cc.attrs.id}Label" indicateRequired="false" />
 			<p:outputLabel
 				value="#{cc.attrs.required or cc.attrs.starRequeridShow ? ' *' : ''}"
-				for="#{cc.attrs.id}Txt" indicateRequired="false"
+				for="#{cc.attrs.id}Select" indicateRequired="false"
 				id="#{cc.attrs.id}LabelRequired" styleClass="redNeed" />:
 		</h:panelGroup>
 		<h:panelGroup layout="block" id="#{cc.attrs.id}LayoutValue"
 			styleClass="ui-g-9">
-			<p:inputText id="#{cc.attrs.id}Txt" value="#{cc.attrs.value}"
-				requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',(cc.attrs.label))}"
-				required="#{cc.attrs.required}" size="#{cc.attrs.inputSize}" />
-			<p:tooltip id="#{cc.attrs.id}Tooltip" for="#{cc.attrs.id}Txt"
+			<p:selectOneMenu id="#{cc.attrs.id}Select" value="#{cc.attrs.value}"
+				required="#{cc.attrs.required}" autoWidth="true"
+				valueChangeListener="#{cc.attrs.valueChangeListenerSelect}"
+				converterMessage="#{messageBean.bundleValidation('error_campo_invalido',(cc.attrs.label),{cc.attrs.valueAcepted})}"
+				requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',(cc.attrs.label))}">
+				<composite:insertChildren />
+			</p:selectOneMenu>
+			<p:tooltip id="#{cc.attrs.id}Tooltip" for="#{cc.attrs.id}Select"
 				value="#{cc.attrs.tooltips}" position="#{cc.attrs.tooltipsPosition}" />
 		</h:panelGroup>
 	</h:panelGroup>

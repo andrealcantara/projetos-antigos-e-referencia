@@ -2,10 +2,9 @@ package br.com.geradorOkaeri.model;
 
 import java.util.Arrays;
 
-import br.com.geradorOkaeri.util.Mensagem;
-import br.com.geradorOkaeri.util.Mensagem.MensagemEnum;
+import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum ExibicaoCompartilhamento {
+public enum ExibicaoCompartilhamento implements EnumID {
 	PADRAO(1,"Padrão"),
 	CODE(2,"Code"),
 	SPOILER(3,"Spoiler"),
@@ -35,6 +34,6 @@ public enum ExibicaoCompartilhamento {
 	public static ExibicaoCompartilhamento valueOf(int id) {
 		return Arrays.asList(ExibicaoCompartilhamento.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						Mensagem.get(MensagemEnum.Mensagem_Error_Enum_Param, id, ExibicaoCompartilhamento.class.getName())));
+						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, ExibicaoCompartilhamento.class.getName())));
 	}
 }

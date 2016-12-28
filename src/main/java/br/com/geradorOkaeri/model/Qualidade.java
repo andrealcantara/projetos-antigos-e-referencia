@@ -2,10 +2,9 @@ package br.com.geradorOkaeri.model;
 
 import java.util.Arrays;
 
-import br.com.geradorOkaeri.util.Mensagem;
-import br.com.geradorOkaeri.util.Mensagem.MensagemEnum;
+import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum Qualidade {
+public enum Qualidade implements EnumID {
 	TRES_D(1, "3D"), 
 	BD_25(2, "BD-25"), 
 	BD_RIP(3, "BDRip"), 
@@ -59,7 +58,7 @@ public enum Qualidade {
 	public static Qualidade valueOf(int id) {
 		return Arrays.asList(Qualidade.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						Mensagem.get(MensagemEnum.Mensagem_Error_Enum_Param, id, Qualidade.class.getName())));
+						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, Qualidade.class.getName())));
 	}
 
 }
