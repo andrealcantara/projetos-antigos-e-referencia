@@ -14,7 +14,4 @@ public class QualidadeConverter implements ConverterEnumModelo {
 	public Function<String, ? extends EnumID> getResolver() {
 		return r -> Qualidade.valueOf(Integer.valueOf(r).intValue());
 	}
-
-
-
 }

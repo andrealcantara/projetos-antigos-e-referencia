@@ -90,9 +90,53 @@
 					value="#{animesBean.post.qualidade}"
 					converteSelect="QualidadeConverter"
 					tooltips="#{tooltips['qualidade']}">
-					<f:converter converterId="QualidadeConverter" for="qualidadeConverter" />
 					<f:selectItems value="#{animesBean.qualidadeItens}" />
 				</local:inputSelectItens>
+				
+				<local:inputSelectItens id="midia"
+					label="#{labels['midia']}" styleClass="ui-g-6"
+					value="#{animesBean.post.midia}"
+					converteSelect="javax.faces.Integer"
+					tooltips="#{tooltips['midia']}">
+					<f:selectItems value="#{animesBean.midiaItens}" />
+				</local:inputSelectItens>
+				
+				<local:inputLabel id="idiomaAudio" label="#{labels['idiomaAudio']}"
+					styleClass="ui-g-6" value="#{animesBean.post.idiomaAudio}"
+					tooltips="#{tooltips['idiomaAudio']}" required="true" />
+
+				<local:inputLabel id="tamanhoArquivo" label="#{labels['tamanhoArquivo']}"
+					styleClass="ui-g-6" value="#{animesBean.post.tamanhoArquivo}"
+					tooltips="#{tooltips['tamanhoArquivo']}" required="true" />
+				
+				<local:inputLabel id="trailer" label="#{labels['trailer']}"
+					styleClass="ui-g-6" value="#{animesBean.post.trailer}"
+					tooltips="#{tooltips['trailer']}" />
+					
+				<local:inputLabel id="genero" label="#{labels['genero']}"
+					styleClass="ui-g-6" value="#{animesBean.post.genero}"
+					tooltips="#{tooltips['genero']}" />
+				
+				<local:inputLabel id="videoBitrate" label="#{labels['videoBitrate']}"
+					styleClass="ui-g-6" value="#{animesBean.post.videoBitrate}"
+					tooltips="#{tooltips['videoBitrate']}" />
+				
+				<local:inputLabel id="videoCodec" label="#{labels['videoCodec']}"
+					styleClass="ui-g-6" value="#{animesBean.post.videoCodec}"
+					tooltips="#{tooltips['videoCodec']}" />
+				
+				<local:inputLabel id="audioBitrate" label="#{labels['audioBitrate']}"
+					styleClass="ui-g-6" value="#{animesBean.post.videoBitrate}"
+					tooltips="#{tooltips['audioBitrate']}" />
+				
+				<local:inputLabel id="audioCodec" label="#{labels['audioCodec']}"
+					styleClass="ui-g-6" value="#{animesBean.post.videoCodec}"
+					tooltips="#{tooltips['audioCodec']}" />
+				
+				<local:inputLabel id="frameRate" label="#{labels['frameRate']}"
+					styleClass="ui-g-6" value="#{animesBean.post.frameRate}"
+					tooltips="#{tooltips['frameRate']}" />
+					
 
 			</h:panelGroup>
 			<p:commandButton id="enviar" value="Enviar" update="@form" />

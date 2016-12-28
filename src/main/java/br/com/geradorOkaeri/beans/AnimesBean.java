@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
@@ -22,13 +23,31 @@ public class AnimesBean implements Serializable {
 	private Post post;
 	private int countScreenShot;
 	private List<SelectItem> qualidadeItens;
+	private List<SelectItem> midiaItens;
+	
 
 	@PostConstruct
 	public void init() {
 		qualidadeItens = loadQualidade();
+		midiaItens = loadMidia();
 		post = new Post();
 		countScreenShot = 2;
 		this.ajustScreenshot(post, countScreenShot);
+	}
+
+	private List<SelectItem> loadMidia() {
+		List<SelectItem> obj = new ArrayList<>();
+		obj.add(new SelectItem(null, "Selecione mídia..."));
+		obj.addAll(IntStream.rangeClosed(1, 4).boxed().map(i -> new SelectItem(i,i.toString())).collect(Collectors.toList()));
+		return obj;
+	}
+	
+	private List<SelectItem> loadQualidade() {
+		List<SelectItem> obj = new ArrayList<>();
+		obj.add(new SelectItem(null, "Selecione qualidade..."));
+		obj.addAll(Arrays.asList(Qualidade.values()).stream().map(t -> new SelectItem(t, t.getName()))
+				.collect(Collectors.toList()));
+		return obj;
 	}
 
 	private void ajustScreenshot(Post post, int countSS) {
@@ -51,14 +70,6 @@ public class AnimesBean implements Serializable {
 		this.ajustScreenshot(post, countScreenShot);
 	}
 
-	private List<SelectItem> loadQualidade() {
-		List<SelectItem> obj = new ArrayList<>();
-		obj.add(new SelectItem(null, "Selecione qualidade..."));
-		obj.addAll(Arrays.asList(Qualidade.values()).stream().map(t -> new SelectItem(t, t.getName()))
-				.collect(Collectors.toList()));
-		return obj;
-	}
-
 	public Post getPost() {
 		return post;
 	}
@@ -73,5 +84,13 @@ public class AnimesBean implements Serializable {
 
 	public void setQualidadeItens(List<SelectItem> qualidadeItens) {
 		this.qualidadeItens = qualidadeItens;
+	}
+
+	public List<SelectItem> getMidiaItens() {
+		return midiaItens;
+	}
+
+	public void setMidiaItens(List<SelectItem> midiaItens) {
+		this.midiaItens = midiaItens;
 	}
 }

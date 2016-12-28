@@ -18,8 +18,10 @@
 	<composite:attribute name="starRequeridShow" default="false" />
 	<composite:attribute name="tooltipsPosition" default="right"
 		shortDescription="Position of tooltips. Ex: top, bottom, right, left. Default value is 'right'" />
-	<composite:editableValueHolder name="#{cc.attrs.id}Converter" targets="#{cc.attrs.id}Select" />
 	<composite:attribute name="valueAcepted" />
+	<composite:attribute name="converter" targets="#{cc.attrs.id}Select" displayName="converterSelect" />
+	<composite:attribute name="validator" targets="#{cc.attrs.id}Select" displayName="validatorSelect" />
+	<composite:attribute name="valueChangeListener" targets="#{cc.attrs.id}Select" displayName="valueChangeListenerSelect" />
 </composite:interface>
 <composite:implementation>
 	<h:panelGroup layout="block" id="#{cc.attrs.id}Geral"
@@ -35,8 +37,7 @@
 		<h:panelGroup layout="block" id="#{cc.attrs.id}LayoutValue"
 			styleClass="ui-g-9">
 			<p:selectOneMenu id="#{cc.attrs.id}Select" value="#{cc.attrs.value}"
-				required="#{cc.attrs.required}" autoWidth="true"
-				valueChangeListener="#{cc.attrs.valueChangeListenerSelect}"
+				required="#{cc.attrs.required}" autoWidth="true" 
 				converterMessage="#{messageBean.bundleValidation('error_campo_invalido',(cc.attrs.label),{cc.attrs.valueAcepted})}"
 				requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',(cc.attrs.label))}">
 				<composite:insertChildren />
