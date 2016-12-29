@@ -63,8 +63,7 @@
 				<p:panelGrid id="screenshotNumber" columns="2"
 					columnClasses="ui-grid-col-11, ui-grid-col-1" layout="grid"
 					styleClass="ui-panelgrid-blank">
-					<h:panelGroup layout="block"
-						styleClass="ui-wizard-navbar ui-datagrid-data">
+					<h:panelGroup layout="block" styleClass="text_right_100perc">
 						#{labels['numScreenshot']}
 					</h:panelGroup>
 					<h:panelGroup layout="block">
@@ -78,20 +77,17 @@
 							value="#{tooltips['numScreenshot']}" />
 					</h:panelGroup>
 				</p:panelGrid>
-				<p:panelGrid columns="2" id="screenshotBox"
-					styleClass="ui-panelgrid-blank"
+				<p:dataGrid columns="2" id="screenshotBox"
+					styleClass="datagrid-no-border" var="screenShot" rowIndexVar="sts"
+					value="#{animesBean.post.screenshot}"
 					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
-						<c:forEach varStatus="sts" var="screenShot"
-							items="#{animesBean.post.screenshot}">
-								<local:inputLabel id="screenshot_#{sts.index}"
-									label="#{messageBean.bundleLabels('screenshot2',(sts.index)+1)}"
-									value="#{screenShot}"
-									starRequeridShow="#{sts.index > 1? 'false':'true'}"
-									tooltips="#{messageBean.bundleTooltips('screenshot',(sts.index)+1)}"
-									required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
-						</c:forEach>
-				</p:panelGrid>
-<!-- 				<p:log id="log" /> -->
+					<local:inputLabel id="screenshot_#{sts}"
+						label="#{messageBean.bundleLabels('screenshot2',(sts)+1)}"
+						value="#{screenShot}"
+						starRequeridShow="#{sts > 1? 'false':'true'}"
+						tooltips="#{messageBean.bundleTooltips('screenshot',(sts)+1)}"
+						required="#{(sts > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
+				</p:dataGrid>
 				<p:panelGrid columns="2" id="secondPanel"
 					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
 					styleClass="ui-panelgrid-blank">
@@ -99,7 +95,7 @@
 					<local:inputSelectItens id="qualidade"
 						label="#{labels['qualidade']}" required="true"
 						value="#{animesBean.post.qualidade}"
-						converteSelect="QualidadeConverter"
+						converteSelect="gerador.converter.qualidade"
 						tooltips="#{tooltips['qualidade']}">
 						<f:selectItems value="#{animesBean.qualidadeItens}" />
 					</local:inputSelectItens>
@@ -148,9 +144,51 @@
 					<local:inputLabel id="frameRate" label="#{labels['frameRate']}"
 						value="#{animesBean.post.frameRate}"
 						tooltips="#{tooltips['frameRate']}" />
+
+					<p:panelGrid columns="2" id="resolucaoVideoGeral"
+						columnClasses="ui-grid-col-4,ui-grid-col-8" layout="grid"
+						styleClass="ui-panelgrid-blank">
+						<h:panelGroup id="resolucaoVideoLayoutLabel" layout="block"
+							styleClass="text_right_100perc">
+							<p:outputLabel value="#{labels['resolucaoVideo']}"
+								for="resolucaoVideo1Txt" id="resolucaoVideoLabel"
+								indicateRequired="false" />
+							<p:outputLabel value=" *" for="resolucaoVideo1Txt"
+								indicateRequired="false" id="resolucaoVideoLabelRequired"
+								styleClass="redNeed" />:
+						</h:panelGroup>
+						<p:panelGrid id="resolucaoVideoLayoutValue" columns="3"
+							columnClasses="ui-grid-col-5,ui-grid-col-2 text_center,ui-grid-col-5"
+							layout="grid" styleClass="ui-panelgrid-blank">
+							<p:inputText id="resolucaoVideo1Txt"
+								value="#{animesBean.post.resolucaoVideo.width}"
+								converterMessage="#{messageBean.bundleValidation('error_not_number',labels['resolucaoVideo2'])}"
+								requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',labels['resolucaoVideo2'])}"
+								required="true" size="8" converter="javax.faces.Integer" />
+							<h:outputText value=" X " />
+							<p:inputText id="resolucaoVideo2Txt"
+								value="#{animesBean.post.resolucaoVideo.height}"
+								converterMessage="#{messageBean.bundleValidation('error_not_number',labels['resolucaoVideo2'])}"
+								requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',labels['resolucaoVideo2'])}"
+								required="true" size="8" converter="javax.faces.Integer" />
+						</p:panelGrid>
+						<p:tooltip id="resolucaoVideoTooltip"
+							for="resolucaoVideoLayoutValue"
+							value="#{tooltips['resolucaoVideo']}" position="top" />
+					</p:panelGrid>
+
+					<local:inputLabel id="formatoTela" label="#{labels['formatoTela']}"
+						value="#{animesBean.post.formatoTela}"
+						tooltips="#{tooltips['formatoTela']}" />
+
+					<local:inputSelectItens id="legendas"
+						label="#{labels['legendas']}" required="true"
+						value="#{animesBean.post.legendas}"
+						converteSelect="gerador.converter.legendas"
+						tooltips="#{tooltips['legendas']}">
+						<f:selectItems value="#{animesBean.legendasItens}" />
+					</local:inputSelectItens>
 				</p:panelGrid>
-
-
 			</h:panelGroup>
 			<p:commandButton id="enviar" value="Enviar" update="@form" />
 		</h:form>

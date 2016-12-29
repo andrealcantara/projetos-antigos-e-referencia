@@ -5,23 +5,23 @@ import java.io.Serializable;
 public class Resolucao implements Serializable {
 	private static final long serialVersionUID = 6803389739336506673L;
 	
-	private int width;
-	private int height;
+	private Integer width;
+	private Integer height;
 	
 	
-	public static Resolucao of(int width, int height) {
+	public static Resolucao of(Integer width, Integer height) {
 		Resolucao re = new Resolucao();
 		re.width = width;
 		re.height = height;
 		return re;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + height;
-		result = prime * result + width;
+		result = prime * result + ((height == null) ? 0 : height.hashCode());
+		result = prime * result + ((width == null) ? 0 : width.hashCode());
 		return result;
 	}
 
@@ -37,34 +37,44 @@ public class Resolucao implements Serializable {
 			return false;
 		}
 		Resolucao other = (Resolucao) obj;
-		if (height != other.height) {
+		if (height == null) {
+			if (other.height != null) {
+				return false;
+			}
+		} else if (!height.equals(other.height)) {
 			return false;
 		}
-		if (width != other.width) {
+		if (width == null) {
+			if (other.width != null) {
+				return false;
+			}
+		} else if (!width.equals(other.width)) {
 			return false;
 		}
 		return true;
 	}
 
-	public int getWidth() {
+
+
+	public Integer getWidth() {
 		return width;
 	}
-	public void setWidth(int width) {
+	public void setWidth(Integer width) {
 		this.width = width;
 	}
-	public int getHeight() {
+	public Integer getHeight() {
 		return height;
 	}
-	public void setHeight(int height) {
+	public void setHeight(Integer height) {
 		this.height = height;
 	}
 
 	@Override
 	public String toString() {
-		return "Resolucao [width=" + width + ", height=" + height + "]";
+		return "Resolucao [width=" + width.intValue() + ", height=" + height.intValue() + "]";
 	}
 	
 	public String formated() {
-		return width+" X "+height;
+		return width.intValue() + " X " + height.intValue();
 	}	
 }

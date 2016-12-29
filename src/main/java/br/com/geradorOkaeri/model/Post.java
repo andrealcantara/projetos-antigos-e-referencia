@@ -6,6 +6,11 @@ import java.util.Arrays;
 public class Post implements Serializable {
 	private static final long serialVersionUID = -4061495122851363504L;
 	
+	public Post(){
+		this.screenshot = new String[2];
+		this.resolucaoVideo = new Resolucao();
+	}
+	
 	private String titulo;
 	private String tituloOriginal;
 	private String tituloEpisodio;
@@ -30,8 +35,8 @@ public class Post implements Serializable {
 	private String audioBitrate;
 	private String audioCodec;
 	private String frameRate;
-	private String resolucaoVideo;
-	private Resolucao formatoTela;
+	private Resolucao resolucaoVideo;
+	private String formatoTela;
 	private Legendas legendas;
 	private String outrasInfo;
 	private ExibicaoCompartilhamento exibicaoCompartilhamento;
@@ -50,12 +55,12 @@ public class Post implements Serializable {
 		result = prime * result + ((compartilhamentoTipo == null) ? 0 : compartilhamentoTipo.hashCode());
 		result = prime * result + ((duracao == null) ? 0 : duracao.hashCode());
 		result = prime * result + ((fansuber == null) ? 0 : fansuber.hashCode());
-		result = prime * result + ((formatoTela == null) ? 0 : formatoTela.hashCode());
+		result = prime * result + ((resolucaoVideo == null) ? 0 : resolucaoVideo.hashCode());
 		result = prime * result + ((idiomaAudio == null) ? 0 : idiomaAudio.hashCode());
 		result = prime * result + ((imagemCapa == null) ? 0 : imagemCapa.hashCode());
 		result = prime * result + ((legendas == null) ? 0 : legendas.hashCode());
 		result = prime * result + ((qualidade == null) ? 0 : qualidade.hashCode());
-		result = prime * result + ((resolucaoVideo == null) ? 0 : resolucaoVideo.hashCode());
+		result = prime * result + ((formatoTela == null) ? 0 : formatoTela.hashCode());
 		result = prime * result + Arrays.hashCode(screenshot);
 		result = prime * result + ((sinopsePTBR == null) ? 0 : sinopsePTBR.hashCode());
 		result = prime * result + ((tamanhoArquivo == null) ? 0 : tamanhoArquivo.hashCode());
@@ -98,11 +103,11 @@ public class Post implements Serializable {
 		} else if (!fansuber.equals(other.fansuber)) {
 			return false;
 		}
-		if (formatoTela == null) {
-			if (other.formatoTela != null) {
+		if (resolucaoVideo == null) {
+			if (other.resolucaoVideo != null) {
 				return false;
 			}
-		} else if (!formatoTela.equals(other.formatoTela)) {
+		} else if (!resolucaoVideo.equals(other.resolucaoVideo)) {
 			return false;
 		}
 		if (idiomaAudio == null) {
@@ -125,11 +130,11 @@ public class Post implements Serializable {
 		if (qualidade != other.qualidade) {
 			return false;
 		}
-		if (resolucaoVideo == null) {
-			if (other.resolucaoVideo != null) {
+		if (formatoTela == null) {
+			if (other.formatoTela != null) {
 				return false;
 			}
-		} else if (!resolucaoVideo.equals(other.resolucaoVideo)) {
+		} else if (!formatoTela.equals(other.formatoTela)) {
 			return false;
 		}
 		if (!Arrays.equals(screenshot, other.screenshot)) {
@@ -302,17 +307,17 @@ public class Post implements Serializable {
 	public void setFrameRate(String frameRate) {
 		this.frameRate = frameRate;
 	}
-	public String getResolucaoVideo() {
-		return resolucaoVideo;
-	}
-	public void setResolucaoVideo(String resolucaoVideo) {
-		this.resolucaoVideo = resolucaoVideo;
-	}
-	public Resolucao getFormatoTela() {
+	public String getFormatoTela() {
 		return formatoTela;
 	}
-	public void setFormatoTela(Resolucao formatoTela) {
+	public void setFormatoTela(String formatoTela) {
 		this.formatoTela = formatoTela;
+	}
+	public Resolucao getResolucaoVideo() {
+		return resolucaoVideo;
+	}
+	public void setResolucaoVideo(Resolucao resolucaoVideo) {
+		this.resolucaoVideo = resolucaoVideo;
 	}
 	public Legendas getLegendas() {
 		return legendas;

@@ -6,11 +6,25 @@
 }
 
 .sizePage {
-	width: 1200px;
+	min-width:800px;
+	max-width:1200px;
 	margin: 0 auto;
 }
 
 .redNeed {
 	font-weight: bold;
 	color: red;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.text_right_100perc {
+	text-align: right;
+	width: 100%;
+}
+
+.datagrid-no-border > :first-child {
+	border:0;
 }

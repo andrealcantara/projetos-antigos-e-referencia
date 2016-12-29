@@ -8,11 +8,11 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.com.geradorOkaeri.model.Legendas;
 import br.com.geradorOkaeri.model.Post;
 import br.com.geradorOkaeri.model.Qualidade;
 
@@ -26,19 +26,26 @@ public class AnimesBean implements Serializable {
 	private int countScreenShot;
 	private List<SelectItem> qualidadeItens;
 	private List<SelectItem> midiaItens;
+	private List<SelectItem> legendasItens;
 	
-	public AnimesBean() {
-//		this.countScreenShot = 2;
-//		this.init();
-	}
+	
+	
 
 	@PostConstruct
 	public void init() {
 		qualidadeItens = loadQualidade();
 		midiaItens = loadMidia();
+		legendasItens = loadLegendas();
 		post = new Post();
 		countScreenShot = 2;
-		this.ajustScreenshot(post, countScreenShot);
+	}
+	
+	private List<SelectItem> loadLegendas() {
+		List<SelectItem> obj = new ArrayList<>();
+		obj.add(new SelectItem(null, "Selecione a legenda..."));
+		obj.addAll(Arrays.asList(Legendas.values()).stream().map(t -> new SelectItem(t, t.getName()))
+				.collect(Collectors.toList()));
+		return obj;
 	}
 
 	private List<SelectItem> loadMidia() {
@@ -99,5 +106,13 @@ public class AnimesBean implements Serializable {
 
 	public void setMidiaItens(List<SelectItem> midiaItens) {
 		this.midiaItens = midiaItens;
+	}
+	
+	public List<SelectItem> getLegendasItens() {
+		return legendasItens;
+	}
+
+	public void setLegendasItens(List<SelectItem> legendasItens) {
+		this.legendasItens = legendasItens;
 	}
 }
