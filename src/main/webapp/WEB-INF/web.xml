@@ -57,5 +57,11 @@
 	</filter-mapping>
 	<!-- Primefaces Uploader Filter END -->
 
+	<!-- error jstl save ViewResquest. -->
+	<!-- Proposto por http://stackoverflow.com/a/3343681 -->
+<!-- 	<context-param> -->
+<!-- 		<param-name>javax.faces.PARTIAL_STATE_SAVING</param-name> -->
+<!-- 		<param-value>false</param-value> -->
+<!-- 	</context-param> -->
 
 </web-app>

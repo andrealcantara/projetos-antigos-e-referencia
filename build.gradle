@@ -34,8 +34,8 @@ dependencies {
 	// compile 'org.postgresql:postgresql:9.4-1204-jdbc42'
 	
 	// JSF
-	compile 'com.sun.faces:jsf-api:2.2.13'
-	compile 'com.sun.faces:jsf-impl:2.2.13'
+	compile 'com.sun.faces:jsf-api:2.2.14'
+	compile 'com.sun.faces:jsf-impl:2.2.14'
 	
 	// Spring Security
 	// compile 'org.springframework.security:spring-security-web:4.1.0.RELEASE'
@@ -55,8 +55,6 @@ dependencies {
 	compile 'org.jboss.weld.servlet:weld-servlet-core:2.4.1.Final'
 	compile 'org.jboss.weld:weld-core:2.4.1.Final'
 	
-	//XStream
-	// compile 'com.thoughtworks.xstream:xstream:1.4.9'
 	// Tomcat Lib
 	compile 'org.apache.tomcat:tomcat-servlet-api:8.0.38'
 

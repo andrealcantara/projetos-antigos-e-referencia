@@ -5,138 +5,150 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:local="http://java.sun.com/jsf/composite/easy">
 <ui:composition template="/WEB-INF/template/body.xhtml">
 	<ui:define name="content">
 		<h:form id="formAnimes" styleClass="fullSize">
-			<h:panelGroup layout="block" styleClass="ui-g sizePage">
-				<local:inputLabel id="titulo" label="#{labels['titulo']}"
-					styleClass="ui-g-6" value="#{animesBean.post.titulo}"
-					tooltips="#{tooltips['titulo']}" required="true" />
+			<h:panelGroup layout="block" styleClass="ui-fluid sizePage">
+				<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
+					id="firstPanel" layout="grid" styleClass="ui-panelgrid-blank">
 
-				<local:inputLabel id="tituloOriginal"
-					label="#{labels['tituloOriginal']}" styleClass="ui-g-6"
-					value="#{animesBean.post.tituloOriginal}"
-					tooltips="#{tooltips['tituloOriginal']}" />
+					<local:inputLabel id="titulo" label="#{labels['titulo']}"
+						value="#{animesBean.post.titulo}" tooltips="#{tooltips['titulo']}"
+						required="true" />
 
-				<local:inputLabel id="temporada" label="#{labels['temporada']}"
-					styleClass="ui-g-6" value="#{animesBean.post.temporada}"
-					tooltips="#{tooltips['temporada']}" />
+					<local:inputLabel id="tituloOriginal"
+						label="#{labels['tituloOriginal']}"
+						value="#{animesBean.post.tituloOriginal}"
+						tooltips="#{tooltips['tituloOriginal']}" />
 
-				<local:inputLabel id="tituloEpisodio"
-					label="#{labels['tituloEpisodio']}" styleClass="ui-g-6"
-					value="#{animesBean.post.tituloEpisodio}"
-					tooltips="#{tooltips['tituloEpisodio']}" />
+					<local:inputLabel id="temporada" label="#{labels['temporada']}"
+						value="#{animesBean.post.temporada}"
+						tooltips="#{tooltips['temporada']}" />
 
-				<local:inputLabel id="duracao" label="#{labels['duracao']}"
-					styleClass="ui-g-6" value="#{animesBean.post.duracao}"
-					tooltips="#{tooltips['duracao']}" required="true" />
+					<local:inputLabel id="tituloEpisodio"
+						label="#{labels['tituloEpisodio']}"
+						value="#{animesBean.post.tituloEpisodio}"
+						tooltips="#{tooltips['tituloEpisodio']}" />
 
-				<local:inputLabel id="fansuber" label="#{labels['fansuber']}"
-					styleClass="ui-g-6" value="#{animesBean.post.fansuber}"
-					tooltips="#{tooltips['fansuber']}" required="true" />
+					<local:inputLabel id="duracao" label="#{labels['duracao']}"
+						value="#{animesBean.post.duracao}"
+						tooltips="#{tooltips['duracao']}" required="true" />
 
-				<local:inputLabel id="upadorpor" label="#{labels['upadorpor']}"
-					styleClass="ui-g-6" value="#{animesBean.post.upadorpor}"
-					tooltips="#{tooltips['upadorpor']}" />
+					<local:inputLabel id="fansuber" label="#{labels['fansuber']}"
+						value="#{animesBean.post.fansuber}"
+						tooltips="#{tooltips['fansuber']}" required="true" />
 
-				<local:inputLabel id="ripadopor" label="#{labels['ripadopor']}"
-					styleClass="ui-g-6" value="#{animesBean.post.ripadopor}"
-					tooltips="#{tooltips['ripadopor']}" />
+					<local:inputLabel id="upadorpor" label="#{labels['upadorpor']}"
+						value="#{animesBean.post.upadorpor}"
+						tooltips="#{tooltips['upadorpor']}" />
 
-				<local:inputLabel id="siteOficial" label="#{labels['siteOficial']}"
-					styleClass="ui-g-6" value="#{animesBean.post.siteOficial}"
-					tooltips="#{tooltips['siteOficial']}" />
+					<local:inputLabel id="ripadopor" label="#{labels['ripadopor']}"
+						value="#{animesBean.post.ripadopor}"
+						tooltips="#{tooltips['ripadopor']}" />
 
-				<local:inputLabel id="imagemCapa" label="#{labels['imagemCapa']}"
-					styleClass="ui-g-6" value="#{animesBean.post.imagemCapa}"
-					tooltips="#{tooltips['imagemCapa']}" required="true" />
+					<local:inputLabel id="siteOficial" label="#{labels['siteOficial']}"
+						value="#{animesBean.post.siteOficial}"
+						tooltips="#{tooltips['siteOficial']}" />
 
+					<local:inputLabel id="imagemCapa" label="#{labels['imagemCapa']}"
+						value="#{animesBean.post.imagemCapa}"
+						tooltips="#{tooltips['imagemCapa']}" required="true" />
+				</p:panelGrid>
 				<local:inputTextLabel id="sinopsePTBR"
 					label="#{labels['sinopsePTBR']}" styleClass="ui-g-12"
 					value="#{animesBean.post.sinopsePTBR}"
 					tooltips="#{tooltips['sinopsePTBR']}" required="true" />
-				<h:panelGroup id="screenshotNumber" layout="block"
-					styleClass="ui-g-12 ui-g-nopad">
-					<h:panelGroup layout="block" styleClass="ui-g-8">&nbsp;</h:panelGroup>
-					<h:panelGroup layout="block" styleClass="ui-g-2">
+				<p:panelGrid id="screenshotNumber" columns="2"
+					columnClasses="ui-grid-col-11, ui-grid-col-1" layout="grid"
+					styleClass="ui-panelgrid-blank">
+					<h:panelGroup layout="block"
+						styleClass="ui-wizard-navbar ui-datagrid-data">
 						#{labels['numScreenshot']}
 					</h:panelGroup>
-					<h:panelGroup layout="block" styleClass="ui-g-1">
+					<h:panelGroup layout="block">
 						<p:spinner id="numeroScreenshot" size="2" min="2"
-							value="#{animesBean.countScreenShot}">
+							validatorMessage="#{messageBean.bundleValidation('error_not_number',labels['numScreenshot'])}"
+							value="#{animesBean.countScreenShot}" maxlength="2">
 							<p:ajax update="screenshotBox" process="@this,screenshotBox"
 								partialSubmit="true" />
 						</p:spinner>
+						<p:tooltip for="numeroScreenshot" position="bottom"
+							value="#{tooltips['numScreenshot']}" />
 					</h:panelGroup>
-					<h:panelGroup layout="block" styleClass="ui-g-1">&nbsp;</h:panelGroup>
-					<p:tooltip for="numeroScreenshot" position="bottom"
-						value="#{tooltips['numScreenshot']}" />
-				</h:panelGroup>
-				<h:panelGroup id="screenshotBox" styleClass="ui-datagrid-data ui-g">
-					<ui:repeat varStatus="sts" var="screenShot"
-						value="#{animesBean.post.screenshot}">
+				</p:panelGrid>
+				<p:panelGrid columns="2" id="screenshotBox"
+					styleClass="ui-panelgrid-blank"
+					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
+					<c:forEach varStatus="sts" var="screenShot"
+						items="#{animesBean.post.screenshot}">
 						<local:inputLabel id="screenshot#{sts.index}"
 							label="#{messageBean.bundleLabels('screenshot2',(sts.index)+1)}"
-							styleClass="ui-g-6" value="#{screenShot}"
+							value="#{screenShot}"
 							starRequeridShow="#{sts.index > 1? 'false':'true'}"
 							tooltips="#{messageBean.bundleTooltips('screenshot',(sts.index)+1)}"
 							required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
-					</ui:repeat>
-				</h:panelGroup>
-				<local:inputSelectItens id="qualidade"
-					label="#{labels['qualidade']}" styleClass="ui-g-6"
-					required="true"
-					value="#{animesBean.post.qualidade}"
-					converteSelect="QualidadeConverter"
-					tooltips="#{tooltips['qualidade']}">
-					<f:selectItems value="#{animesBean.qualidadeItens}" />
-				</local:inputSelectItens>
-				
-				<local:inputSelectItens id="midia"
-					label="#{labels['midia']}" styleClass="ui-g-6"
-					value="#{animesBean.post.midia}"
-					converteSelect="javax.faces.Integer"
-					tooltips="#{tooltips['midia']}">
-					<f:selectItems value="#{animesBean.midiaItens}" />
-				</local:inputSelectItens>
-				
-				<local:inputLabel id="idiomaAudio" label="#{labels['idiomaAudio']}"
-					styleClass="ui-g-6" value="#{animesBean.post.idiomaAudio}"
-					tooltips="#{tooltips['idiomaAudio']}" required="true" />
+					</c:forEach>
+				</p:panelGrid>
+				<p:panelGrid columns="2" id="secondPanel"
+					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
+					styleClass="ui-panelgrid-blank">
 
-				<local:inputLabel id="tamanhoArquivo" label="#{labels['tamanhoArquivo']}"
-					styleClass="ui-g-6" value="#{animesBean.post.tamanhoArquivo}"
-					tooltips="#{tooltips['tamanhoArquivo']}" required="true" />
-				
-				<local:inputLabel id="trailer" label="#{labels['trailer']}"
-					styleClass="ui-g-6" value="#{animesBean.post.trailer}"
-					tooltips="#{tooltips['trailer']}" />
-					
-				<local:inputLabel id="genero" label="#{labels['genero']}"
-					styleClass="ui-g-6" value="#{animesBean.post.genero}"
-					tooltips="#{tooltips['genero']}" />
-				
-				<local:inputLabel id="videoBitrate" label="#{labels['videoBitrate']}"
-					styleClass="ui-g-6" value="#{animesBean.post.videoBitrate}"
-					tooltips="#{tooltips['videoBitrate']}" />
-				
-				<local:inputLabel id="videoCodec" label="#{labels['videoCodec']}"
-					styleClass="ui-g-6" value="#{animesBean.post.videoCodec}"
-					tooltips="#{tooltips['videoCodec']}" />
-				
-				<local:inputLabel id="audioBitrate" label="#{labels['audioBitrate']}"
-					styleClass="ui-g-6" value="#{animesBean.post.videoBitrate}"
-					tooltips="#{tooltips['audioBitrate']}" />
-				
-				<local:inputLabel id="audioCodec" label="#{labels['audioCodec']}"
-					styleClass="ui-g-6" value="#{animesBean.post.videoCodec}"
-					tooltips="#{tooltips['audioCodec']}" />
-				
-				<local:inputLabel id="frameRate" label="#{labels['frameRate']}"
-					styleClass="ui-g-6" value="#{animesBean.post.frameRate}"
-					tooltips="#{tooltips['frameRate']}" />
-					
+					<local:inputSelectItens id="qualidade"
+						label="#{labels['qualidade']}" required="true"
+						value="#{animesBean.post.qualidade}"
+						converteSelect="QualidadeConverter"
+						tooltips="#{tooltips['qualidade']}">
+						<f:selectItems value="#{animesBean.qualidadeItens}" />
+					</local:inputSelectItens>
+
+					<local:inputSelectItens id="midia" label="#{labels['midia']}"
+						value="#{animesBean.post.midia}"
+						converteSelect="javax.faces.Integer"
+						tooltips="#{tooltips['midia']}">
+						<f:selectItems value="#{animesBean.midiaItens}" />
+					</local:inputSelectItens>
+
+					<local:inputLabel id="tamanhoArquivo"
+						label="#{labels['tamanhoArquivo']}"
+						value="#{animesBean.post.tamanhoArquivo}"
+						tooltips="#{tooltips['tamanhoArquivo']}" required="true" />
+
+					<local:inputLabel id="idiomaAudio" label="#{labels['idiomaAudio']}"
+						value="#{animesBean.post.idiomaAudio}"
+						tooltips="#{tooltips['idiomaAudio']}" required="true" />
+
+					<local:inputLabel id="trailer" label="#{labels['trailer']}"
+						value="#{animesBean.post.trailer}"
+						tooltips="#{tooltips['trailer']}" />
+
+					<local:inputLabel id="genero" label="#{labels['genero']}"
+						value="#{animesBean.post.genero}" tooltips="#{tooltips['genero']}" />
+
+					<local:inputLabel id="videoBitrate"
+						label="#{labels['videoBitrate']}"
+						value="#{animesBean.post.videoBitrate}"
+						tooltips="#{tooltips['videoBitrate']}" />
+
+					<local:inputLabel id="videoCodec" label="#{labels['videoCodec']}"
+						value="#{animesBean.post.videoCodec}"
+						tooltips="#{tooltips['videoCodec']}" />
+
+					<local:inputLabel id="audioBitrate"
+						label="#{labels['audioBitrate']}"
+						value="#{animesBean.post.videoBitrate}"
+						tooltips="#{tooltips['audioBitrate']}" />
+
+					<local:inputLabel id="audioCodec" label="#{labels['audioCodec']}"
+						value="#{animesBean.post.videoCodec}"
+						tooltips="#{tooltips['audioCodec']}" />
+
+					<local:inputLabel id="frameRate" label="#{labels['frameRate']}"
+						value="#{animesBean.post.frameRate}"
+						tooltips="#{tooltips['frameRate']}" />
+				</p:panelGrid>
+
 
 			</h:panelGroup>
 			<p:commandButton id="enviar" value="Enviar" update="@form" />

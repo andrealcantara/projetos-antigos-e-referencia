@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
@@ -17,6 +18,7 @@ import br.com.geradorOkaeri.model.Qualidade;
 
 @Named
 @ViewScoped
+//@SessionScoped
 public class AnimesBean implements Serializable {
 	private static final long serialVersionUID = -475922267196560694L;
 
@@ -25,6 +27,10 @@ public class AnimesBean implements Serializable {
 	private List<SelectItem> qualidadeItens;
 	private List<SelectItem> midiaItens;
 	
+	public AnimesBean() {
+//		this.countScreenShot = 2;
+//		this.init();
+	}
 
 	@PostConstruct
 	public void init() {
@@ -38,10 +44,11 @@ public class AnimesBean implements Serializable {
 	private List<SelectItem> loadMidia() {
 		List<SelectItem> obj = new ArrayList<>();
 		obj.add(new SelectItem(null, "Selecione mídia..."));
-		obj.addAll(IntStream.rangeClosed(1, 4).boxed().map(i -> new SelectItem(i,i.toString())).collect(Collectors.toList()));
+		obj.addAll(IntStream.rangeClosed(1, 4).boxed().map(i -> new SelectItem(i, i.toString()))
+				.collect(Collectors.toList()));
 		return obj;
 	}
-	
+
 	private List<SelectItem> loadQualidade() {
 		List<SelectItem> obj = new ArrayList<>();
 		obj.add(new SelectItem(null, "Selecione qualidade..."));
@@ -66,8 +73,8 @@ public class AnimesBean implements Serializable {
 	}
 
 	public void setCountScreenShot(int countScreenShot) {
-		this.countScreenShot = countScreenShot;
-		this.ajustScreenshot(post, countScreenShot);
+		this.countScreenShot = countScreenShot > 1 ? countScreenShot : 2;
+		this.ajustScreenshot(post, this.countScreenShot);
 	}
 
 	public Post getPost() {

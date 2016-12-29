@@ -24,6 +24,9 @@
 			<base-name>properties.tooltips</base-name>
 			<var>tooltips</var>
 		</resource-bundle>
+		<message-bundle>
+			properties.geradormessages
+		</message-bundle>
 	</application>
 
 </faces-config>

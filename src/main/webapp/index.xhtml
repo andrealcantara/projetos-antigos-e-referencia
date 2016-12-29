@@ -4,11 +4,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui">
 <ui:composition template="WEB-INF/template/body.xhtml">
 	<ui:define name="content">
-		<p> Gerador do cpturbo, para postar animes.</p>
-		<p> Produzido por André Alcantara.</p>
+		<p>Gerador do cpturbo, para postar animes.</p>
+		<p>Produzido por André Alcantara.</p>
+		<h:panelGroup layout="block" styleClass="ui-fluid">
+			<p:panelGrid columns="2" id="screenshotBox1"
+				styleClass="ui-panelgrid-blank"
+				columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
+				<ui:repeat var="aew" value="#{animesBean.midiaItens}" >
+					<h:outputText value="#{aew.label}" />
+				</ui:repeat>
+			</p:panelGrid>
+			<p:panelGrid columns="2" id="screenshotBox2"
+				styleClass="ui-panelgrid-blank"
+				columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
+				<c:forEach var="aew" items="#{animesBean.midiaItens}" >
+					<h:outputText value="#{aew.label}" />
+				</c:forEach>
+			</p:panelGrid>
+		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>
