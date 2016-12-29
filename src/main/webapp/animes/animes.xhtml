@@ -81,16 +81,17 @@
 				<p:panelGrid columns="2" id="screenshotBox"
 					styleClass="ui-panelgrid-blank"
 					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
-					<c:forEach varStatus="sts" var="screenShot"
-						items="#{animesBean.post.screenshot}">
-						<local:inputLabel id="screenshot#{sts.index}"
-							label="#{messageBean.bundleLabels('screenshot2',(sts.index)+1)}"
-							value="#{screenShot}"
-							starRequeridShow="#{sts.index > 1? 'false':'true'}"
-							tooltips="#{messageBean.bundleTooltips('screenshot',(sts.index)+1)}"
-							required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
-					</c:forEach>
+						<c:forEach varStatus="sts" var="screenShot"
+							items="#{animesBean.post.screenshot}">
+								<local:inputLabel id="screenshot_#{sts.index}"
+									label="#{messageBean.bundleLabels('screenshot2',(sts.index)+1)}"
+									value="#{screenShot}"
+									starRequeridShow="#{sts.index > 1? 'false':'true'}"
+									tooltips="#{messageBean.bundleTooltips('screenshot',(sts.index)+1)}"
+									required="#{(sts.index > 1? 'false':'true') and (not empty param['formAnimes:enviar'])}" />
+						</c:forEach>
 				</p:panelGrid>
+<!-- 				<p:log id="log" /> -->
 				<p:panelGrid columns="2" id="secondPanel"
 					columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid"
 					styleClass="ui-panelgrid-blank">
