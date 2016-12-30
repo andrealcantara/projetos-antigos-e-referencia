@@ -11,6 +11,10 @@
 	margin: 0 auto;
 }
 
+.ui-widget .ui-widget {
+	font-size: 0.96em;
+}
+
 .redNeed {
 	font-weight: bold;
 	color: red;

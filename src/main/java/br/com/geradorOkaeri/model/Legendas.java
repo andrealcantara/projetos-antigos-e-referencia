@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum Legendas implements EnumID {
+public enum Legendas implements EnumModelInterface {
 
 	AO_POST(1,"Anexao ao Post"),
 	EMBUTIDA(2,"Embutida"),

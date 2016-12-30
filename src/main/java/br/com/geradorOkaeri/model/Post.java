@@ -9,6 +9,7 @@ public class Post implements Serializable {
 	public Post(){
 		this.screenshot = new String[2];
 		this.resolucaoVideo = new Resolucao();
+		this.exibicaoCompartilhamento = ExibicaoCompartilhamento.PADRAO;
 	}
 	
 	private String titulo;
@@ -40,11 +41,11 @@ public class Post implements Serializable {
 	private Legendas legendas;
 	private String outrasInfo;
 	private ExibicaoCompartilhamento exibicaoCompartilhamento;
-	private CompartilhamentoTipo compartilhamentoTipo;
+	private CompartilhamentoTipo[] compartilhamentoTipo;
 	private String compartilhamento;
 	private boolean temSenha;
 	private String senha;
-	private String borda;
+	private boolean temBorda;
 	
 	
 	@Override
@@ -52,7 +53,7 @@ public class Post implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((compartilhamento == null) ? 0 : compartilhamento.hashCode());
-		result = prime * result + ((compartilhamentoTipo == null) ? 0 : compartilhamentoTipo.hashCode());
+		result = prime * result + Arrays.hashCode(compartilhamentoTipo);
 		result = prime * result + ((duracao == null) ? 0 : duracao.hashCode());
 		result = prime * result + ((fansuber == null) ? 0 : fansuber.hashCode());
 		result = prime * result + ((resolucaoVideo == null) ? 0 : resolucaoVideo.hashCode());
@@ -337,10 +338,10 @@ public class Post implements Serializable {
 	public void setExibicaoCompartilhamento(ExibicaoCompartilhamento exibicaoCompartilhamento) {
 		this.exibicaoCompartilhamento = exibicaoCompartilhamento;
 	}
-	public CompartilhamentoTipo getCompartilhamentoTipo() {
+	public CompartilhamentoTipo[] getCompartilhamentoTipo() {
 		return compartilhamentoTipo;
 	}
-	public void setCompartilhamentoTipo(CompartilhamentoTipo compartilhamentoTipo) {
+	public void setCompartilhamentoTipo(CompartilhamentoTipo[] compartilhamentoTipo) {
 		this.compartilhamentoTipo = compartilhamentoTipo;
 	}
 	public String getCompartilhamento() {
@@ -361,10 +362,10 @@ public class Post implements Serializable {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getBorda() {
-		return borda;
+	public boolean getTemBorda() {
+		return temBorda;
 	}
-	public void setBorda(String borda) {
-		this.borda = borda;
+	public void setTemBorda(boolean temBorda) {
+		this.temBorda = temBorda;
 	}
 }

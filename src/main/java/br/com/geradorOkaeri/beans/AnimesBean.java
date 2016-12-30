@@ -12,13 +12,15 @@ import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import br.com.geradorOkaeri.model.CompartilhamentoTipo;
+import br.com.geradorOkaeri.model.ExibicaoCompartilhamento;
 import br.com.geradorOkaeri.model.Legendas;
 import br.com.geradorOkaeri.model.Post;
 import br.com.geradorOkaeri.model.Qualidade;
 
 @Named
 @ViewScoped
-//@SessionScoped
+// @SessionScoped
 public class AnimesBean implements Serializable {
 	private static final long serialVersionUID = -475922267196560694L;
 
@@ -27,19 +29,26 @@ public class AnimesBean implements Serializable {
 	private List<SelectItem> qualidadeItens;
 	private List<SelectItem> midiaItens;
 	private List<SelectItem> legendasItens;
-	
-	
-	
+	private List<SelectItem> compartilhamentoTipoItens;
+	private List<SelectItem> compartilhamentoExibicaoItens;
+	private boolean renderCompartilhamentoTexto;
 
 	@PostConstruct
 	public void init() {
 		qualidadeItens = loadQualidade();
 		midiaItens = loadMidia();
 		legendasItens = loadLegendas();
-		post = new Post();
-		countScreenShot = 2;
+		compartilhamentoTipoItens = loadCompartilhamentoTipo();
+		compartilhamentoExibicaoItens = loadCompartilhamentoExibicao();
+		this.resetPost();
 	}
 	
+	public void resetPost() {
+		post = new Post();
+		countScreenShot = 2;
+		renderCompartilhamentoTexto = false;		
+	}
+
 	private List<SelectItem> loadLegendas() {
 		List<SelectItem> obj = new ArrayList<>();
 		obj.add(new SelectItem(null, "Selecione a legenda..."));
@@ -64,6 +73,20 @@ public class AnimesBean implements Serializable {
 		return obj;
 	}
 
+	private List<SelectItem> loadCompartilhamentoTipo() {
+		List<SelectItem> obj = new ArrayList<>();
+		obj.addAll(Arrays.asList(CompartilhamentoTipo.values()).stream().map(t -> new SelectItem(t, t.getName()))
+				.collect(Collectors.toList()));
+		return obj;
+	}
+	
+	private List<SelectItem> loadCompartilhamentoExibicao() {
+		List<SelectItem> obj = new ArrayList<>();
+		obj.addAll(Arrays.asList(ExibicaoCompartilhamento.values()).stream().map(t -> new SelectItem(t, t.getName()))
+				.collect(Collectors.toList()));
+		return obj;
+	}
+
 	private void ajustScreenshot(Post post, int countSS) {
 		String[] atual = post.getScreenshot();
 		String[] novo = null;
@@ -73,6 +96,19 @@ public class AnimesBean implements Serializable {
 			novo = new String[countSS];
 		}
 		post.setScreenshot(novo);
+	}
+
+	public void compartilhamentoRendered() {
+		boolean retorno = true;
+		if (this.post.getCompartilhamentoTipo() == null || this.post.getCompartilhamentoTipo().length < 1) {
+			retorno = false;
+		} else {
+			List<CompartilhamentoTipo> tipo = Arrays.asList(this.post.getCompartilhamentoTipo());
+			if (tipo.size() < 1 || tipo.size() == 1 && tipo.get(0).equals(CompartilhamentoTipo.TORRENT)) {
+				retorno = false;
+			}
+		}
+		renderCompartilhamentoTexto = retorno;
 	}
 
 	public int getCountScreenShot() {
@@ -107,7 +143,7 @@ public class AnimesBean implements Serializable {
 	public void setMidiaItens(List<SelectItem> midiaItens) {
 		this.midiaItens = midiaItens;
 	}
-	
+
 	public List<SelectItem> getLegendasItens() {
 		return legendasItens;
 	}
@@ -115,4 +151,29 @@ public class AnimesBean implements Serializable {
 	public void setLegendasItens(List<SelectItem> legendasItens) {
 		this.legendasItens = legendasItens;
 	}
+
+	public List<SelectItem> getCompartilhamentoTipoItens() {
+		return compartilhamentoTipoItens;
+	}
+
+	public void setCompartilhamentoTipoItens(List<SelectItem> compartilhamentoTipoItens) {
+		this.compartilhamentoTipoItens = compartilhamentoTipoItens;
+	}
+
+	public boolean isRenderCompartilhamentoTexto() {
+		return renderCompartilhamentoTexto;
+	}
+
+	public void setRenderCompartilhamentoTexto(boolean renderCompartilhamentoTexto) {
+		this.renderCompartilhamentoTexto = renderCompartilhamentoTexto;
+	}
+	
+	public List<SelectItem> getCompartilhamentoExibicaoItens() {
+		return compartilhamentoExibicaoItens;
+	}
+
+	public void setCompartilhamentoExibicaoItens(List<SelectItem> compartilhamentoExibicaoItens) {
+		this.compartilhamentoExibicaoItens = compartilhamentoExibicaoItens;
+	}
+
 }

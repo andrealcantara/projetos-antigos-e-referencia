@@ -10,22 +10,6 @@
 	<ui:define name="content">
 		<p>Gerador do cpturbo, para postar animes.</p>
 		<p>Produzido por André Alcantara.</p>
-		<h:panelGroup layout="block" styleClass="ui-fluid">
-			<p:panelGrid columns="2" id="screenshotBox1"
-				styleClass="ui-panelgrid-blank"
-				columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
-				<ui:repeat var="aew" value="#{animesBean.midiaItens}" >
-					<h:outputText value="#{aew.label}" />
-				</ui:repeat>
-			</p:panelGrid>
-			<p:panelGrid columns="2" id="screenshotBox2"
-				styleClass="ui-panelgrid-blank"
-				columnClasses="ui-grid-col-6, ui-grid-col-6" layout="grid">
-				<c:forEach var="aew" items="#{animesBean.midiaItens}" >
-					<h:outputText value="#{aew.label}" />
-				</c:forEach>
-			</p:panelGrid>
-		</h:panelGroup>
 	</ui:define>
 </ui:composition>
 </html>

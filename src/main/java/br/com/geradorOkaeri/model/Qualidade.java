@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum Qualidade implements EnumID {
+public enum Qualidade implements EnumModelInterface {
 	TRES_D(1, "3D"), 
 	BD_25(2, "BD-25"), 
 	BD_RIP(3, "BDRip"), 

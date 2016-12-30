@@ -6,7 +6,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
-import br.com.geradorOkaeri.model.EnumID;
+import br.com.geradorOkaeri.model.EnumModelInterface;
 
 public interface ConverterEnumModelo extends Converter {
 
@@ -22,10 +22,10 @@ public interface ConverterEnumModelo extends Converter {
 	@Override
 	default String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null){
-			return String.format("%s", ((EnumID)value).getId());
+			return String.format("%s", ((EnumModelInterface)value).getId());
 		}
 		return null;
 	}
 	
-	public Function<String,? extends EnumID> getResolver();
+	public Function<String,? extends EnumModelInterface> getResolver();
 }

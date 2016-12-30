@@ -13,7 +13,6 @@
 			<h:panelGroup layout="block" styleClass="ui-fluid sizePage">
 				<p:panelGrid columns="2" columnClasses="ui-grid-col-6,ui-grid-col-6"
 					id="firstPanel" layout="grid" styleClass="ui-panelgrid-blank">
-
 					<local:inputLabel id="titulo" label="#{labels['titulo']}"
 						value="#{animesBean.post.titulo}" tooltips="#{tooltips['titulo']}"
 						required="true" />
@@ -57,7 +56,7 @@
 						tooltips="#{tooltips['imagemCapa']}" required="true" />
 				</p:panelGrid>
 				<local:inputTextLabel id="sinopsePTBR"
-					label="#{labels['sinopsePTBR']}" styleClass="ui-g-12"
+					label="#{labels['sinopsePTBR']}"
 					value="#{animesBean.post.sinopsePTBR}"
 					tooltips="#{tooltips['sinopsePTBR']}" required="true" />
 				<p:panelGrid id="screenshotNumber" columns="2"
@@ -178,19 +177,169 @@
 					</p:panelGrid>
 
 					<local:inputLabel id="formatoTela" label="#{labels['formatoTela']}"
-						value="#{animesBean.post.formatoTela}"
+						value="#{animesBean.post.formatoTela}" required="true"
 						tooltips="#{tooltips['formatoTela']}" />
 
-					<local:inputSelectItens id="legendas"
-						label="#{labels['legendas']}" required="true"
-						value="#{animesBean.post.legendas}"
+					<local:inputSelectItens id="legendas" label="#{labels['legendas']}"
+						required="true" value="#{animesBean.post.legendas}"
 						converteSelect="gerador.converter.legendas"
 						tooltips="#{tooltips['legendas']}">
 						<f:selectItems value="#{animesBean.legendasItens}" />
 					</local:inputSelectItens>
 				</p:panelGrid>
+				<local:inputTextLabel id="outrasInfo"
+					label="#{labels['outrasInfo']}"
+					value="#{animesBean.post.outrasInfo}"
+					tooltips="#{tooltips['outrasInfo']}" />
+
+				<p:panelGrid columns="2" id="compartilhamentoTipoGeral"
+					columnClasses="ui-grid-col-2, ui-grid-col-10" layout="grid"
+					styleClass="ui-panelgrid-blank">
+					<h:panelGroup id="compartilhamentoTipoLayoutLabel" layout="block"
+						styleClass="text_right_100perc">
+						<p:outputLabel value="#{labels['compartilhamento']}"
+							for="compartilhamentoTipoSelect" id="compartilhamentoTipoLabel"
+							indicateRequired="false" />
+						<p:outputLabel value=" *" for="compartilhamentoTipoSelect"
+							indicateRequired="false" id="compartilhamentoTipoLabelRequired"
+							styleClass="redNeed" />:
+					</h:panelGroup>
+					<h:panelGroup layout="block" id="compartilhamentoTipoLayoutValue">
+						<p:selectManyCheckbox id="compartilhamentoTipoSelect"
+							value="#{animesBean.post.compartilhamentoTipo}"
+							required="#{not empty param['formAnimes:enviar']}"
+							autoWidth="true"
+							converter="gerador.converter.compartilhamentoTipo"
+							converterMessage="#{messageBean.bundleValidation('error_campo_invalido',labels['compartilhamento'],'ED2k, HTTP, MAGNETO, TORRENT')}"
+							requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',labels['compartilhamento'])}">
+							<p:ajax process="@this" event="change"
+								listener="#{animesBean.compartilhamentoRendered()}"
+								update="compartilhamentoGeralBlock
+										compartilhamentoGeral" />
+							<f:selectItems value="#{animesBean.compartilhamentoTipoItens}" />
+						</p:selectManyCheckbox>
+						<p:tooltip id="compartilhamentoTipoTooltip"
+							for="compartilhamentoTipoSelect"
+							value="#{tooltips['compartilhamento']}" position="top" />
+					</h:panelGroup>
+				</p:panelGrid>
+				<h:panelGroup id="compartilhamentoGeralBlock" layout="block">
+					<p:panelGrid columns="2" id="compartilhamentoGeral"
+						rendered="#{animesBean.renderCompartilhamentoTexto}"
+						columnClasses="ui-grid-col-2, ui-grid-col-10" layout="grid"
+						styleClass="ui-panelgrid-blank">
+						<h:panelGroup id="compartilhamentoLayoutLabel" layout="block"
+							styleClass="text_right_100perc">
+						</h:panelGroup>
+						<h:panelGroup layout="block" id="compartilhamentoLayoutValue">
+							<p:inputTextarea id="compartilhamentoTxt"
+								value="#{animesBean.post.compartilhamento}"
+								requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',labels['compartilhamento2'])}"
+								required="true" cols="96" rows="5" />
+							<p:tooltip id="compartilhamentoTooltip" for="compartilhamentoTxt"
+								value="#{tooltips['compartilhamentoTexto']}" position="top" />
+						</h:panelGroup>
+						<h:panelGroup id="compartilhamentoExibicaoLayoutLabel"
+							layout="block" styleClass="text_right_100perc">
+							<p:outputLabel value="#{labels['compartilhamentoExibicao']}"
+								for="compartilhamentoExibicaoRadio"
+								id="compartilhamentoExibicaoLabel" indicateRequired="false" />
+							<p:outputLabel value=" *" for="compartilhamentoExibicaoRadio"
+								indicateRequired="false"
+								id="compartilhamentoExibicaoLabelRequired" styleClass="redNeed" />:
+						</h:panelGroup>
+						<h:panelGroup layout="block"
+							id="compartilhamentoExibicaoLayoutValue">
+							<p:selectOneRadio id="compartilhamentoExibicaoRadio"
+								value="#{animesBean.post.exibicaoCompartilhamento}"
+								required="true" autoWidth="true"
+								converter="gerador.converter.compartilhamentoExibicao"
+								converterMessage="#{messageBean.bundleValidation('error_campo_invalido',labels['compartilhamentoExibicao'],'Padrao, Code, Spoiler')}"
+								requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',labels['compartilhamentoExibicao'])}">
+								<f:selectItems
+									value="#{animesBean.compartilhamentoExibicaoItens}" />
+							</p:selectOneRadio>
+							<p:tooltip id="compartilhamentoExibicaoTooltip"
+								for="compartilhamentoExibicaoRadio"
+								value="#{tooltips['compartilhamentoExibicao']}" position="top" />
+						</h:panelGroup>
+					</p:panelGrid>
+				</h:panelGroup>
+
+				<p:panelGrid columns="3" id="senhaGeral"
+					columnClasses="ui-grid-col-2, ui-grid-col-1,ui-grid-col-9"
+					layout="grid" styleClass="ui-panelgrid-blank">
+					<h:panelGroup id="senhaLayoutLabel" layout="block"
+						styleClass="text_right_100perc">
+						<p:outputLabel value="#{labels['senha']}" for="senhaCheckbox"
+							id="senhaLabel" indicateRequired="false" />:
+					</h:panelGroup>
+					<h:panelGroup layout="block" id="senhaLayoutValue">
+						<p:selectBooleanButton id="senhaCheckbox" onLabel="On"
+							offLabel="Off" value="#{animesBean.post.temSenha}"
+							autoWidth="true">
+							<p:ajax process="@this" update="senhaInputGeralBox" />
+						</p:selectBooleanButton>
+						<p:spacer height="2" />
+						<p:tooltip id="senhaTooltip" for="senhaCheckbox"
+							value="#{tooltips['senha']}" position="top" />
+					</h:panelGroup>
+					<h:panelGroup layout="block" id="senhaInputGeralBox">
+						<p:panelGrid columns="2" id="senhaInputGeral"
+							rendered="#{animesBean.post.temSenha}"
+							columnClasses="ui-grid-col-8,ui-grid-col-4" layout="grid"
+							styleClass="ui-panelgrid-blank">
+							<h:panelGroup id="senhaInputLayoutLabel" layout="block"
+								styleClass="text_right_100perc">
+								<p:outputLabel value="#{labels['senha2']}" for="senhaInputTxt"
+									id="senhaInputLabel" indicateRequired="false" />:
+							</h:panelGroup>
+							<h:panelGroup layout="block" id="senhaInputLayoutValue">
+								<p:inputText id="senhaInputTxt" value="#{animesBean.post.senha}" />
+								<p:tooltip id="senhaInputTooltip" for="senhaInputTxt"
+									value="#{tooltips['senha2']}" position="top" />
+							</h:panelGroup>
+						</p:panelGrid>
+					</h:panelGroup>
+				</p:panelGrid>
+				<p:panelGrid columns="3" id="bordaGeral"
+					columnClasses="ui-grid-col-2, ui-grid-col-1,ui-grid-col-9"
+					layout="grid" styleClass="ui-panelgrid-blank">
+					<h:panelGroup id="bordaLayoutLabel" layout="block"
+						styleClass="text_right_100perc">
+						<p:outputLabel value="#{labels['borda']}" for="bordaCheckbox"
+							id="bordaLabel" indicateRequired="false" />:
+					</h:panelGroup>
+					<h:panelGroup layout="block" id="bordaLayoutValue">
+						<p:selectBooleanButton id="bordaCheckbox" onLabel="On"
+							offLabel="Off" value="#{animesBean.post.temBorda}"
+							autoWidth="true" />
+						<p:tooltip id="bordaTooltip" for="bordaCheckbox"
+							value="#{tooltips['borda']}" position="top" />
+					</h:panelGroup>
+				</p:panelGrid>
+				<p:panelGrid columns="4" id="botoesGeral"
+					columnClasses="ui-grid-col-2, ui-grid-col-2,ui-grid-col-2,ui-grid-col-6"
+					layout="grid" styleClass="ui-panelgrid-blank">
+					<p:spacer />
+					<p:commandButton id="enviar" value="Enviar" update="@form" />
+					<p:commandButton id="reset" value="Reset"
+						actionListener="#{animesBean.resetPost()}" immediate="true"
+						ajax="false">
+						<p:resetInput target="bordaGeral" />
+						<p:resetInput target="senhaInputGeral" />
+						<p:resetInput target="senhaGeral" />
+						<p:resetInput target="compartilhamentoGeral" />
+						<p:resetInput target="compartilhamentoTipoGeral" />
+						<p:resetInput target="outrasInfo" />
+						<p:resetInput target="secondPanel" />
+						<p:resetInput target="screenshotBox" />
+						<p:resetInput target="screenshotNumber" />
+						<p:resetInput target="sinopsePTBR" />
+						<p:resetInput target="firstPanel" />
+					</p:commandButton>
+				</p:panelGrid>
 			</h:panelGroup>
-			<p:commandButton id="enviar" value="Enviar" update="@form" />
 		</h:form>
 	</ui:define>
 </ui:composition>

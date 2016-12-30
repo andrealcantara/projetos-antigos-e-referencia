@@ -4,14 +4,14 @@ import java.util.function.Function;
 
 import javax.faces.convert.FacesConverter;
 
+import br.com.geradorOkaeri.model.CompartilhamentoTipo;
 import br.com.geradorOkaeri.model.EnumModelInterface;
-import br.com.geradorOkaeri.model.Qualidade;
 
-@FacesConverter("gerador.converter.qualidade")
-public class QualidadeConverter implements ConverterEnumModelo {
+@FacesConverter("gerador.converter.compartilhamentoTipo")
+public class CompartilhamentoTipoConverter implements ConverterEnumModelo {
 
 	@Override
 	public Function<String, ? extends EnumModelInterface> getResolver() {
-		return r -> Qualidade.valueOf(Integer.valueOf(r).intValue());
+		return r -> CompartilhamentoTipo.valueOf(Integer.valueOf(r).intValue());
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum CompartilhamentoTipo implements EnumID {
+public enum CompartilhamentoTipo implements EnumModelInterface {
 	ED2K(1,"Ed2k"),
 	HTTP(2,"Http"),
 	TORRENT(3,"Torrent"),

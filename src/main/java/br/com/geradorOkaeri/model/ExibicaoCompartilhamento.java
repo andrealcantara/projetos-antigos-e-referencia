@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
-public enum ExibicaoCompartilhamento implements EnumID {
+public enum ExibicaoCompartilhamento implements EnumModelInterface {
 	PADRAO(1,"Padrão"),
 	CODE(2,"Code"),
 	SPOILER(3,"Spoiler"),
