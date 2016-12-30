@@ -35,7 +35,7 @@ public enum Legendas implements EnumModelInterface {
 	public static Legendas valueOf(int id) {
 		return Arrays.asList(Legendas.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, Legendas.class.getName())));
+						LocalMessage.getDefaultInstance().get("mensagemErrorEnumParam", id, Legendas.class.getName())));
 	}
 	
 }

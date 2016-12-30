@@ -34,6 +34,6 @@ public enum CompartilhamentoTipo implements EnumModelInterface {
 	public static CompartilhamentoTipo valueOf(int id) {
 		return Arrays.asList(CompartilhamentoTipo.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, CompartilhamentoTipo.class.getName())));
+						LocalMessage.getDefaultInstance().get("mensagemErrorEnumParam", id, CompartilhamentoTipo.class.getName())));
 	}
 }

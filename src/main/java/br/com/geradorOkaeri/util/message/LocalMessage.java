@@ -6,60 +6,54 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.enterprise.context.ApplicationScoped;
-
-@ApplicationScoped
 public class LocalMessage implements Serializable {
 	private static final long serialVersionUID = -1549157101237590081L;
-	private Map<MessageType, ResourceBundle> mapBundle;
-	private ResourceBundle rb ;
+
+	private static Map<MessageType, LocalMessage> mapa = new HashMap<>();
 	
-	public static LocalMessage getDefaultInstance(){
-		return LocalMessageHolder.INSTANCE;
-	}
+	private ResourceBundle rb;
 	
-	private LocalMessage(){
-		mapBundle = new HashMap<>();
-		mapBundle.put(MessageType.SYSTEM, ResourceBundle.getBundle("properties.sys-messages"));
-		mapBundle.put(MessageType.LABELS, ResourceBundle.getBundle("properties.labels"));
-		mapBundle.put(MessageType.TOOLTIPS, ResourceBundle.getBundle("properties.tooltips"));
-		mapBundle.put(MessageType.MENSAGEM, ResourceBundle.getBundle("properties.mensagens"));
-		mapBundle.put(MessageType.VALIDATION, ResourceBundle.getBundle("properties.validation"));
-		
-		changeResourceBundle(MessageType.SYSTEM);
-	}
-	
-	public LocalMessage getDefault() {
+	public static LocalMessage getDefaultInstance() {
 		return getBundle(MessageType.SYSTEM);
 	}
+
+	private LocalMessage() {}
 	
-	public LocalMessage getBundle(MessageType type){
-		this.changeResourceBundle(type);
-		return this;
-	}
-	
-	private void changeResourceBundle(MessageType type){
-		rb = mapBundle.get(type);
-	}
-	
-	public String get(String msg) {
-		return rb.getString(msg);
+	private LocalMessage(ResourceBundle bundle) {
+		rb = bundle;
 	}
 
-	public String get(String msg, Object... params) {
-		return MessageFormat.format(rb.getString(msg), params);
+	public static LocalMessage getBundle(MessageType type) {
+		if(!mapa.containsKey(type)){
+			mapa.put(type, new LocalMessage(LocalMessageHolder.staticBundles.get(type)));
+		}
+		return mapa.get(type);
 	}
-	
+
+	public String get(String key) {
+		return rb.getString(key);
+	}
+
+	public String get(String key, Object... params) {
+		return MessageFormat.format(rb.getString(key), params);
+	}
+
 	private static class LocalMessageHolder {
-		private static LocalMessage INSTANCE = new LocalMessage();
+		private static Map<MessageType, ResourceBundle> staticBundles = getBundle();
+
+		private static Map<MessageType, ResourceBundle> getBundle() {
+			Map<MessageType, ResourceBundle> bundles = new HashMap<>();
+			bundles.put(MessageType.SYSTEM, ResourceBundle.getBundle("properties.sys-messages"));
+			bundles.put(MessageType.LABELS, ResourceBundle.getBundle("properties.labels"));
+			bundles.put(MessageType.TOOLTIPS, ResourceBundle.getBundle("properties.tooltips"));
+			bundles.put(MessageType.MENSAGEM, ResourceBundle.getBundle("properties.mensagens"));
+			bundles.put(MessageType.VALIDATION, ResourceBundle.getBundle("properties.validation"));
+			return bundles;
+		}
 	}
-	
+
 	public enum MessageType {
-		SYSTEM,
-		LABELS,
-		TOOLTIPS,
-		MENSAGEM,
-		VALIDATION;
+		SYSTEM, LABELS, TOOLTIPS, MENSAGEM, VALIDATION;
 	}
-	
+
 }

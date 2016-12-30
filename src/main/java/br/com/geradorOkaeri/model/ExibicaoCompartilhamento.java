@@ -34,6 +34,6 @@ public enum ExibicaoCompartilhamento implements EnumModelInterface {
 	public static ExibicaoCompartilhamento valueOf(int id) {
 		return Arrays.asList(ExibicaoCompartilhamento.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, ExibicaoCompartilhamento.class.getName())));
+						LocalMessage.getDefaultInstance().get("mensagemErrorEnumParam", id, ExibicaoCompartilhamento.class.getName())));
 	}
 }

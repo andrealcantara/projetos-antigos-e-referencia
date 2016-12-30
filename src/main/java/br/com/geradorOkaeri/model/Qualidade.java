@@ -58,7 +58,7 @@ public enum Qualidade implements EnumModelInterface {
 	public static Qualidade valueOf(int id) {
 		return Arrays.asList(Qualidade.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(
-						LocalMessage.getDefaultInstance().getDefault().get("mensagemErrorEnumParam", id, Qualidade.class.getName())));
+						LocalMessage.getDefaultInstance().get("mensagemErrorEnumParam", id, Qualidade.class.getName())));
 	}
 
 }

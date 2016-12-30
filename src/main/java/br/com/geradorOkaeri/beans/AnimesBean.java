@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
@@ -13,6 +15,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.com.geradorOkaeri.model.CompartilhamentoTipo;
+import br.com.geradorOkaeri.model.EnumModelInterface;
 import br.com.geradorOkaeri.model.ExibicaoCompartilhamento;
 import br.com.geradorOkaeri.model.Legendas;
 import br.com.geradorOkaeri.model.Post;
@@ -42,52 +45,64 @@ public class AnimesBean implements Serializable {
 		compartilhamentoExibicaoItens = loadCompartilhamentoExibicao();
 		this.resetPost();
 	}
-	
+
 	public void resetPost() {
 		post = new Post();
 		countScreenShot = 2;
-		renderCompartilhamentoTexto = false;		
+		renderCompartilhamentoTexto = false;
 	}
 
 	private List<SelectItem> loadLegendas() {
-		List<SelectItem> obj = new ArrayList<>();
-		obj.add(new SelectItem(null, "Selecione a legenda..."));
-		obj.addAll(Arrays.asList(Legendas.values()).stream().map(t -> new SelectItem(t, t.getName()))
-				.collect(Collectors.toList()));
-		return obj;
+		Function<Object, SelectItem> func = p -> {
+			Legendas t = (Legendas) p;
+			return new SelectItem(t, t.getName());
+		};
+		return loadCommon(Arrays.asList(Legendas.values()).stream(), func, "Selecione a legenda...");
 	}
 
 	private List<SelectItem> loadMidia() {
-		List<SelectItem> obj = new ArrayList<>();
-		obj.add(new SelectItem(null, "Selecione mídia..."));
-		obj.addAll(IntStream.rangeClosed(1, 4).boxed().map(i -> new SelectItem(i, i.toString()))
-				.collect(Collectors.toList()));
-		return obj;
+		Function<Object, SelectItem> func = p -> {
+			Integer t = (Integer) p;
+			return new SelectItem(t, t.toString());
+		};
+		return loadCommon(IntStream.rangeClosed(1, 4).boxed(), func, "Selecione a mídia...");
 	}
 
 	private List<SelectItem> loadQualidade() {
-		List<SelectItem> obj = new ArrayList<>();
-		obj.add(new SelectItem(null, "Selecione qualidade..."));
-		obj.addAll(Arrays.asList(Qualidade.values()).stream().map(t -> new SelectItem(t, t.getName()))
-				.collect(Collectors.toList()));
-		return obj;
+		Function<Object, SelectItem> func = p -> {
+			Qualidade t = (Qualidade) p;
+			return new SelectItem(t, t.getName());
+		};
+		return loadCommon(Arrays.asList(Qualidade.values()).stream(), func, "Selecione qualidade...");
 	}
 
 	private List<SelectItem> loadCompartilhamentoTipo() {
-		List<SelectItem> obj = new ArrayList<>();
-		obj.addAll(Arrays.asList(CompartilhamentoTipo.values()).stream().map(t -> new SelectItem(t, t.getName()))
-				.collect(Collectors.toList()));
-		return obj;
+		Function<Object, SelectItem> func = p -> {
+			CompartilhamentoTipo t = (CompartilhamentoTipo) p;
+			return new SelectItem(t, t.getName());
+		};
+		return loadCommon(Arrays.asList(CompartilhamentoTipo.values()).stream(), func, null);
 	}
-	
+
 	private List<SelectItem> loadCompartilhamentoExibicao() {
+		Function<Object, SelectItem> func = p -> {
+			ExibicaoCompartilhamento t = (ExibicaoCompartilhamento) p;
+			return new SelectItem(t, t.getName());
+		};
+		return loadCommon(Arrays.asList(ExibicaoCompartilhamento.values()).stream(), func, null);
+	}
+
+	private List<SelectItem> loadCommon(Stream<?> strean, Function<Object, SelectItem> func, String firstSelect) {
 		List<SelectItem> obj = new ArrayList<>();
-		obj.addAll(Arrays.asList(ExibicaoCompartilhamento.values()).stream().map(t -> new SelectItem(t, t.getName()))
-				.collect(Collectors.toList()));
+		if (firstSelect != null && !firstSelect.isEmpty()) {
+			obj.add(new SelectItem(null, firstSelect));
+		}
+		obj.addAll(strean.map(func).collect(Collectors.toList()));
 		return obj;
 	}
 
 	private void ajustScreenshot(Post post, int countSS) {
+		countSS = countSS > 1 ? countSS : 2;
 		String[] atual = post.getScreenshot();
 		String[] novo = null;
 		if (atual != null && atual[0] != null && atual[0].trim().length() > 18) {
@@ -116,7 +131,7 @@ public class AnimesBean implements Serializable {
 	}
 
 	public void setCountScreenShot(int countScreenShot) {
-		this.countScreenShot = countScreenShot > 1 ? countScreenShot : 2;
+		this.countScreenShot = countScreenShot;
 		this.ajustScreenshot(post, this.countScreenShot);
 	}
 
@@ -167,7 +182,7 @@ public class AnimesBean implements Serializable {
 	public void setRenderCompartilhamentoTexto(boolean renderCompartilhamentoTexto) {
 		this.renderCompartilhamentoTexto = renderCompartilhamentoTexto;
 	}
-	
+
 	public List<SelectItem> getCompartilhamentoExibicaoItens() {
 		return compartilhamentoExibicaoItens;
 	}

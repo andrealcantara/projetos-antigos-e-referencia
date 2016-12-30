@@ -12,19 +12,19 @@ public class MessageBean implements Serializable{
 	private static final long serialVersionUID = 8086953403127279252L;
 	
 	public String bundleSystem(String key, Object... param) {
-		return LocalMessage.getDefaultInstance().getDefault().get(key, param);
+		return LocalMessage.getDefaultInstance().get(key, param);
 	}
 	
 	public String bundleTooltips(String key, Object... param) {
-		return LocalMessage.getDefaultInstance().getBundle(MessageType.TOOLTIPS).get(key, param);
+		return LocalMessage.getBundle(MessageType.TOOLTIPS).get(key, param);
 	}
 	
 	public String bundleLabels(String key, Object... param) {
-		return LocalMessage.getDefaultInstance().getBundle(MessageType.LABELS).get(key, param);
+		return LocalMessage.getBundle(MessageType.LABELS).get(key, param);
 	}
 	
 	public String bundleValidation(String key, Object... param) {
-		return LocalMessage.getDefaultInstance().getBundle(MessageType.VALIDATION).get(key, param);
+		return LocalMessage.getBundle(MessageType.VALIDATION).get(key, param);
 	}
 	
 	
