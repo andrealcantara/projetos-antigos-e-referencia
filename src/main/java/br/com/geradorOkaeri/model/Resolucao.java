@@ -2,6 +2,11 @@ package br.com.geradorOkaeri.model;
 
 import java.io.Serializable;
 
+/**
+ * Classe que representa a resolução do vídeo no {@link Post}
+ * @author andre
+ *
+ */
 public class Resolucao implements Serializable {
 	private static final long serialVersionUID = 6803389739336506673L;
 	
@@ -9,6 +14,12 @@ public class Resolucao implements Serializable {
 	private Integer height;
 	
 	
+	/**
+	 * Metodo usado para criar uma {@link Resolucao};
+	 * @param width - {@link Integer} largura do video.
+	 * @param height - {@link Integer} altura do video.
+	 * @return {@link Resolucao}
+	 */
 	public static Resolucao of(Integer width, Integer height) {
 		Resolucao re = new Resolucao();
 		re.width = width;
@@ -74,6 +85,10 @@ public class Resolucao implements Serializable {
 		return "Resolucao [width=" + width.intValue() + ", height=" + height.intValue() + "]";
 	}
 	
+	/**
+	 * <p>Metodo que retorna a resolucano no formato <code>largura X altura</code></p>
+	 * @return - {@link String} no formato <code>largura X altura</code>
+	 */
 	public String formated() {
 		return width.intValue() + " X " + height.intValue();
 	}	

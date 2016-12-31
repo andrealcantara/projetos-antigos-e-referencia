@@ -4,6 +4,12 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
+/**
+ * Enum que representa o tipo de exibicao do compartilhamento do {@link Post}.
+ * 
+ * @author andre
+ *
+ */
 public enum ExibicaoCompartilhamento implements EnumModelInterface {
 	PADRAO(1,"Padrão"),
 	CODE(2,"Code"),
@@ -31,6 +37,11 @@ public enum ExibicaoCompartilhamento implements EnumModelInterface {
 		return this.name;
 	}
 	
+	/**
+	 * Busca um tipo de {@link ExibicaoCompartilhamento} atraves da sua <code>id</code>
+	 * @param id - int id do {@link ExibicaoCompartilhamento}
+	 * @return {@link ExibicaoCompartilhamento}
+	 */
 	public static ExibicaoCompartilhamento valueOf(int id) {
 		return Arrays.asList(ExibicaoCompartilhamento.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(

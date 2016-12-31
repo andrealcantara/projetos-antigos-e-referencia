@@ -4,6 +4,11 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
+/**
+ * Enum que representa o tipo de legendas do {@link Post}.
+ * @author andre
+ *
+ */
 public enum Legendas implements EnumModelInterface {
 
 	AO_POST(1,"Anexao ao Post"),
@@ -32,6 +37,11 @@ public enum Legendas implements EnumModelInterface {
 		return this.name;
 	}
 	
+	/**
+	 * Busca um tipo de {@link Legendas} atraves da sua <code>id</code>
+	 * @param id - int id do {@link Legendas}
+	 * @return {@link Legendas}
+	 */
 	public static Legendas valueOf(int id) {
 		return Arrays.asList(Legendas.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(

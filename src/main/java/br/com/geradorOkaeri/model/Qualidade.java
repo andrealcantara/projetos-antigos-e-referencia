@@ -4,6 +4,11 @@ import java.util.Arrays;
 
 import br.com.geradorOkaeri.util.message.LocalMessage;
 
+/**
+ * Enum que representa a qualidade do video do {@link Post}
+ * @author andre
+ *
+ */
 public enum Qualidade implements EnumModelInterface {
 	TRES_D(1, "3D"), 
 	BD_25(2, "BD-25"), 
@@ -55,6 +60,11 @@ public enum Qualidade implements EnumModelInterface {
 		return this.name;
 	}
 
+	/**
+	 * Busca um tipo de {@link Qualidade} atraves da sua <code>id</code>
+	 * @param id - int id do {@link Qualidade}
+	 * @return {@link Qualidade}
+	 */
 	public static Qualidade valueOf(int id) {
 		return Arrays.asList(Qualidade.values()).stream().filter(i -> i.getId() == id).findFirst()
 				.orElseThrow(() -> new IllegalArgumentException(

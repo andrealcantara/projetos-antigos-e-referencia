@@ -15,11 +15,11 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.com.geradorOkaeri.model.CompartilhamentoTipo;
-import br.com.geradorOkaeri.model.EnumModelInterface;
 import br.com.geradorOkaeri.model.ExibicaoCompartilhamento;
 import br.com.geradorOkaeri.model.Legendas;
 import br.com.geradorOkaeri.model.Post;
 import br.com.geradorOkaeri.model.Qualidade;
+import br.com.geradorOkaeri.validation.ValidationPost;
 
 @Named
 @ViewScoped
@@ -112,18 +112,14 @@ public class AnimesBean implements Serializable {
 		}
 		post.setScreenshot(novo);
 	}
+	
+	public void gerarPost(){
+		
+	}
 
 	public void compartilhamentoRendered() {
-		boolean retorno = true;
-		if (this.post.getCompartilhamentoTipo() == null || this.post.getCompartilhamentoTipo().length < 1) {
-			retorno = false;
-		} else {
-			List<CompartilhamentoTipo> tipo = Arrays.asList(this.post.getCompartilhamentoTipo());
-			if (tipo.size() < 1 || tipo.size() == 1 && tipo.get(0).equals(CompartilhamentoTipo.TORRENT)) {
-				retorno = false;
-			}
-		}
-		renderCompartilhamentoTexto = retorno;
+		renderCompartilhamentoTexto = ValidationPost.getInstance()
+				.verifyCompartilhamentoTipoTorrent(post.getCompartilhamentoTipo());
 	}
 
 	public int getCountScreenShot() {

@@ -1,5 +1,10 @@
 package br.com.geradorOkaeri.exception;
 
+/**
+ * Classe que representa a {@link Exception} para validacao do gerador.
+ * @author andre
+ *
+ */
 public class GeradorValidationException extends Exception {
 	private static final long serialVersionUID = 7438736311097522435L;
 
@@ -14,4 +19,10 @@ public class GeradorValidationException extends Exception {
 	public GeradorValidationException(Throwable arg0) {
 		super(arg0);
 	}
+
+	public GeradorValidationException() {
+		super();
+	}
+	
+	
 }

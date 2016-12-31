@@ -3,6 +3,45 @@ package br.com.geradorOkaeri.model;
 import java.io.Serializable;
 import java.util.Arrays;
 
+/**
+ * <p>Classe que representa um post de animes que contem informações sobre os vídeos dos animes como:</p>
+ * <code>titulo,</code><br />
+ * <code>tituloOriginal,</code><br />
+ * <code>tituloEpisodio,</code><br />
+ * <code>qntEpisodio,</code><br />
+ * <code>temporada,</code><br />
+ * <code>duracao,</code><br />
+ * <code>fansuber,</code><br />
+ * <code>upadorpor,</code><br />
+ * <code>ripadopor,</code><br />
+ * <code>siteOficial,</code><br />
+ * <code>imagemCapa,</code><br />
+ * <code>sinopsePTBR,</code><br />
+ * <code>screenshot,</code><br />
+ * <code>qualidade,</code><br />
+ * <code>midia,</code><br />
+ * <code>idiomaAudio,</code><br />
+ * <code>tamanhoArquivo,</code><br />
+ * <code>trailer,</code><br />
+ * <code>genero,</code><br />
+ * <code>videoBitrate,</code><br />
+ * <code>videoCodec,</code><br />
+ * <code>audioBitrate,</code><br />
+ * <code>audioCodec,</code><br />
+ * <code>frameRate,</code><br />
+ * <code>resolucaoVideo,</code><br />
+ * <code>formatoTela,</code><br />
+ * <code>legendas,</code><br />
+ * <code>outrasInfo,</code><br />
+ * <code>exibicaoCompartilhamento,</code><br />
+ * <code>compartilhamentoTipo,</code><br />
+ * <code>compartilhamento,</code><br />
+ * <code>temSenha,</code><br />
+ * <code>senha</code> e<br />
+ * <code>temBorda</code><br />
+ * @author andre
+ *
+ */
 public class Post implements Serializable {
 	private static final long serialVersionUID = -4061495122851363504L;
 	
