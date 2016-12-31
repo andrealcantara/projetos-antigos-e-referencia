@@ -29,6 +29,8 @@ dependencies {
 	
 	// Primefaces
 	compile 'org.primefaces:primefaces:6.0'
+	compile 'org.primefaces.extensions:primefaces-extensions:6.0.0'
+	
 	
 	// Postgresql
 	// compile 'org.postgresql:postgresql:9.4-1204-jdbc42'

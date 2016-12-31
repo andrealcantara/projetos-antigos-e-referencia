@@ -24,6 +24,10 @@
 			<base-name>properties.tooltips</base-name>
 			<var>tooltips</var>
 		</resource-bundle>
+		<resource-bundle>
+			<base-name>properties.validation</base-name>
+			<var>validation</var>
+		</resource-bundle>
 		<message-bundle>
 			properties.geradormessages
 		</message-bundle>

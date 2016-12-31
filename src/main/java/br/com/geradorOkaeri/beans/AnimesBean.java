@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import javax.annotation.PostConstruct;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.geradorOkaeri.model.CompartilhamentoTipo;
@@ -23,7 +24,6 @@ import br.com.geradorOkaeri.validation.ValidationPost;
 
 @Named
 @ViewScoped
-// @SessionScoped
 public class AnimesBean implements Serializable {
 	private static final long serialVersionUID = -475922267196560694L;
 
@@ -36,6 +36,9 @@ public class AnimesBean implements Serializable {
 	private List<SelectItem> compartilhamentoExibicaoItens;
 	private boolean renderCompartilhamentoTexto;
 
+	@Inject
+	private CountSessionBean count;
+
 	@PostConstruct
 	public void init() {
 		qualidadeItens = loadQualidade();
@@ -44,10 +47,11 @@ public class AnimesBean implements Serializable {
 		compartilhamentoTipoItens = loadCompartilhamentoTipo();
 		compartilhamentoExibicaoItens = loadCompartilhamentoExibicao();
 		this.resetPost();
+
 	}
 
 	public void resetPost() {
-		post = new Post();
+		post = this.count.getPost();
 		countScreenShot = 2;
 		renderCompartilhamentoTexto = false;
 	}
@@ -112,9 +116,9 @@ public class AnimesBean implements Serializable {
 		}
 		post.setScreenshot(novo);
 	}
-	
-	public void gerarPost(){
-		
+
+	public void gerarPost() {
+
 	}
 
 	public void compartilhamentoRendered() {
@@ -186,5 +190,4 @@ public class AnimesBean implements Serializable {
 	public void setCompartilhamentoExibicaoItens(List<SelectItem> compartilhamentoExibicaoItens) {
 		this.compartilhamentoExibicaoItens = compartilhamentoExibicaoItens;
 	}
-
 }

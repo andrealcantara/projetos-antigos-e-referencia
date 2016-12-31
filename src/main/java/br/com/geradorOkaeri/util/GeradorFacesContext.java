@@ -100,5 +100,22 @@ public class GeradorFacesContext implements Serializable {
 	public static FacesMessage warningMessage(String summary, String details) {
 		return new FacesMessage(FacesMessage.SEVERITY_WARN, summary, details);
 	}
+	
+	/**
+	 * Metodo que finaliza a sessao do {@link FacesContext}
+	 */
+	public static void endSession(){
+		GeradorFacesContext.getCurrentFacesContext().getExternalContext().invalidateSession();
+	}
+	
+	/**
+	 * Metodo que finaliza a sessao do {@link FacesContext}
+	 * @param url - {@link String} url para redirecionamento da pagina.
+	 * @throws IOException  - Error ao tentar navegar.
+	 */
+	public static void endSession(String url) throws IOException{
+		GeradorFacesContext.endSession();
+		GeradorFacesContext.redirect(url);
+	}
 
 }

@@ -2,7 +2,6 @@ package br.com.geradorOkaeri.validation;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.lang.annotation.Inherited;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -32,27 +31,27 @@ public class ValidationPost {
 	}
 
 	public void valid(Post post) throws GeradorValidationException {
-		if (Strings.isNullOrEmpty(post.getTitulo())) {
+		if (this.verificaString(post.getTitulo())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("titulo")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getDuracao())) {
+		if (this.verificaString(post.getDuracao())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("duracao")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getFansuber())) {
+		if (this.verificaString(post.getFansuber())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("fansuber")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getImagemCapa())) {
+		if (this.verificaString(post.getImagemCapa())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("imagemCapa")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getSinopsePTBR())) {
+		if (this.verificaString(post.getSinopsePTBR())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("sinopsePTBR")));
 		}
@@ -67,12 +66,12 @@ public class ValidationPost {
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("qualidade")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getIdiomaAudio())) {
+		if (this.verificaString(post.getIdiomaAudio())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("idiomaAudio")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getTamanhoArquivo())) {
+		if (this.verificaString(post.getTamanhoArquivo())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("tamanhoArquivo")));
 		}
@@ -82,7 +81,7 @@ public class ValidationPost {
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("resolucao")));
 		}
 
-		if (Strings.isNullOrEmpty(post.getFormatoTela())) {
+		if (this.verificaString(post.getFormatoTela())) {
 			throw new GeradorValidationException(
 					validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, labels.get("formatoTela")));
 		}
@@ -98,11 +97,15 @@ public class ValidationPost {
 		}
 
 		if (verifyCompartilhamentoTipoTorrent(post.getCompartilhamentoTipo())
-				&& Strings.isNullOrEmpty(post.getCompartilhamento())) {
+				&& this.verificaString(post.getCompartilhamento())) {
 			throw new GeradorValidationException(validation.get(ValidationPost.ERROR_CAMPO_OBRIGATORIO, "Urls"));
 		}
 
 		this.verifyResolucaoScreenShots(post.getResolucaoVideo(), post.getScreenshot());
+	}
+
+	private boolean verificaString(String str) {
+		return Strings.isNullOrEmpty(str) || str.trim().isEmpty();
 	}
 
 	/**
@@ -110,9 +113,11 @@ public class ValidationPost {
 	 * tipo {@link CompartilhamentoTipo.Torrent}
 	 * 
 	 * @param tipo
-	 *            - {@inheritDoc}
-	 * @return true se existir e se tiver o tipo TORRENT + qualque outro, false
-	 *         se nao existir ou se o unico existente for TORRENT.
+	 *            - arrays {@link CompartilhamentoTipo}
+	 * @return <b><code>true</code></b> se existir e se tiver o tipo TORRENT +
+	 *         qualque outro,<br />
+	 *         <b><code>false</code></b> se nao existir ou se o unico existente
+	 *         for TORRENT.
 	 */
 	public boolean verifyCompartilhamentoTipoTorrent(CompartilhamentoTipo[] tipo) {
 		boolean retorno = true;
@@ -127,6 +132,18 @@ public class ValidationPost {
 		return retorno;
 	}
 
+	/**
+	 * Metodo que verifica se a {@link Resolucao} confere com o informado nas
+	 * <code>screenshots</code>
+	 * 
+	 * @param resolucao
+	 *            - {@link Resolucao}
+	 * @param screenshots
+	 *            - Arrays {@link String} com url das imagens
+	 * @throws GeradorValidationException
+	 *             Erro ao encontrar uma imagem com resolucao que diverge da
+	 *             {@link Resolucao} informada.
+	 */
 	public void verifyResolucaoScreenShots(Resolucao resolucao, String[] screenshots)
 			throws GeradorValidationException {
 		BufferedImage bi = null;
@@ -146,6 +163,17 @@ public class ValidationPost {
 		}
 	}
 
+	/**
+	 * Metodo que verifica o arrays de {@link String} é null ou vazia e se é
+	 * maior que 2.
+	 * 
+	 * @param array
+	 *            - arrays de {@link String}.
+	 * @return <b><code>TRUE</code></b> se todas os arrays possuem valor
+	 *         diferente de vazio ou null<br />
+	 *         <b><code>FALSE</code></b> se alguma {@link String} é null ou
+	 *         vazio.
+	 */
 	private boolean verifyArraysStringsIsNullOrEmpty(String[] array) {
 		boolean retorno = true;
 		if (array.length < 2) {
@@ -154,7 +182,7 @@ public class ValidationPost {
 			int count = 0;
 			for (String str : array) {
 				++count;
-				if (Strings.isNullOrEmpty(str) && count < 3) {
+				if (this.verificaString(str) && count < 3) {
 					retorno = false;
 					break;
 				}
@@ -163,6 +191,17 @@ public class ValidationPost {
 		return retorno;
 	}
 
+	/**
+	 * Metodo que verifica se existe valores em {@link Resolucao}.
+	 * 
+	 * @param resolucao
+	 *            - {@link Resolucao} que vai ser verificado
+	 * @return <b><code>TRUE</code></b> se existe é diferente de
+	 *         <code>null</code> e se os valores interno são maiores que
+	 *         1.<br />
+	 *         <b><code>FALSE</code></b> se o valor é null, se algum dos valores
+	 *         internos é null e se alguns dos valores interno é menor que 1.
+	 */
 	private boolean verifyResolucao(Resolucao resolucao) {
 		boolean retorno = true;
 		if (resolucao == null || resolucao.getWidth() == null || resolucao.getHeight() == null

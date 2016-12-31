@@ -9,6 +9,11 @@ import java.net.URLConnection;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
+/**
+ * Interface que representa classes que fazem Rest Acess.
+ * @author andre
+ *
+ */
 public interface RESTAcess {
 	
 	
