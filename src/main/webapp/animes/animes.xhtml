@@ -9,16 +9,32 @@
 	xmlns:local="http://java.sun.com/jsf/composite/easy">
 <ui:composition template="/WEB-INF/template/body.xhtml">
 	<ui:define name="content">
+		<h:outputScript library="js" name="animesSession.js" target="head" />
 		<h:form id="formAnimes" styleClass="fullSize">
-			<p:idleMonitor timeout="5000">
-				<p:ajax event="active" process="@this" update="timerBox"
-					ignoreAutoUpdate="true" listener="#{countSessionBean.activity()}" />
-				<p:ajax event="idle" process="@this" update="timerBox"
-					ignoreAutoUpdate="true"
-					listener="#{countSessionBean.calculateTimeLeft()}" />
-			</p:idleMonitor>
+			<h:inputHidden id="countDownParam"
+				value="#{countSessionBean.countDownTimer}" />
+			<p:idleMonitor timeout="#{countSessionBean.timeSessaoIdleMonitor}"
+				onidle="startIdleMonitor()" onactive="PF('timeoutDialog').hide();" />
+			<p:remoteCommand name="itsOver"
+				action="#{countSessionBean.endSession()}" process="@this" />
+			<p:dialog showEffect="fade" hideEffect="fade" modal="true"
+				width="400" height="110" closable="false" draggable="false"
+				resizable="false" id="timeoutSession" appendTo="@(body)"
+				header="#{labels['tempoFinal']}" widgetVar="timeoutDialog"
+				onHide="stopCount()" onShow="doTimer()">
+				<h:panelGroup layout="block">
+					<h:panelGroup class="ui-icon ui-icon-alert"
+						style="float: left; margin: 8px 8px 0;" />
+					<p:panel>
+               			#{labels['tempoRestante']}
+               			<h:panelGroup id="dialog-countdown"
+							style="font-weight: bold" />
+					</p:panel>
+				</h:panelGroup>
+				<h:outputText value="#{labels['mexaMouse']}" />
+			</p:dialog>
 			<h:panelGroup layout="block" styleClass="ui-fluid sizePage">
-				<h:panelGroup layout="block" id="timerBox">
+				<h:panelGroup layout="block" id="timerBox" rendered="false">
 					<p:panelGrid columns="2"
 						columnClasses="ui-grid-col-10,ui-grid-col-2" id="timerPanel"
 						layout="grid" styleClass="ui-panelgrid-blank">
@@ -28,13 +44,10 @@
 								for="timeValue" />
 						</h:panelGroup>
 						<h:panelGroup layout="block" id="timeValue">
-							<h:panelGroup layout="block"
-								rendered="#{countSessionBean.secondTimeExpire == 0}">
-								#{validation['acabou_tempo_tela']}
-							</h:panelGroup>
 							<h:panelGroup layout="block">
-								<pe:timer timeout="#{countSessionBean.secondTimeExpire}"
-									process="@this" update="timerBox" format="mm:ss" listener="#{countSessionBean.calculateTimeLeft()}" />
+								<pe:timer timeout="#{countSessionBean.timeSessao / 1000}"
+									process="@this" update="timerBox" format="mm:ss"
+									listener="#{countSessionBean.endSession()}" />
 							</h:panelGroup>
 						</h:panelGroup>
 						<p:tooltip for="timeValue" position="bottom"
