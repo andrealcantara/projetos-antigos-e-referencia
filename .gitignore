@@ -1,0 +1,8 @@
+bin/
+binTeste/
+.gradle/
+temp/
+.settings/
+
+.project
+.classpath
