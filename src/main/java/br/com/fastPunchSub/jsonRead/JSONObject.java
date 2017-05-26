@@ -1,4 +1,4 @@
-package jsonRead;
+package br.com.fastPunchSub.jsonRead;
 import java.util.Map;
 
 public class JSONObject {

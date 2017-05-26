@@ -17,6 +17,13 @@ repositories {
 }
 
 dependencies {
+	// Jsoup
+	compile 'org.jsoup:jsoup:1.10.2'
+	
+	// SLF4J
+	compile 'org.slf4j:slf4j-api:1.7.25'
+	compile 'org.slf4j:slf4j-simple:1.7.25'  
+
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
 
@@ -25,5 +32,35 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+}
+
+eclipse{
+	 project {
+	 	natures 'org.springsource.ide.eclipse.gradle.core.nature'
+	 }
+	classpath {
+		// containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+		// containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+		downloadSources = true
+		downloadJavadoc = true
+		
+		// Configuração que permite que o código fonte das bibliotecas sejam visualizados
+		file {
+			withXml { xml ->
+				def node = xml.asNode()
+				// node.remove( node.find { it.@path == 'org.eclipse.jst.j2ee.internal.web.container' } )
+				// node.remove( node.find { it.@path == 'src/test/java' } )
+				// node.remove( node.find { it.@path == 'src/test/resources' } )
+				// node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/java', output: 'binTest'])
+				// node.appendNode( 'classpathentry', [ kind: 'src', path: 'src/test/resources', output: 'binTest'])
+				// node.appendNode( 'classpathentry', [ kind: 'con', path: 'org.eclipse.jst.j2ee.internal.web.container', exported: 'true'])
+			}
+		}
+	}
+	jdt{
+	File f = file('.settings/org.eclipse.core.resources.prefs')
+	f.write('eclipse.preferences.version=1\n')
+	f.append('encoding/<project>=utf-8')
+	}
 }
 

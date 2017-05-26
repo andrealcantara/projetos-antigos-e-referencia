@@ -1,4 +1,4 @@
-package jsonRead;
+package br.com.fastPunchSub.jsonRead;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
