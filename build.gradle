@@ -120,16 +120,22 @@ eclipse{
 			}
 		}
 	}
-}
-
-// Adiciona informações pertinentes a configuração do eclipse
-eclipseJdt << {
+	// Adiciona informações pertinentes a configuração do eclipse
+	jdt{
 	File f = file('.settings/org.eclipse.core.resources.prefs')
 	f.write('eclipse.preferences.version=1\n')
 	f.append('encoding/<project>=utf-8')
+	}
 }
 
 
+// eclipseJdt << {
+// 	File f = file('.settings/org.eclipse.core.resources.prefs')
+// 	f.write('eclipse.preferences.version=1\n')
+// 	f.append('encoding/<project>=utf-8')
+// }
+
+
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.1'
+  gradleVersion = '3.5'
 }
