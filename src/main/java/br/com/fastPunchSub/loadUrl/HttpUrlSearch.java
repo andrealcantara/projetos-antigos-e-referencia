@@ -14,21 +14,24 @@ import java.util.List;
 import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.event.Level;
 
 import com.google.common.base.Preconditions;
+
+import br.com.fastPunchSub.util.LevelLogger;
 
 public class HttpUrlSearch {
 
 	private List<String> cookies;
 
 	private final String USER_AGENT = "Mozilla/5.0";
-
-	
 
 	public void sendPost(String url, String postParams) throws IOException {
 		sendPost(url, postParams, null);
@@ -48,12 +51,10 @@ public class HttpUrlSearch {
 		wr.flush();
 		wr.close();
 
-		
-		
-//		int responseCode = http.getResponseCode();
-//		System.out.println("\nSending 'POST' request to URL : " + url);
-//		System.out.println("Post parameters : " + postParams);
-//		System.out.println("Response Code : " + responseCode);
+		int responseCode = http.getResponseCode();
+		LevelLogger.log(Level.INFO, "\nSending 'POST' request to URL : " + url);
+		LevelLogger.log(Level.INFO, "Post parameters : " + postParams);
+		LevelLogger.log(Level.INFO, "Response Code : " + responseCode);
 		setCookies(http.getHeaderFields().get("Set-Cookie"));
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(http.getInputStream()));
@@ -101,9 +102,10 @@ public class HttpUrlSearch {
 		HttpURLConnection conn = (HttpURLConnection) obj.openConnection();
 		this.addHeadersRequest(conn);
 		conn.setRequestMethod("GET");
+		
 		int responseCode = conn.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
+		LevelLogger.log(Level.INFO, "\nSending 'GET' request to URL : " + url);
+		LevelLogger.log(Level.INFO, "Response Code : " + responseCode);
 
 		BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
 		String inputLine;
@@ -126,7 +128,6 @@ public class HttpUrlSearch {
 		return conn.getResponseCode();
 	}
 
-	
 	/*
 	 * Ajustar metodo para ficar generico.
 	 */
@@ -161,6 +162,11 @@ public class HttpUrlSearch {
 			}
 		}
 		return result.toString();
+	}
+	
+	
+	public static ScriptEngine getEngineNashor(){
+		return new ScriptEngineManager().getEngineByName("nashorn");
 	}
 
 	public List<String> getCookies() {

@@ -17,11 +17,11 @@ public class JSONFile {
     public static final JSONObject parseFromURL(String url) {
         return parseFromString(TextFile.readFromURL(url));
     }
-
+    
     public static final JSONObject parseFromString(String json) {
         try {
             ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
-            engine.eval(TextFile.readFromResource("/jsonRead/convertJs.js"));
+            engine.eval(TextFile.readFromResource("/br/com/fastPunchSub/jsonRead/convertJs.js"));
             return new JSONObject(((Invocable) engine).invokeFunction("parseJSON", json));
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -30,5 +30,23 @@ public class JSONFile {
         }
         return null;
     }
+
+    public static final JSONObject parseFromString2(String json) {
+        try {
+            ScriptEngine engine = readJavascript("/jsonRead/convertJs.js");
+            return new JSONObject(((Invocable) engine).invokeFunction("parseJSON", json));
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+	public static ScriptEngine readJavascript(String path) throws ScriptException {
+		ScriptEngine engine = new ScriptEngineManager().getEngineByName("nashorn");
+		engine.eval(TextFile.readFromResource(path));
+		return engine;
+	}
 
 }

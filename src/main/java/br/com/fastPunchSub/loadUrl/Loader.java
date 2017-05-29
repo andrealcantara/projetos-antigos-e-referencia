@@ -54,24 +54,8 @@ public class Loader {
 
 	private StringBuilder getSourceCodePage(String end) {
 		StringBuilder allPage = null;
-		try {
-			URL urlPage = new URL(end);
-			URLConnection urlConn = urlPage.openConnection();
-			urlConn.addRequestProperty(MessageLoader.getDefaultInstance().get("useragent.name"),
-					MessageLoader.getDefaultInstance().get("useragent.value"));
-			urlConn.setConnectTimeout(100000);
-			BufferedReader br = new BufferedReader(new InputStreamReader(urlConn.getInputStream(),
-					MessageLoader.getDefaultInstance().get("contenttype")));
-			String inputLine;
-			allPage = new StringBuilder();
-			while ((inputLine = br.readLine()) != null)
-				allPage.append(inputLine + Loader.lineseparator);
-			br.close();
-		} catch (SocketTimeoutException ex) {
-			throw new RuntimeException(MessageLoader.getBundle(MessageType.ERROR).get("TIME_OUT_ERROR"), ex);
-		} catch (IOException ex) {
-			throw new RuntimeException(ex);
-		}
+		HttpUrlSearch http = new HttpUrlSearch();
+//		String src = HttpUrlSearch
 		return allPage;
 	}
 	

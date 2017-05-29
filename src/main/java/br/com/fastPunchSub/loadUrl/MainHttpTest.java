@@ -1,4 +1,4 @@
-package br.com.fastPunchSub.punchSys;
+package br.com.fastPunchSub.loadUrl;
 
 import java.io.IOException;
 import java.net.CookieHandler;
@@ -6,7 +6,6 @@ import java.net.CookieManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import br.com.fastPunchSub.loadUrl.HttpUrlSearch;
 import br.com.fastPunchSub.redecanais.RedeCanaisFinder;
 import br.com.fastPunchSub.redecanais.models.ClasseVideo;
 import br.com.fastPunchSub.redecanais.models.TypeEpisode;

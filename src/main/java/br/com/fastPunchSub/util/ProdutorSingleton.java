@@ -10,16 +10,17 @@ import org.slf4j.LoggerFactory;
 public class ProdutorSingleton implements Serializable {
 	private static final long serialVersionUID = -4765847284744259747L;
 
-	private Map<TypeLoggers, Map<String, Class<?>>> map;
+	private Map<String, Logger> map;
 
 	private ProdutorSingleton() {
-		map = new HashMap<TypeLoggers, Map<String, Class<?>>>();
+		map = new HashMap<String, Logger>();
 	}
 
-	public Logger logger(TypeLoggers tipos, Class<?> clazz) {
-			if(this.map.containsKey(tipos)){
-				if(this.map.getOrDefault(tipos, new HashMap<String, Class<?>>()))
+	public Logger logger(Class<?> clazz) {
+			if(this.map.containsKey(clazz.getName())){
+				this.map.put(clazz.getName(), LoggerFactory.getLogger(clazz));
 			}
+			return this.map.get(clazz.getName());
 	}
 
 	public ProdutorSingleton getInstance() {
@@ -29,9 +30,4 @@ public class ProdutorSingleton implements Serializable {
 	private static class ProdutorSingletonHandler {
 		private static final ProdutorSingleton INSTANCE = new ProdutorSingleton();
 	}
-
-	public enum TypeLoggers {
-		INFO, WARN, TRACE, ERROR;
-	}
-
 }
