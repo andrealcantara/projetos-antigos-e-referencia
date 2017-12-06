@@ -10,6 +10,7 @@ apply plugin: 'war'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+compileJava.options.encoding = 'UTF-8'
 
 // Identificação do war
 war {
@@ -113,27 +114,21 @@ eclipse{
 			resource sourcePath: '/src/test/resources', deployPath: 'WEB-INF/classes/target-test'
 		}
 		facet {
-			//facet name: 'jst.web', version: '3.1'
+			// facet name: 'jst.web', version: '3.1'
 			facet name: 'jst.jsf', version: '2.2'
 			file.withXml { provider ->
 				provider.asNode().installed.find { it.@facet == 'jst.web' }.@version = '3.1'
 			}
 		}
 	}
-	// Adiciona informações pertinentes a configuração do eclipse
-	jdt{
-	File f = file('.settings/org.eclipse.core.resources.prefs')
-	f.write('eclipse.preferences.version=1\n')
-	f.append('encoding/<project>=utf-8')
-	}
 }
 
-
-// eclipseJdt << {
-// 	File f = file('.settings/org.eclipse.core.resources.prefs')
-// 	f.write('eclipse.preferences.version=1\n')
-// 	f.append('encoding/<project>=utf-8')
-// }
+	// Adiciona informações pertinentes a configuração do eclipse
+eclipseJdt.doLast {
+    File f = file('.settings/org.eclipse.core.resources.prefs')
+    f.write('eclipse.preferences.version=1\n')
+    f.append('encoding/<project>=UTF-8')
+}
 
 
 task wrapper(type: Wrapper) {

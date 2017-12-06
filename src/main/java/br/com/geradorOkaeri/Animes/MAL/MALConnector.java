@@ -25,9 +25,16 @@ import br.com.geradorOkaeri.annotation.LocalProperties;
 @ApplicationScoped
 public class MALConnector implements Serializable, RESTAcess{
 	private static final long serialVersionUID = -4860690404329496751L;
-	private final String baseUrl;
     private final String username;
+    private final String baseUrl;
     private final String password;
+
+    public static void main(String[] args) {
+        MALConnector rest = new MALConnector("AndreAlcantara", "890410");
+        List<AnimeMAL> lista = rest.getAnimesMAL(1,"fullmetal alchemist");
+        lista.forEach(s -> System.out.println(s.getTitulo() + "- Tipo " + s.getTipo() + " dates - " + s.getDate_inicio() + " - " + s.getDate_fim()));
+    }
+
  
     /**
      * Construtor de {@link MALConnector}
@@ -35,13 +42,13 @@ public class MALConnector implements Serializable, RESTAcess{
      * @param password - {@link String} password do login
      */
     public MALConnector(String username, String password) {
-        this.baseUrl = "http://myanimelist.net/api";
+        this.baseUrl = "https://myanimelist.net/api";
         this.username = username;
         this.password = password;
     }
     
     public MALConnector(@LocalProperties("MALUser") Properties prop) {
-        this.baseUrl = "http://myanimelist.net/api";
+        this.baseUrl = "https://myanimelist.net/api";
         this.username = prop.getProperty("username");
         this.password = prop.getProperty("password");
     }
@@ -71,7 +78,7 @@ public class MALConnector implements Serializable, RESTAcess{
  
     /**
      * Metodo que faz a requisição a url e retorna o xml da resposta.
-     * @param tipoPesquisa - Integer sobre o tipo de pesquisa.
+     * @param tipoPesquisa - Integer sobre o tipo de pesquisa 1 = anime, outros = manga.
      * @param animeQuery - o nome do anime pesquisado.
      * @return {@link StringBuilder} com o xml da resposta.
      */
