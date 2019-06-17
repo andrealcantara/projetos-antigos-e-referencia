@@ -13,14 +13,15 @@ public enum TipoTransacao {
     }
 
     public static TipoTransacao getByValor(int key) {
+        TipoTransacao findObject = TipoTransacao.DESCONHECIDO;
         for (TipoTransacao tt : values()) {
             if (tt.getKey() == key) {
-                return tt;
+                findObject = tt;
+                break;
             }
         }
-        return TipoTransacao.DESCONHECIDO;
+        return findObject;
     }
-
     public int getKey() {
         return key;
     }

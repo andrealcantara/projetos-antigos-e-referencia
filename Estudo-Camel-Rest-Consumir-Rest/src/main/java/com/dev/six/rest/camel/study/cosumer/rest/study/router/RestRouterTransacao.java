@@ -1,9 +1,14 @@
 package com.dev.six.rest.camel.study.cosumer.rest.study.router;
 
 import com.dev.six.rest.camel.study.cosumer.rest.study.exception.GeneralExceptionProcessor;
+import com.dev.six.rest.camel.study.cosumer.rest.study.exception.TransacaoInvalidException;
 import com.dev.six.rest.camel.study.cosumer.rest.study.processor.PreProcessResponse;
 import com.dev.six.rest.camel.study.cosumer.rest.study.processor.ProcessorsStream2Json;
+import com.dev.six.rest.camel.study.cosumer.rest.study.processor.TransacaoBodyValidationProcessor;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.apache.camel.Exchange;
+import org.apache.camel.Expression;
 import org.apache.camel.LoggingLevel;
 import org.apache.camel.Predicate;
 import org.apache.camel.builder.RouteBuilder;
@@ -23,6 +28,8 @@ public class RestRouterTransacao extends RouteBuilder {
     private ProcessorsStream2Json processorsStream2Json;
     @Autowired
     private PreProcessResponse preProcessResponse;
+    @Autowired
+    private TransacaoBodyValidationProcessor transacaoBodyValidationProcessor;
 
     private static final String ROUTER_DIRECT_PRODUCTS = "direct:consumer-products";
     private static final String ROUTER_DIRECT_POST_PRODUCT = "direct:consumer-post-products";
@@ -49,13 +56,15 @@ public class RestRouterTransacao extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
-        onException(Throwable.class)
-                .redeliveryDelay(5).maximumRedeliveries(5)
-                .log(LoggingLevel.ERROR,"Excecoes de mensagens")
-                .process(exceptionProcessor)
-                .log(LoggingLevel.ERROR,"${body}")
-                .handled(true);
+        onException(TransacaoInvalidException.class)
+                .onException(JsonParseException.class)
+                .onException(Exception.class)
+                    .redeliveryDelay(5).maximumRedeliveries(5)
+                    .log(LoggingLevel.ERROR,"Excecoes de mensagens")
+                    .process(exceptionProcessor)
+                    .handled(true)
+                .end()
+        ;
 
         restConfigurationInit();
 
@@ -66,7 +75,13 @@ public class RestRouterTransacao extends RouteBuilder {
                 .setHeader(Exchange.HTTP_METHOD, constant("GET"))
                 .setHeader(Exchange.HTTP_URI, simple(URL_DEFAULT + "${header.id}"))
                 .to("http4:" + URI_BASE)
+                .transform(new Expression() {
+                    @Override
+                    public <T> T evaluate(Exchange exchange, Class<T> type) {
 
+                        return null;
+                    }
+                })
                 .process(processorsStream2Json)
                 .end()
         ;
@@ -123,14 +138,15 @@ public class RestRouterTransacao extends RouteBuilder {
                 .post()
                 .id(ID_POST_PRODUCT).description("Consome outro rest e passa para ele dados para inserir no banco")
                 .route()
-                .to("json-validator:" +
-                        "com/dev/six/rest/camel/study/cosumer/rest/study/transacaoDTOValidation.json")
+                .process(transacaoBodyValidationProcessor)
                 .to(ROUTER_DIRECT_POST_PRODUCT)
                 .endRest()
 
                 .put()
                 .id(ID_PUT_PRODUCT).description("Consome outro rest e passa para ele dados para ser alterado")
                 .route()
+                .setHeader(TransacaoBodyValidationProcessor.verifyID, simple("true"))
+                .process(transacaoBodyValidationProcessor)
                 .to(ROUTER_DIRECT_PUT_PRODUCT)
                 .endRest()
 

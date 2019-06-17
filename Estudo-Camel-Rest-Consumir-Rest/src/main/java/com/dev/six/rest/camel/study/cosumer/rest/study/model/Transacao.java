@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import java.util.StringJoiner;
+
 @JsonComponent
 @JsonIgnoreProperties
 public class Transacao implements Serializable {

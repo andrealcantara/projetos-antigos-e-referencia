@@ -5,7 +5,6 @@ import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.springframework.stereotype.Component;
 
-
 @Component
 public class ProcessorsStream2Json implements Processor {
     @Override
