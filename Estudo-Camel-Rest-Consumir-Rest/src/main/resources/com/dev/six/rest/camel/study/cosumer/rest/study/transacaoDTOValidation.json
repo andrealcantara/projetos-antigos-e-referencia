@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "definitions": {},
+  "id": "transacaoDTO",
+  "properties": {
+    "id": {
+      "default": 1,
+      "description": "Um idenditificador unico da transacao.",
+      "id": "/properties/id",
+      "title": "O id da transacao",
+      "type": "integer"
+    },
+    "descricao": {
+      "default": "Descricao do transacao NUMERO",
+      "description": "A Descricao do transacao",
+      "id": "/properties/descricao",
+      "title": "A descricao da transacao",
+      "type": "string"
+    },
+    "ativo": {
+      "default": true,
+      "description": "É um status da transacao",
+      "id": "/properties/ativo",
+      "title": "O Status da transacao",
+      "type": "boolean"
+    },
+    "tipoTransacao": {
+      "default": "DEBITO",
+      "description": "É um tipo de transacao",
+      "id": "/properties/tipoTransacao",
+      "title": "Tipo da transacao",
+      "type": "string"
+    },
+    "valorTransacao": {
+      "default": 12.54,
+      "description": "É o valor da transacao",
+      "id": "/properties/valorTransacao",
+      "title": "O Valor da transacao",
+      "type": "number"
+    },
+    "dateTimeTransferencia": {
+      "default": "2019-06-04T15:46:03.348+0000",
+      "description": "É um registro do momento em que a transacao foi feita",
+      "id": "/properties/dateTimeTransferencia",
+      "title": "O Tempo da transacao",
+      "type": "string"
+    },
+    "conta": {
+      "default": "",
+      "description": "É o numero da conta da transacao",
+      "id": "/properties/conta",
+      "title": "O Numero da conta da transacao",
+      "type": "string"
+    }
+  },
+  "required": [
+    "conta",
+    "dateTimeTransferencia",
+    "valorTransacao",
+    "tipoTransacao",
+    "ativo",
+    "descricao"
+  ],
+  "type": "object"
+}

@@ -18,69 +18,89 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <versao-padrao-camel-spring>2.24.0</versao-padrao-camel-spring>
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel</groupId>-->
-<!--            <artifactId>camel-servlet-starter</artifactId>-->
-<!--            <version>2.24.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel</groupId>-->
-<!--            <artifactId>camel-servlet</artifactId>-->
-<!--            <version>2.24.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel</groupId>-->
-<!--            <artifactId>camel-cxf</artifactId>-->
-<!--            <version>2.24.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.camel</groupId>-->
-<!--            <artifactId>camel-cxf</artifactId>-->
-<!--            <version>2.24.0</version>-->
-<!--        </dependency>-->
+        <!-- JSON VALIDATION -->
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-support</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-json-validator-starter</artifactId>
+            <version>${versao-padrao-camel-spring}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-json-validator</artifactId>
+            <version>${versao-padrao-camel-spring}</version>
+        </dependency>
+
+        <!-- Restlet Component -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-restlet-starter</artifactId>
-            <version>2.24.0</version>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-restlet</artifactId>
-            <version>2.24.0</version>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
+
+        <!-- Swagger Component -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-swagger-java-starter</artifactId>
-            <version>2.24.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-spring-boot-starter</artifactId>
-            <version>2.24.0</version>
+            <artifactId>camel-swagger-java</artifactId>
+            <version>${versao-padrao-camel-spring}</version>
+        </dependency>
+
+        <!-- WEB Component -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>2.1.5.RELEASE</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.camel</groupId>
-            <artifactId>camel-restlet</artifactId>
-            <version>2.24.0</version>
+            <artifactId>camel-spring-boot-starter</artifactId>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
+
+        <!-- HTTP4 Component -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-http4</artifactId>
-            <version>2.24.0</version>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
+
+        <!-- Jackson Component -->
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-jackson</artifactId>
-            <version>2.24.0</version>
+            <version>${versao-padrao-camel-spring}</version>
         </dependency>
+
+
+        <!-- Hawtio Component -->
+        <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>hawtio-springboot</artifactId>
+            <version>2.6.0</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-parent</artifactId>
@@ -95,11 +115,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.hawt</groupId>
-            <artifactId>hawtio-springboot</artifactId>
-            <version>2.6.0</version>
         </dependency>
     </dependencies>
 
