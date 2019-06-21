@@ -24,10 +24,13 @@ public class RestRouterTransacao extends RouteBuilder {
 
     @Autowired
     private GeneralExceptionProcessor exceptionProcessor;
+
     @Autowired
     private ProcessorsStream2Json processorsStream2Json;
+
     @Autowired
     private PreProcessResponse preProcessResponse;
+
     @Autowired
     private TransacaoBodyValidationProcessor transacaoBodyValidationProcessor;
 
