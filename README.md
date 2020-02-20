@@ -7,8 +7,8 @@
 * estudo-camel-rest
 * estudo-camel-spring
 * estudoSpringBoot
-* ExemploCDIWeld -> Treinamento, feito por mim, sobre CDI com Weld
-* exemplojava8 -> Treinamento, feito por mim, sobre as novidades do Java 8
+* ExemploCDIWeld -> Treinamento, aplicado por mim, sobre CDI com Weld
+* exemplojava8 -> Treinamento, aplicado por mim, sobre as novidades do Java 8
 * geradorcpt
 * geradorteste
 * ifquestoes
