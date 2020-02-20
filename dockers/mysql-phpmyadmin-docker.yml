@@ -1,0 +1,31 @@
+version: '3'
+networks:
+    ygg:
+services:
+    mysqlygg:
+        image: mysql/mysql-server:latest
+        container_name: 'mysql-ygg'
+        restart: 'always'
+        networks:
+            - ygg
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: admin
+            MYSQL_DATABASE: app
+            MYSQL_USER: admin
+            MYSQL_PASSWORD: admin
+        command:
+            --default_authentication_plugin=mysql_native_password
+    phpmyadminygg:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: 'phpmyadmin-ygg'
+        networks:
+            - ygg
+        links:
+            - mysqlygg
+        environment:
+            PMA_HOST: mysqlygg
+            PMA_PORT: 3306
+        ports:
+            - '8090:80'
