@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+
+<composite:interface>
+	<composite:attribute name="styleClass" />
+	<composite:attribute name="id" required="true" />
+	<composite:attribute name="required" default="false" />
+	<composite:attribute name="label" required="true" />
+	<composite:attribute name="rows" default="5" />
+	<composite:attribute name="cols" default="96" />
+	<composite:attribute name="value" required="true" />
+	<composite:attribute name="tooltips" required="true" />
+	<composite:attribute name="tooltipsPosition" default="top"
+		shortDescription="Position of tooltips. Ex: top, bottom, right, left. Default value is 'right'" />
+</composite:interface>
+<composite:implementation>
+	<p:panelGrid columns="2" id="#{cc.attrs.id}Geral"
+		columnClasses="ui-grid-col-2, ui-grid-col-10" layout="grid"
+		styleClass="#{cc.attrs.styleClass} ui-panelgrid-blank">
+		<h:panelGroup id="#{cc.attrs.id}LayoutLabel" layout="block"
+			styleClass="text_right_100perc">
+			<p:outputLabel value="#{cc.attrs.label}" for="#{cc.attrs.id}Txt"
+				id="#{cc.attrs.id}Label" indicateRequired="false" />
+			<p:outputLabel value="#{cc.attrs.required ? ' *' : ''}"
+				for="#{cc.attrs.id}Txt" indicateRequired="false"
+				id="#{cc.attrs.id}LabelRequired" styleClass="redNeed" />:
+		</h:panelGroup>
+		<h:panelGroup layout="block" id="#{cc.attrs.id}LayoutValue">
+			<p:inputTextarea id="#{cc.attrs.id}Txt" value="#{cc.attrs.value}"
+				requiredMessage="#{messageBean.bundleValidation('error_campo_obrigatorio',(cc.attrs.label))}"
+				required="#{cc.attrs.required}" size="#{cc.attrs.inputSize}" cols="#{cc.attrs.cols}" rows="#{cc.attrs.rows}" />
+			<p:tooltip id="#{cc.attrs.id}Tooltip" for="#{cc.attrs.id}Txt"
+				value="#{cc.attrs.tooltips}" position="#{cc.attrs.tooltipsPosition}" />
+		</h:panelGroup>
+	</p:panelGrid>
+</composite:implementation>
+
+</html>

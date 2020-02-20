@@ -1,0 +1,34 @@
+.fullSize {
+	width:100%;
+	height:100%;
+	margin:0;
+	padding:0;
+}
+
+.sizePage {
+	min-width:800px;
+	max-width:1200px;
+	margin: 0 auto;
+}
+
+.ui-widget .ui-widget {
+	font-size: 0.96em;
+}
+
+.redNeed {
+	font-weight: bold;
+	color: red;
+}
+
+.text_center {
+	text-align: center;
+}
+
+.text_right_100perc {
+	text-align: right;
+	width: 100%;
+}
+
+.datagrid-no-border > :first-child {
+	border:0;
+}

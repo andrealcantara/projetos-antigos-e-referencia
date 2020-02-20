@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta content="text/html; charset=ISO-8859-1"
+			http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Gerador Okaeri - Cpturbo #{empty nomeUser == false? 'User - ':''}#{nomeUser}</title>
+	</f:facet>
+	<f:facet name="last">
+		<h:outputStylesheet library="css" name="main.css" />
+	</f:facet>
+</h:head>
+	<h:body>
+		<p:growl sticky="true" autoUpdate="true" />
+		<p:layout id="layout" fullPage="true">
+			<p:layoutUnit id="cab" position="north" size="130" header="Gerador Okaeri - Bem Vindo">
+				<ui:include src="header.xhtml" />
+			</p:layoutUnit>
+			
+			<p:layoutUnit id="rod" position="south" size="130" header="">
+				<ui:include src="footer.xhtml" />
+			</p:layoutUnit>
+			
+			<p:layoutUnit id="cont" position="center" size="#{empty nomeUser == false? '130':'0'}" header="#{nomeUser}">
+				<ui:insert name="content" src="content.xhtml" />
+			</p:layoutUnit>
+		</p:layout>
+	</h:body>
+</html>
