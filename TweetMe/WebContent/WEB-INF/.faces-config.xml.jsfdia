@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#pages#cadastro.jsp"
+  PATH="/pages/cadastro.jsp" SHAPE="240,304,50,57" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#cadastro.jsp:0" NAME="item"
+   PATH="/pages/cadastro.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{signupBean.signup}:#pages#user#home.xhtml"
+    NAME="output" PATH="/pages/user/home.xhtml"
+    TARGET="rules:#pages#user#home.xhtml"
+    TITLE="#{signupBean.signup}:continue" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{loginBean.signin}:#pages#user#home.xhtml"
+    NAME="output1" PATH="/pages/user/home.xhtml"
+    TARGET="rules:#pages#user#home.xhtml"
+    TITLE="#{loginBean.signin}:continue" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#login.jsp" PATH="/pages/login.jsp"
+  SHAPE="216,64,50,57" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#login.jsp:0" NAME="item"
+   PATH="/pages/login.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{signupBean.emailValidate}:#pages#cadastro.jsp"
+    NAME="output" PATH="/pages/cadastro.jsp"
+    TARGET="rules:#pages#cadastro.jsp"
+    TITLE="#{signupBean.emailValidate}:continue" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{loginBean.signin}:#pages#user#home.xhtml"
+    NAME="output1" PATH="/pages/user/home.xhtml"
+    TARGET="rules:#pages#user#home.xhtml"
+    TITLE="#{loginBean.signin}:continue" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,417,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="outcome:#{loginBean.logout}:#pages#login.jsp" NAME="output"
+    PATH="/pages/login.jsp" TARGET="rules:#pages#login.jsp"
+    TITLE="#{loginBean.logout}:outcome" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="profile:#{profileBean.goToProfile}:#pages#user#profile.xhtml"
+    NAME="output1" PATH="/pages/user/profile.xhtml"
+    TARGET="rules:#pages#user#profile.xhtml"
+    TITLE="#{profileBean.goToProfile}:profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="home:#{profileBean.goToHome}:#pages#user#home.xhtml"
+    NAME="output2" PATH="/pages/user/home.xhtml"
+    TARGET="rules:#pages#user#home.xhtml"
+    TITLE="#{profileBean.goToHome}:home" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="following:#{profileBean.goToFollowing}:#pages#user#following.xhtml"
+    NAME="output3" PATH="/pages/user/following.xhtml"
+    TARGET="rules:#pages#user#following.xhtml"
+    TITLE="#{profileBean.goToFollowing}:following" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="followers:#{profileBean.goToFollowers}:#pages#user#followers.xhtml"
+    NAME="output4" PATH="/pages/user/followers.xhtml"
+    TARGET="rules:#pages#user#followers.xhtml"
+    TITLE="#{profileBean.goToFollowers}:followers" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="search:#{profileBean.goToSearch}:#pages#user#search.xhtml"
+    NAME="output5" PATH="/pages/user/search.xhtml"
+    TARGET="rules:#pages#user#search.xhtml"
+    TITLE="#{profileBean.goToSearch}:search" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="settings:#{profileBean.goToSettings}:#pages#user#settings.xhtml"
+    NAME="output6" PATH="/pages/user/settings.xhtml"
+    TARGET="rules:#pages#user#settings.xhtml"
+    TITLE="#{profileBean.goToSettings}:settings" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="post:#{postBean.reply}:#pages#user#reply.xhtml" NAME="output7"
+    PATH="/pages/user/reply.xhtml"
+    TARGET="rules:#pages#user#reply.xhtml"
+    TITLE="#{postBean.reply}:post" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="settings:#{userBean.change}:#pages#user#settings.xhtml"
+    NAME="output8" PATH="/pages/user/settings.xhtml"
+    TARGET="rules:#pages#user#settings.xhtml"
+    TITLE="#{userBean.change}:settings" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#user#profile.xhtml"
+  PATH="/pages/user/profile.xhtml" SHAPE="304,673,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#user#profile.xhtml:0" NAME="item"
+   PATH="/pages/user/profile.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="profile:#{profileBean.follow()}:#pages#user#profile.xhtml"
+    NAME="output" PATH="/pages/user/profile.xhtml"
+    TARGET="rules:#pages#user#profile.xhtml"
+    TITLE="#{profileBean.follow()}:profile" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="profile:#{profileBean.unfollow()}:#pages#user#profile.xhtml"
+    NAME="output1" PATH="/pages/user/profile.xhtml"
+    TARGET="rules:#pages#user#profile.xhtml"
+    TITLE="#{profileBean.unfollow()}:profile" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#user#search.xhtml"
+  PATH="/pages/user/search.xhtml" SHAPE="304,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#user#followers.xhtml"
+  PATH="/pages/user/followers.xhtml" SHAPE="304,705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#user#following.xhtml"
+  PATH="/pages/user/following.xhtml" SHAPE="304,433,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#user#home.xhtml"
+  PATH="/pages/user/home.xhtml" SHAPE="560,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#user#home.xhtml:0" NAME="item"
+   PATH="/pages/user/home.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{postBean.toPost}:#pages#user#home.xhtml"
+    NAME="output" PATH="/pages/user/home.xhtml"
+    TARGET="rules:#pages#user#home.xhtml"
+    TITLE="#{postBean.toPost}:continue" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#user#settings.xhtml"
+  PATH="/pages/user/settings.xhtml" SHAPE="304,737,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#user#reply.xhtml"
+  PATH="/pages/user/reply.xhtml" SHAPE="304,769,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pages#user#reply.xhtml:0" NAME="item"
+   PATH="/pages/user/reply.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="continue:#{postBean.toPost}:#pages#user#profile.xhtml"
+    NAME="output" PATH="/pages/user/profile.xhtml"
+    TARGET="rules:#pages#user#profile.xhtml"
+    TITLE="#{postBean.toPost}:continue" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>
