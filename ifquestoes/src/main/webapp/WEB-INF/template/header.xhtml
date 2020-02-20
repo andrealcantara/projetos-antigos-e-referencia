@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<ui:component>
+	<h:panelGroup layout="block" id="headerInner">
+		<h:panelGroup layout="block" id="header" styleClass="ui-g">
+			<h:panelGroup layout="block" id="logo" styleClass="ui-g-4">
+				<h:graphicImage library="img" name="larger/logo.png" width="360" />
+			</h:panelGroup>
+			<h:panelGroup layout="block" id="menu" styleClass="ui-g-8">
+				<h:panelGroup layout="block" styleClass="pull_right">
+					<h:form id="header_form">
+						<h:panelGroup layout="block" styleClass="header_menu">
+							<p:commandButton type="button" value="Home"
+								icon="fa fa-fw fa-home" />
+							<p:commandButton type="button" value="Questões"
+								icon="fa fa-fw fa-search" />
+							<p:commandButton type="button" value="Logoff"
+								icon="fa fa-fw fa-power-off" />
+						</h:panelGroup>
+					</h:form>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup>
+</ui:component>
+</html>

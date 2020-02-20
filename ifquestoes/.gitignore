@@ -1,0 +1,26 @@
+# Project configuration
+/bin
+/binTest
+build
+.project
+.gradle
+
+
+# Eclipse configuration
+.metadata
+.classpath
+.project
+.settings
+.checkstyle
+/WEB-INF
+/src/main/resources/META-INF/persistence.xml 
+
+# Text editors
+*.swp
+*.orig
+*.directory
+*.~lock*
+*.old
+
+# Exclusao Pessoal
+/FilesIgnored
