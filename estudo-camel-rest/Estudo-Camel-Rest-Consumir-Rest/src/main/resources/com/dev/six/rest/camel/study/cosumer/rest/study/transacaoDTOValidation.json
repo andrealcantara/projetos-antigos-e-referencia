@@ -1,0 +1,84 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://example.com/root.json",
+  "type": "object",
+  "title": "The Root Schema",
+  "required": [
+    "descricao",
+    "ativo",
+    "tipoTransacao",
+    "valorTransacao",
+    "dateTimeTransferencia",
+    "conta"
+  ],
+  "properties": {
+    "id": {
+      "$id": "#/properties/id",
+      "type": "integer",
+      "title": "The Id Schema",
+      "default": 0,
+      "examples": [
+        1
+      ]
+    },
+    "descricao": {
+      "$id": "#/properties/descricao",
+      "type": "string",
+      "title": "The Descricao Schema",
+      "default": "",
+      "examples": [
+        "Descricao Transação - 1720891085"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "ativo": {
+      "$id": "#/properties/ativo",
+      "type": "boolean",
+      "title": "The Ativo Schema",
+      "default": false,
+      "examples": [
+        false, true
+      ]
+    },
+    "tipoTransacao": {
+      "$id": "#/properties/tipoTransacao",
+      "type": "string",
+      "title": "The Tipotransacao Schema",
+      "default": "",
+      "examples": [
+        "CREDITO","DEBITO","ACERTO"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "valorTransacao": {
+      "$id": "#/properties/valorTransacao",
+      "type": "integer",
+      "title": "The Valortransacao Schema",
+      "default": 0,
+      "examples": [
+        6487130
+      ]
+    },
+    "dateTimeTransferencia": {
+      "$id": "#/properties/dateTimeTransferencia",
+      "type": "string",
+      "title": "The Datetimetransferencia Schema",
+      "default": "",
+      "examples": [
+        "2019-06-04T15:46:03.348+0000"
+      ],
+      "pattern": "^(.*)$"
+    },
+    "conta": {
+      "$id": "#/properties/conta",
+      "type": "string",
+      "title": "The Conta Schema",
+      "default": "",
+      "examples": [
+        "1720891085"
+      ],
+      "pattern": "^(.*)$"
+    }
+  }
+}
